@@ -1,0 +1,1269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FIFA World Cup 2026 Predictor</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg: #0b1220;
+      --card: #121a2b;
+      --card-2: #18233a;
+      --text: #eaf0ff;
+      --muted: #9fb0d4;
+      --accent: #3b82f6;
+      --accent-2: #22c55e;
+      --danger: #ef4444;
+      --gold: #facc15;
+      --border: rgba(255,255,255,0.08);
+      --shadow: 0 10px 30px rgba(0,0,0,0.25);
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(59,130,246,0.16), transparent 28%),
+        radial-gradient(circle at top right, rgba(34,197,94,0.10), transparent 26%),
+        linear-gradient(180deg, #08101d, #0b1220 45%, #0a1020 100%);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    .container {
+      width: min(1400px, 94%);
+      margin: 0 auto;
+      padding: 24px 0 60px;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 {
+      margin: 0 0 10px;
+      font-size: 38px;
+      line-height: 1.15;
+    }
+
+    .hero p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .card {
+      background: rgba(18, 26, 43, 0.92);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      padding: 18px;
+      backdrop-filter: blur(8px);
+    }
+
+    .login-card {
+      width: min(720px, 100%);
+      margin: 0 auto 24px;
+    }
+
+    .login-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr auto;
+      gap: 12px;
+      align-items: end;
+    }
+
+    .field label {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .field input {
+      width: 100%;
+      padding: 14px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      outline: none;
+      background: #0c1528;
+      color: var(--text);
+      font-size: 15px;
+    }
+
+    .field input:focus {
+      border-color: var(--accent);
+    }
+
+    button {
+      border: none;
+      outline: none;
+      cursor: pointer;
+      border-radius: 12px;
+      padding: 14px 18px;
+      font-size: 15px;
+      font-weight: bold;
+      transition: transform 0.18s ease, opacity 0.18s ease, background 0.18s ease;
+    }
+
+    button:hover {
+      transform: translateY(-1px);
+    }
+
+    .primary-btn {
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      color: white;
+    }
+
+    .secondary-btn {
+      background: #1f2d4e;
+      color: white;
+      border: 1px solid var(--border);
+    }
+
+    .danger-btn {
+      background: #7f1d1d;
+      color: white;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .user-box {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      padding: 10px 12px;
+      border-radius: 14px;
+    }
+
+    .user-avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, #2563eb, #22c55e);
+      color: white;
+      font-weight: bold;
+    }
+
+    .progress-wrap {
+      margin: 18px 0 26px;
+    }
+
+    .progress-steps {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 10px;
+    }
+
+    .step {
+      text-align: center;
+      padding: 12px 8px;
+      background: #0d1527;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      color: var(--muted);
+      font-size: 13px;
+      transition: 0.25s ease;
+    }
+
+    .step.active {
+      color: white;
+      border-color: rgba(59,130,246,0.45);
+      background: linear-gradient(180deg, rgba(37,99,235,0.24), rgba(13,21,39,0.95));
+    }
+
+    .step.done {
+      color: white;
+      border-color: rgba(34,197,94,0.45);
+      background: linear-gradient(180deg, rgba(34,197,94,0.20), rgba(13,21,39,0.95));
+    }
+
+    .section {
+      margin-bottom: 28px;
+    }
+
+    .section h2 {
+      margin: 0 0 6px;
+      font-size: 28px;
+    }
+
+    .section p {
+      margin: 0 0 18px;
+      color: var(--muted);
+    }
+
+    .groups-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .group-box {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 16px;
+      transition: 0.25s ease;
+    }
+
+    .group-box.complete {
+      border-color: rgba(34,197,94,0.45);
+      box-shadow: 0 0 0 1px rgba(34,197,94,0.12) inset;
+    }
+
+    .group-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .group-head h3 {
+      margin: 0;
+      font-size: 20px;
+    }
+
+    .group-status {
+      font-size: 12px;
+      color: var(--muted);
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+    }
+
+    .teams-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .team-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+      text-align: left;
+      padding: 12px 12px;
+      border-radius: 14px;
+      background: #10192e;
+      color: white;
+      border: 1px solid rgba(255,255,255,0.06);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.22s ease, background 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+    }
+
+    .team-card:hover {
+      transform: translateY(-1px) scale(1.01);
+      border-color: rgba(59,130,246,0.45);
+    }
+
+    .team-card.selected {
+      background: linear-gradient(135deg, rgba(34,197,94,0.22), rgba(37,99,235,0.18));
+      border-color: rgba(34,197,94,0.55);
+      box-shadow: 0 0 0 1px rgba(34,197,94,0.15) inset;
+    }
+
+    .team-card.locked {
+      opacity: 0.52;
+      cursor: not-allowed;
+    }
+
+    .team-card.winner {
+      background: linear-gradient(135deg, rgba(250,204,21,0.22), rgba(245,158,11,0.14));
+      border-color: rgba(250,204,21,0.55);
+    }
+
+    .flag {
+      width: 38px;
+      height: 26px;
+      object-fit: cover;
+      border-radius: 5px;
+      border: 1px solid rgba(255,255,255,0.14);
+      flex-shrink: 0;
+      background: #0e1627;
+    }
+
+    .team-name {
+      font-size: 15px;
+      font-weight: 600;
+      flex: 1;
+    }
+
+    .pick-badge {
+      font-size: 12px;
+      padding: 6px 9px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid var(--border);
+      color: var(--muted);
+    }
+
+    .selected .pick-badge,
+    .winner .pick-badge {
+      color: white;
+      background: rgba(255,255,255,0.12);
+    }
+
+    .action-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    .center {
+      display: flex;
+      justify-content: center;
+    }
+
+    .round-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .match-box {
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 14px;
+      background: rgba(255,255,255,0.03);
+      animation: fadeUp 0.35s ease;
+    }
+
+    .match-title {
+      margin: 0 0 12px;
+      font-size: 15px;
+      color: var(--muted);
+    }
+
+    .match-teams {
+      display: grid;
+      gap: 10px;
+    }
+
+    .champion-box {
+      text-align: center;
+      padding: 28px 16px;
+      border: 1px solid rgba(250,204,21,0.35);
+      border-radius: 22px;
+      background: linear-gradient(180deg, rgba(250,204,21,0.12), rgba(255,255,255,0.03));
+      animation: popIn 0.35s ease;
+    }
+
+    .champion-box img {
+      width: 88px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: 10px;
+      border: 2px solid rgba(255,255,255,0.24);
+      margin-bottom: 14px;
+    }
+
+    .champion-box h3 {
+      margin: 0 0 8px;
+      font-size: 30px;
+      color: var(--gold);
+    }
+
+    .champion-box p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .info-note {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 14px;
+      margin-top: 16px;
+    }
+
+    .small {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .winner-line {
+      color: var(--accent-2);
+      font-weight: 600;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(14px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes popIn {
+      from {
+        opacity: 0;
+        transform: scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @media (max-width: 1100px) {
+      .groups-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .progress-steps {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    @media (max-width: 760px) {
+      .login-grid,
+      .round-grid,
+      .groups-grid,
+      .progress-steps {
+        grid-template-columns: 1fr;
+      }
+
+      .hero h1 {
+        font-size: 30px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="hero">
+      <h1>FIFA World Cup 2026 Predictor</h1>
+      <p>Group Stage থেকে Final পর্যন্ত নিজের prediction বানাও</p>
+    </div>
+
+    <div class="card login-card" id="loginCard">
+      <div class="section">
+        <h2>Enter Your Name and Gmail</h2>
+        <p>নাম আর Gmail দিয়ে ঢুকো, তারপর prediction শুরু করো।</p>
+      </div>
+
+      <div class="login-grid">
+        <div class="field">
+          <label for="nameInput">Your Name</label>
+          <input type="text" id="nameInput" placeholder="Enter your name" />
+        </div>
+
+        <div class="field">
+          <label for="emailInput">Gmail Address</label>
+          <input type="email" id="emailInput" placeholder="example@gmail.com" />
+        </div>
+
+        <button class="primary-btn" id="startBtn">Enter</button>
+      </div>
+
+      <div class="info-note">
+        এই version এ real Google Sign In নেই। এখানে নাম আর Gmail validation আছে। চাইলে পরে Firebase দিয়ে real Gmail login বসানো যাবে।
+      </div>
+    </div>
+
+    <div id="app" class="hidden">
+      <div class="topbar">
+        <div class="user-box">
+          <div class="user-avatar" id="userAvatar">U</div>
+          <div>
+            <div id="userNameText">User</div>
+            <div class="small" id="userEmailText">user@gmail.com</div>
+          </div>
+        </div>
+
+        <div class="action-row">
+          <button class="secondary-btn" id="saveBtn">Save Prediction</button>
+          <button class="danger-btn" id="resetBtn">Reset All</button>
+        </div>
+      </div>
+
+      <div class="progress-wrap">
+        <div class="progress-steps" id="progressSteps"></div>
+      </div>
+
+      <section class="section card" id="groupSection">
+        <h2>Group Stage</h2>
+        <p>প্রতি গ্রুপ থেকে ২টা দল সিলেক্ট করো। তারপর Best 8 Third-Place Teams নির্বাচন করা যাবে।</p>
+        <div class="groups-grid" id="groupsGrid"></div>
+        <div class="action-row center">
+          <button class="primary-btn" id="toThirdPlaceBtn">Continue to Best Third-Place Teams</button>
+        </div>
+      </section>
+
+      <section class="section card hidden" id="thirdPlaceSection">
+        <h2>Best 8 Third-Place Teams</h2>
+        <p>৪৮ দলের format এ ১২ গ্রুপ থেকে ২৪ দল আসে, তাই Round of 32 করার জন্য ৮টা third-place team নিতে হবে। নিচে remaining দলগুলো থেকে ৮টা বেছে নাও।</p>
+        <div class="groups-grid" id="thirdPlaceGrid"></div>
+        <div class="action-row center">
+          <button class="secondary-btn" id="backToGroupsBtn">Back to Groups</button>
+          <button class="primary-btn" id="toRound32Btn">Generate Round of 32</button>
+        </div>
+      </section>
+
+      <section class="section card hidden" id="round32Section">
+        <h2>Round of 32</h2>
+        <p>প্রতি ম্যাচে winning team এ click করো।</p>
+        <div class="round-grid" id="round32Matches"></div>
+        <div class="action-row center">
+          <button class="primary-btn" id="toRound16Btn">Continue to Round of 16</button>
+        </div>
+      </section>
+
+      <section class="section card hidden" id="round16Section">
+        <h2>Round of 16</h2>
+        <p>আবার winning team select করো।</p>
+        <div class="round-grid" id="round16Matches"></div>
+        <div class="action-row center">
+          <button class="primary-btn" id="toQuarterBtn">Continue to Quarter Final</button>
+        </div>
+      </section>
+
+      <section class="section card hidden" id="quarterSection">
+        <h2>Quarter Final</h2>
+        <p>৪টা quarter-final match থেকে winners বেছে নাও।</p>
+        <div class="round-grid" id="quarterMatches"></div>
+        <div class="action-row center">
+          <button class="primary-btn" id="toSemiBtn">Continue to Semi Final</button>
+        </div>
+      </section>
+
+      <section class="section card hidden" id="semiSection">
+        <h2>Semi Final</h2>
+        <p>২টা semi-final match এর winner select করো।</p>
+        <div class="round-grid" id="semiMatches"></div>
+        <div class="action-row center">
+          <button class="primary-btn" id="toFinalBtn">Continue to Final</button>
+        </div>
+      </section>
+
+      <section class="section card hidden" id="finalSection">
+        <h2>Final</h2>
+        <p>চ্যাম্পিয়ন select করো।</p>
+        <div class="round-grid" id="finalMatch"></div>
+        <div class="action-row center">
+          <button class="primary-btn" id="showChampionBtn">Show Champion</button>
+        </div>
+      </section>
+
+      <section class="section card hidden" id="championSection">
+        <h2>Your Champion</h2>
+        <div id="championResult"></div>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    const groups = {
+      A: [
+        { name: "USA", code: "us" },
+        { name: "Ghana", code: "gh" },
+        { name: "Poland", code: "pl" },
+        { name: "Qatar", code: "qa" }
+      ],
+      B: [
+        { name: "Argentina", code: "ar" },
+        { name: "Japan", code: "jp" },
+        { name: "Denmark", code: "dk" },
+        { name: "Iran", code: "ir" }
+      ],
+      C: [
+        { name: "France", code: "fr" },
+        { name: "Mexico", code: "mx" },
+        { name: "Switzerland", code: "ch" },
+        { name: "Saudi Arabia", code: "sa" }
+      ],
+      D: [
+        { name: "Brazil", code: "br" },
+        { name: "South Korea", code: "kr" },
+        { name: "Serbia", code: "rs" },
+        { name: "Morocco", code: "ma" }
+      ],
+      E: [
+        { name: "England", code: "gb-eng" },
+        { name: "Sweden", code: "se" },
+        { name: "Tunisia", code: "tn" },
+        { name: "Costa Rica", code: "cr" }
+      ],
+      F: [
+        { name: "Spain", code: "es" },
+        { name: "Canada", code: "ca" },
+        { name: "Croatia", code: "hr" },
+        { name: "Egypt", code: "eg" }
+      ],
+      G: [
+        { name: "Portugal", code: "pt" },
+        { name: "Colombia", code: "co" },
+        { name: "Austria", code: "at" },
+        { name: "Nigeria", code: "ng" }
+      ],
+      H: [
+        { name: "Netherlands", code: "nl" },
+        { name: "Uruguay", code: "uy" },
+        { name: "Turkey", code: "tr" },
+        { name: "Algeria", code: "dz" }
+      ],
+      I: [
+        { name: "Germany", code: "de" },
+        { name: "Ecuador", code: "ec" },
+        { name: "Ukraine", code: "ua" },
+        { name: "Cameroon", code: "cm" }
+      ],
+      J: [
+        { name: "Belgium", code: "be" },
+        { name: "Chile", code: "cl" },
+        { name: "Czech Republic", code: "cz" },
+        { name: "Ivory Coast", code: "ci" }
+      ],
+      K: [
+        { name: "Italy", code: "it" },
+        { name: "Peru", code: "pe" },
+        { name: "Hungary", code: "hu" },
+        { name: "Senegal", code: "sn" }
+      ],
+      L: [
+        { name: "Australia", code: "au" },
+        { name: "Paraguay", code: "py" },
+        { name: "Romania", code: "ro" },
+        { name: "New Zealand", code: "nz" }
+      ]
+    };
+
+    const state = {
+      user: null,
+      groupSelections: {},
+      thirdPlaceSelections: [],
+      round32Teams: [],
+      round32Winners: [],
+      round16Winners: [],
+      quarterWinners: [],
+      semiWinners: [],
+      finalWinner: null
+    };
+
+    const stages = [
+      "Login",
+      "Group Stage",
+      "Third Place",
+      "Round of 32",
+      "Round of 16",
+      "Quarter Final",
+      "Semi / Final"
+    ];
+
+    function getFlagUrl(code) {
+      if (code === "gb-eng") {
+        return "https://flagcdn.com/w80/gb-eng.png";
+      }
+      return `https://flagcdn.com/w80/${code}.png`;
+    }
+
+    function cloneTeam(team) {
+      return { ...team };
+    }
+
+    function showMessage(text) {
+      alert(text);
+    }
+
+    function isValidGmail(email) {
+      return /^[a-zA-Z0-9._%+-]+@gmail\.com$/.test(email.trim());
+    }
+
+    function saveToLocal() {
+      const payload = JSON.stringify(state);
+      localStorage.setItem("fifaPredictor2026", payload);
+      showMessage("Prediction saved.");
+    }
+
+    function loadFromLocal() {
+      const saved = localStorage.getItem("fifaPredictor2026");
+      if (!saved) return false;
+
+      try {
+        const parsed = JSON.parse(saved);
+        Object.assign(state, parsed);
+        return true;
+      } catch (error) {
+        return false;
+      }
+    }
+
+    function resetAll() {
+      localStorage.removeItem("fifaPredictor2026");
+      location.reload();
+    }
+
+    function updateProgress(activeIndex) {
+      const progressSteps = document.getElementById("progressSteps");
+      progressSteps.innerHTML = "";
+
+      stages.forEach((stage, index) => {
+        const div = document.createElement("div");
+        div.className = "step";
+        if (index < activeIndex) div.classList.add("done");
+        if (index === activeIndex) div.classList.add("active");
+        div.textContent = stage;
+        progressSteps.appendChild(div);
+      });
+    }
+
+    function setUserUI() {
+      if (!state.user) return;
+      document.getElementById("userNameText").textContent = state.user.name;
+      document.getElementById("userEmailText").textContent = state.user.email;
+      document.getElementById("userAvatar").textContent = state.user.name.trim().charAt(0).toUpperCase();
+    }
+
+    function startApp() {
+      document.getElementById("loginCard").classList.add("hidden");
+      document.getElementById("app").classList.remove("hidden");
+      setUserUI();
+      updateProgress(1);
+      renderGroups();
+      restoreFlowFromState();
+    }
+
+    function restoreFlowFromState() {
+      const groupsDone = areAllGroupsCompleted();
+
+      if (groupsDone) {
+        document.getElementById("thirdPlaceSection").classList.remove("hidden");
+        renderThirdPlaceSelection();
+      }
+
+      if (state.round32Teams.length === 32) {
+        document.getElementById("round32Section").classList.remove("hidden");
+        renderKnockoutRound("round32Matches", state.round32Teams, state.round32Winners, "r32");
+      }
+
+      if (state.round32Winners.length === 16) {
+        document.getElementById("round16Section").classList.remove("hidden");
+        renderKnockoutRound("round16Matches", state.round32Winners, state.round16Winners, "r16");
+      }
+
+      if (state.round16Winners.length === 8) {
+        document.getElementById("quarterSection").classList.remove("hidden");
+        renderKnockoutRound("quarterMatches", state.round16Winners, state.quarterWinners, "qf");
+      }
+
+      if (state.quarterWinners.length === 4) {
+        document.getElementById("semiSection").classList.remove("hidden");
+        renderKnockoutRound("semiMatches", state.quarterWinners, state.semiWinners, "sf");
+      }
+
+      if (state.semiWinners.length === 2) {
+        document.getElementById("finalSection").classList.remove("hidden");
+        renderFinal();
+      }
+
+      if (state.finalWinner) {
+        document.getElementById("championSection").classList.remove("hidden");
+        renderChampion();
+      }
+    }
+
+    function renderGroups() {
+      const groupsGrid = document.getElementById("groupsGrid");
+      groupsGrid.innerHTML = "";
+
+      Object.entries(groups).forEach(([groupKey, teams]) => {
+        if (!state.groupSelections[groupKey]) {
+          state.groupSelections[groupKey] = [];
+        }
+
+        const selectedNames = state.groupSelections[groupKey];
+        const box = document.createElement("div");
+        box.className = "group-box";
+        if (selectedNames.length === 2) box.classList.add("complete");
+
+        const head = document.createElement("div");
+        head.className = "group-head";
+
+        const h3 = document.createElement("h3");
+        h3.textContent = `Group ${groupKey}`;
+
+        const status = document.createElement("div");
+        status.className = "group-status";
+        status.textContent = `${selectedNames.length}/2 selected`;
+
+        head.appendChild(h3);
+        head.appendChild(status);
+
+        const teamList = document.createElement("div");
+        teamList.className = "teams-list";
+
+        teams.forEach(team => {
+          const isSelected = selectedNames.includes(team.name);
+          const locked = selectedNames.length >= 2 && !isSelected;
+
+          const btn = createTeamCard(team, isSelected ? "Selected" : "Pick");
+          if (isSelected) btn.classList.add("selected");
+          if (locked) btn.classList.add("locked");
+
+          btn.onclick = () => {
+            const current = state.groupSelections[groupKey];
+
+            if (current.includes(team.name)) {
+              state.groupSelections[groupKey] = current.filter(name => name !== team.name);
+            } else {
+              if (current.length >= 2) {
+                showMessage(`Group ${groupKey} থেকে শুধু 2টা দল select করা যাবে।`);
+                return;
+              }
+              state.groupSelections[groupKey].push(team.name);
+            }
+
+            if (!areAllGroupsCompleted()) {
+              state.thirdPlaceSelections = [];
+              state.round32Teams = [];
+              state.round32Winners = [];
+              state.round16Winners = [];
+              state.quarterWinners = [];
+              state.semiWinners = [];
+              state.finalWinner = null;
+              hideAfter("thirdPlaceSection");
+            }
+
+            renderGroups();
+          };
+
+          teamList.appendChild(btn);
+        });
+
+        box.appendChild(head);
+        box.appendChild(teamList);
+        groupsGrid.appendChild(box);
+      });
+    }
+
+    function createTeamCard(team, badgeText = "") {
+      const btn = document.createElement("button");
+      btn.className = "team-card";
+
+      const img = document.createElement("img");
+      img.className = "flag";
+      img.src = getFlagUrl(team.code);
+      img.alt = `${team.name} flag`;
+
+      const name = document.createElement("div");
+      name.className = "team-name";
+      name.textContent = team.name;
+
+      const badge = document.createElement("div");
+      badge.className = "pick-badge";
+      badge.textContent = badgeText;
+
+      btn.appendChild(img);
+      btn.appendChild(name);
+      btn.appendChild(badge);
+      return btn;
+    }
+
+    function areAllGroupsCompleted() {
+      return Object.keys(groups).every(key => (state.groupSelections[key] || []).length === 2);
+    }
+
+    function getThirdPlaceCandidates() {
+      const candidates = [];
+      Object.entries(groups).forEach(([groupKey, teams]) => {
+        const selected = state.groupSelections[groupKey] || [];
+        const remaining = teams.filter(team => !selected.includes(team.name));
+        if (remaining.length > 0) {
+          candidates.push({
+            group: groupKey,
+            team: cloneTeam(remaining[0]),
+            positionLabel: "Third Place Candidate"
+          });
+        }
+      });
+      return candidates;
+    }
+
+    function renderThirdPlaceSelection() {
+      updateProgress(2);
+      const grid = document.getElementById("thirdPlaceGrid");
+      grid.innerHTML = "";
+
+      const candidates = getThirdPlaceCandidates();
+
+      candidates.forEach(item => {
+        const wrap = document.createElement("div");
+        wrap.className = "group-box";
+        if (state.thirdPlaceSelections.includes(item.team.name)) {
+          wrap.classList.add("complete");
+        }
+
+        const head = document.createElement("div");
+        head.className = "group-head";
+
+        const h3 = document.createElement("h3");
+        h3.textContent = `Group ${item.group}`;
+
+        const status = document.createElement("div");
+        status.className = "group-status";
+        status.textContent = item.positionLabel;
+
+        head.appendChild(h3);
+        head.appendChild(status);
+
+        const list = document.createElement("div");
+        list.className = "teams-list";
+
+        const selected = state.thirdPlaceSelections.includes(item.team.name);
+        const locked = state.thirdPlaceSelections.length >= 8 && !selected;
+
+        const btn = createTeamCard(item.team, selected ? "Selected" : "Pick");
+        if (selected) btn.classList.add("selected");
+        if (locked) btn.classList.add("locked");
+
+        btn.onclick = () => {
+          const arr = state.thirdPlaceSelections;
+          if (arr.includes(item.team.name)) {
+            state.thirdPlaceSelections = arr.filter(name => name !== item.team.name);
+          } else {
+            if (arr.length >= 8) {
+              showMessage("শুধু 8টা third-place team select করা যাবে।");
+              return;
+            }
+            state.thirdPlaceSelections.push(item.team.name);
+          }
+
+          state.round32Teams = [];
+          state.round32Winners = [];
+          state.round16Winners = [];
+          state.quarterWinners = [];
+          state.semiWinners = [];
+          state.finalWinner = null;
+          hideAfter("round32Section");
+
+          renderThirdPlaceSelection();
+        };
+
+        list.appendChild(btn);
+        wrap.appendChild(head);
+        wrap.appendChild(list);
+        grid.appendChild(wrap);
+      });
+    }
+
+    function buildRound32Teams() {
+      const qualified = [];
+
+      Object.entries(groups).forEach(([groupKey, teams]) => {
+        const selected = state.groupSelections[groupKey];
+        const groupQualified = selected.map(name => teams.find(team => team.name === name)).filter(Boolean);
+        qualified.push(...groupQualified.map(team => cloneTeam(team)));
+      });
+
+      const thirdCandidates = getThirdPlaceCandidates()
+        .filter(item => state.thirdPlaceSelections.includes(item.team.name))
+        .map(item => cloneTeam(item.team));
+
+      state.round32Teams = [...qualified, ...thirdCandidates];
+    }
+
+    function hideAfter(sectionId) {
+      const order = [
+        "thirdPlaceSection",
+        "round32Section",
+        "round16Section",
+        "quarterSection",
+        "semiSection",
+        "finalSection",
+        "championSection"
+      ];
+
+      const startIndex = order.indexOf(sectionId);
+      if (startIndex === -1) return;
+
+      for (let i = startIndex; i < order.length; i++) {
+        document.getElementById(order[i]).classList.add("hidden");
+      }
+    }
+
+    function renderKnockoutRound(containerId, teams, selectedWinners, stageCode) {
+      const container = document.getElementById(containerId);
+      container.innerHTML = "";
+
+      for (let i = 0; i < teams.length; i += 2) {
+        const team1 = teams[i];
+        const team2 = teams[i + 1];
+        const winnerName = selectedWinners[Math.floor(i / 2)]?.name || null;
+
+        const matchBox = document.createElement("div");
+        matchBox.className = "match-box";
+
+        const title = document.createElement("h3");
+        title.className = "match-title";
+        title.textContent = `Match ${Math.floor(i / 2) + 1}`;
+
+        const matchTeams = document.createElement("div");
+        matchTeams.className = "match-teams";
+
+        const btn1 = createTeamCard(team1, winnerName === team1.name ? "Winner" : "Pick Winner");
+        const btn2 = createTeamCard(team2, winnerName === team2.name ? "Winner" : "Pick Winner");
+
+        if (winnerName === team1.name) btn1.classList.add("winner");
+        if (winnerName === team2.name) btn2.classList.add("winner");
+
+        btn1.onclick = () => pickWinner(stageCode, Math.floor(i / 2), team1);
+        btn2.onclick = () => pickWinner(stageCode, Math.floor(i / 2), team2);
+
+        matchTeams.appendChild(btn1);
+        matchTeams.appendChild(btn2);
+
+        if (winnerName) {
+          const line = document.createElement("div");
+          line.className = "winner-line small";
+          line.textContent = `${winnerName} selected for next round`;
+          matchTeams.appendChild(line);
+        }
+
+        matchBox.appendChild(title);
+        matchBox.appendChild(matchTeams);
+        container.appendChild(matchBox);
+      }
+    }
+
+    function pickWinner(stageCode, matchIndex, team) {
+      const map = {
+        r32: "round32Winners",
+        r16: "round16Winners",
+        qf: "quarterWinners",
+        sf: "semiWinners"
+      };
+
+      const key = map[stageCode];
+      if (!key) return;
+
+      state[key][matchIndex] = cloneTeam(team);
+
+      if (stageCode === "r32") {
+        renderKnockoutRound("round32Matches", state.round32Teams, state.round32Winners, "r32");
+      } else if (stageCode === "r16") {
+        renderKnockoutRound("round16Matches", state.round32Winners, state.round16Winners, "r16");
+      } else if (stageCode === "qf") {
+        renderKnockoutRound("quarterMatches", state.round16Winners, state.quarterWinners, "qf");
+      } else if (stageCode === "sf") {
+        renderKnockoutRound("semiMatches", state.quarterWinners, state.semiWinners, "sf");
+      }
+    }
+
+    function renderFinal() {
+      updateProgress(6);
+      const container = document.getElementById("finalMatch");
+      container.innerHTML = "";
+
+      const [team1, team2] = state.semiWinners;
+      if (!team1 || !team2) return;
+
+      const matchBox = document.createElement("div");
+      matchBox.className = "match-box";
+
+      const title = document.createElement("h3");
+      title.className = "match-title";
+      title.textContent = "Final Match";
+
+      const matchTeams = document.createElement("div");
+      matchTeams.className = "match-teams";
+
+      const btn1 = createTeamCard(team1, state.finalWinner?.name === team1.name ? "Champion" : "Pick Champion");
+      const btn2 = createTeamCard(team2, state.finalWinner?.name === team2.name ? "Champion" : "Pick Champion");
+
+      if (state.finalWinner?.name === team1.name) btn1.classList.add("winner");
+      if (state.finalWinner?.name === team2.name) btn2.classList.add("winner");
+
+      btn1.onclick = () => {
+        state.finalWinner = cloneTeam(team1);
+        renderFinal();
+      };
+
+      btn2.onclick = () => {
+        state.finalWinner = cloneTeam(team2);
+        renderFinal();
+      };
+
+      matchTeams.appendChild(btn1);
+      matchTeams.appendChild(btn2);
+
+      if (state.finalWinner) {
+        const line = document.createElement("div");
+        line.className = "winner-line small";
+        line.textContent = `${state.finalWinner.name} selected as champion`;
+        matchTeams.appendChild(line);
+      }
+
+      matchBox.appendChild(title);
+      matchBox.appendChild(matchTeams);
+      container.appendChild(matchBox);
+    }
+
+    function renderChampion() {
+      const championResult = document.getElementById("championResult");
+      championResult.innerHTML = "";
+
+      const winner = state.finalWinner;
+      if (!winner) return;
+
+      const box = document.createElement("div");
+      box.className = "champion-box";
+
+      box.innerHTML = `
+        <img src="${getFlagUrl(winner.code)}" alt="${winner.name} flag">
+        <h3>${winner.name}</h3>
+        <p>${state.user.name}, তোমার prediction অনুযায়ী এটাই World Cup champion.</p>
+      `;
+
+      championResult.appendChild(box);
+    }
+
+    function validateRoundWinners(winnerList, neededCount, roundName) {
+      if (winnerList.length !== neededCount || winnerList.some(item => !item)) {
+        showMessage(`${roundName} এর সব ম্যাচের winner select করো।`);
+        return false;
+      }
+      return true;
+    }
+
+    document.getElementById("startBtn").addEventListener("click", () => {
+      const name = document.getElementById("nameInput").value.trim();
+      const email = document.getElementById("emailInput").value.trim();
+
+      if (!name) {
+        showMessage("নাম দাও।");
+        return;
+      }
+
+      if (!isValidGmail(email)) {
+        showMessage("একটা valid Gmail address দাও।");
+        return;
+      }
+
+      state.user = { name, email };
+      startApp();
+    });
+
+    document.getElementById("saveBtn").addEventListener("click", saveToLocal);
+    document.getElementById("resetBtn").addEventListener("click", resetAll);
+
+    document.getElementById("toThirdPlaceBtn").addEventListener("click", () => {
+      if (!areAllGroupsCompleted()) {
+        showMessage("আগে সব group থেকে 2টা করে দল select করো।");
+        return;
+      }
+      document.getElementById("thirdPlaceSection").classList.remove("hidden");
+      renderThirdPlaceSelection();
+      updateProgress(2);
+      document.getElementById("thirdPlaceSection").scrollIntoView({ behavior: "smooth" });
+    });
+
+    document.getElementById("backToGroupsBtn").addEventListener("click", () => {
+      document.getElementById("groupSection").scrollIntoView({ behavior: "smooth" });
+      updateProgress(1);
+    });
+
+    document.getElementById("toRound32Btn").addEventListener("click", () => {
+      if (state.thirdPlaceSelections.length !== 8) {
+        showMessage("8টা best third-place team select করো।");
+        return;
+      }
+
+      buildRound32Teams();
+
+      if (state.round32Teams.length !== 32) {
+        showMessage("Round of 32 তৈরি হয়নি। আবার check করো।");
+        return;
+      }
+
+      document.getElementById("round32Section").classList.remove("hidden");
+      renderKnockoutRound("round32Matches", state.round32Teams, state.round32Winners, "r32");
+      updateProgress(3);
+      document.getElementById("round32Section").scrollIntoView({ behavior: "smooth" });
+    });
+
+    document.getElementById("toRound16Btn").addEventListener("click", () => {
+      if (!validateRoundWinners(state.round32Winners, 16, "Round of 32")) return;
+
+      document.getElementById("round16Section").classList.remove("hidden");
+      renderKnockoutRound("round16Matches", state.round32Winners, state.round16Winners, "r16");
+      updateProgress(4);
+      document.getElementById("round16Section").scrollIntoView({ behavior: "smooth" });
+    });
+
+    document.getElementById("toQuarterBtn").addEventListener("click", () => {
+      if (!validateRoundWinners(state.round16Winners, 8, "Round of 16")) return;
+
+      document.getElementById("quarterSection").classList.remove("hidden");
+      renderKnockoutRound("quarterMatches", state.round16Winners, state.quarterWinners, "qf");
+      updateProgress(5);
+      document.getElementById("quarterSection").scrollIntoView({ behavior: "smooth" });
+    });
+
+    document.getElementById("toSemiBtn").addEventListener("click", () => {
+      if (!validateRoundWinners(state.quarterWinners, 4, "Quarter Final")) return;
+
+      document.getElementById("semiSection").classList.remove("hidden");
+      renderKnockoutRound("semiMatches", state.quarterWinners, state.semiWinners, "sf");
+      updateProgress(6);
+      document.getElementById("semiSection").scrollIntoView({ behavior: "smooth" });
+    });
+
+    document.getElementById("toFinalBtn").addEventListener("click", () => {
+      if (!validateRoundWinners(state.semiWinners, 2, "Semi Final")) return;
+
+      document.getElementById("finalSection").classList.remove("hidden");
+      renderFinal();
+      updateProgress(6);
+      document.getElementById("finalSection").scrollIntoView({ behavior: "smooth" });
+    });
+
+    document.getElementById("showChampionBtn").addEventListener("click", () => {
+      if (!state.finalWinner) {
+        showMessage("Final এর champion select করো।");
+        return;
+      }
+
+      document.getElementById("championSection").classList.remove("hidden");
+      renderChampion();
+      document.getElementById("championSection").scrollIntoView({ behavior: "smooth" });
+    });
+
+    window.addEventListener("load", () => {
+      const loaded = loadFromLocal();
+      if (loaded && state.user) {
+        startApp();
+      }
+    });
+  </script>
+</body>
+</html>
