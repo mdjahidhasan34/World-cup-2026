@@ -4,51 +4,60 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>FIFA World Cup 2026 Predictor</title>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <style>
     * {
       box-sizing: border-box;
     }
 
     :root {
-      --bg: #0b1220;
-      --card: #121a2b;
-      --card-2: #18233a;
-      --text: #eaf0ff;
-      --muted: #9fb0d4;
-      --accent: #3b82f6;
-      --accent-2: #22c55e;
-      --danger: #ef4444;
+      --bg-1: #07111f;
+      --bg-2: #0d1b33;
+      --card: rgba(14, 24, 42, 0.88);
+      --card-2: rgba(17, 29, 50, 0.95);
+      --border: rgba(255, 255, 255, 0.08);
+      --text: #eef4ff;
+      --muted: #a8b8da;
+      --blue: #3b82f6;
+      --blue-2: #2563eb;
+      --green: #22c55e;
+      --green-2: #16a34a;
       --gold: #facc15;
-      --border: rgba(255,255,255,0.08);
-      --shadow: 0 10px 30px rgba(0,0,0,0.25);
+      --orange: #f59e0b;
+      --red: #ef4444;
+      --shadow: 0 14px 40px rgba(0, 0, 0, 0.35);
+      --radius: 20px;
+      --radius-sm: 14px;
     }
 
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background:
-        radial-gradient(circle at top left, rgba(59,130,246,0.16), transparent 28%),
-        radial-gradient(circle at top right, rgba(34,197,94,0.10), transparent 26%),
-        linear-gradient(180deg, #08101d, #0b1220 45%, #0a1020 100%);
       color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(37, 99, 235, 0.18), transparent 22%),
+        radial-gradient(circle at top right, rgba(34, 197, 94, 0.12), transparent 24%),
+        linear-gradient(180deg, var(--bg-1), var(--bg-2));
       min-height: 100vh;
+      scroll-behavior: smooth;
     }
 
     .container {
-      width: min(1400px, 94%);
+      width: min(1460px, 94%);
       margin: 0 auto;
-      padding: 24px 0 60px;
+      padding: 26px 0 80px;
     }
 
     .hero {
       text-align: center;
-      margin-bottom: 24px;
+      margin-bottom: 26px;
     }
 
     .hero h1 {
       margin: 0 0 10px;
-      font-size: 38px;
-      line-height: 1.15;
+      font-size: 40px;
+      line-height: 1.1;
+      letter-spacing: 0.2px;
     }
 
     .hero p {
@@ -58,17 +67,34 @@
     }
 
     .card {
-      background: rgba(18, 26, 43, 0.92);
+      background: var(--card);
       border: 1px solid var(--border);
-      border-radius: 18px;
+      border-radius: var(--radius);
       box-shadow: var(--shadow);
-      padding: 18px;
-      backdrop-filter: blur(8px);
+      backdrop-filter: blur(10px);
+      padding: 20px;
+      margin-bottom: 22px;
+    }
+
+    .hidden {
+      display: none !important;
     }
 
     .login-card {
-      width: min(720px, 100%);
+      width: min(860px, 100%);
       margin: 0 auto 24px;
+    }
+
+    .section-title {
+      margin: 0 0 8px;
+      font-size: 28px;
+    }
+
+    .section-desc {
+      margin: 0 0 18px;
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 15px;
     }
 
     .login-grid {
@@ -81,135 +107,134 @@
     .field label {
       display: block;
       margin-bottom: 8px;
-      color: var(--muted);
       font-size: 14px;
+      color: var(--muted);
     }
 
     .field input {
       width: 100%;
       padding: 14px 14px;
-      border-radius: 12px;
+      border-radius: 14px;
       border: 1px solid var(--border);
-      outline: none;
-      background: #0c1528;
+      background: #0b162a;
       color: var(--text);
+      outline: none;
       font-size: 15px;
+      transition: border-color 0.2s ease, transform 0.2s ease;
     }
 
     .field input:focus {
-      border-color: var(--accent);
-    }
-
-    button {
-      border: none;
-      outline: none;
-      cursor: pointer;
-      border-radius: 12px;
-      padding: 14px 18px;
-      font-size: 15px;
-      font-weight: bold;
-      transition: transform 0.18s ease, opacity 0.18s ease, background 0.18s ease;
-    }
-
-    button:hover {
+      border-color: rgba(59, 130, 246, 0.7);
       transform: translateY(-1px);
     }
 
-    .primary-btn {
-      background: linear-gradient(135deg, #2563eb, #1d4ed8);
-      color: white;
+    button {
+      cursor: pointer;
+      border: none;
+      outline: none;
+      font-weight: 700;
+      border-radius: 14px;
+      padding: 14px 18px;
+      transition: transform 0.22s ease, box-shadow 0.22s ease, opacity 0.22s ease, background 0.22s ease;
     }
 
-    .secondary-btn {
-      background: #1f2d4e;
-      color: white;
+    button:hover {
+      transform: translateY(-2px);
+    }
+
+    button:active {
+      transform: scale(0.97);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--blue), var(--blue-2));
+      color: #fff;
+      box-shadow: 0 8px 24px rgba(37, 99, 235, 0.28);
+    }
+
+    .btn-secondary {
+      background: #192746;
+      color: #fff;
       border: 1px solid var(--border);
     }
 
-    .danger-btn {
-      background: #7f1d1d;
-      color: white;
+    .btn-success {
+      background: linear-gradient(135deg, var(--green), var(--green-2));
+      color: #fff;
+      box-shadow: 0 8px 24px rgba(22, 163, 74, 0.24);
     }
 
-    .hidden {
-      display: none !important;
+    .btn-danger {
+      background: linear-gradient(135deg, #dc2626, #991b1b);
+      color: #fff;
+      box-shadow: 0 8px 24px rgba(220, 38, 38, 0.24);
     }
 
-    .topbar {
+    .toolbar {
       display: flex;
       justify-content: space-between;
-      gap: 12px;
+      gap: 14px;
       align-items: center;
-      margin-bottom: 20px;
       flex-wrap: wrap;
+      margin-bottom: 20px;
     }
 
     .user-box {
       display: flex;
       align-items: center;
-      gap: 10px;
-      background: rgba(255,255,255,0.03);
+      gap: 12px;
+      background: rgba(255, 255, 255, 0.03);
       border: 1px solid var(--border);
       padding: 10px 12px;
-      border-radius: 14px;
+      border-radius: 16px;
     }
 
-    .user-avatar {
-      width: 38px;
-      height: 38px;
+    .avatar {
+      width: 42px;
+      height: 42px;
       border-radius: 50%;
       display: grid;
       place-items: center;
-      background: linear-gradient(135deg, #2563eb, #22c55e);
-      color: white;
       font-weight: bold;
+      background: linear-gradient(135deg, var(--blue), var(--green));
+      color: white;
+      flex-shrink: 0;
     }
 
-    .progress-wrap {
-      margin: 18px 0 26px;
-    }
-
-    .progress-steps {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
+    .toolbar-actions {
+      display: flex;
       gap: 10px;
+      flex-wrap: wrap;
     }
 
-    .step {
-      text-align: center;
+    .progress {
+      display: grid;
+      grid-template-columns: repeat(9, 1fr);
+      gap: 10px;
+      margin-bottom: 22px;
+    }
+
+    .progress-step {
       padding: 12px 8px;
-      background: #0d1527;
-      border: 1px solid var(--border);
       border-radius: 14px;
+      border: 1px solid var(--border);
+      background: #0c172b;
+      text-align: center;
       color: var(--muted);
       font-size: 13px;
       transition: 0.25s ease;
     }
 
-    .step.active {
-      color: white;
-      border-color: rgba(59,130,246,0.45);
-      background: linear-gradient(180deg, rgba(37,99,235,0.24), rgba(13,21,39,0.95));
+    .progress-step.active {
+      color: #fff;
+      border-color: rgba(59, 130, 246, 0.55);
+      background: linear-gradient(180deg, rgba(37, 99, 235, 0.22), rgba(12, 23, 43, 0.98));
     }
 
-    .step.done {
-      color: white;
-      border-color: rgba(34,197,94,0.45);
-      background: linear-gradient(180deg, rgba(34,197,94,0.20), rgba(13,21,39,0.95));
-    }
-
-    .section {
-      margin-bottom: 28px;
-    }
-
-    .section h2 {
-      margin: 0 0 6px;
-      font-size: 28px;
-    }
-
-    .section p {
-      margin: 0 0 18px;
-      color: var(--muted);
+    .progress-step.done {
+      color: #fff;
+      border-color: rgba(34, 197, 94, 0.45);
+      background: linear-gradient(180deg, rgba(34, 197, 94, 0.18), rgba(12, 23, 43, 0.98));
     }
 
     .groups-grid {
@@ -219,16 +244,17 @@
     }
 
     .group-box {
-      background: rgba(255,255,255,0.03);
       border: 1px solid var(--border);
       border-radius: 18px;
+      background: rgba(255, 255, 255, 0.03);
       padding: 16px;
       transition: 0.25s ease;
+      animation: fadeUp 0.3s ease;
     }
 
     .group-box.complete {
-      border-color: rgba(34,197,94,0.45);
-      box-shadow: 0 0 0 1px rgba(34,197,94,0.12) inset;
+      border-color: rgba(34, 197, 94, 0.45);
+      box-shadow: 0 0 0 1px rgba(34, 197, 94, 0.12) inset;
     }
 
     .group-head {
@@ -241,101 +267,125 @@
 
     .group-head h3 {
       margin: 0;
-      font-size: 20px;
+      font-size: 21px;
     }
 
-    .group-status {
+    .pill {
       font-size: 12px;
       color: var(--muted);
+      border: 1px solid var(--border);
       padding: 6px 10px;
       border-radius: 999px;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.04);
     }
 
-    .teams-list {
+    .group-info-line {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 10px;
+      line-height: 1.5;
+    }
+
+    .team-list {
       display: grid;
       gap: 10px;
     }
 
     .team-card {
+      width: 100%;
       display: flex;
       align-items: center;
       gap: 12px;
-      width: 100%;
       text-align: left;
-      padding: 12px 12px;
-      border-radius: 14px;
-      background: #10192e;
-      color: white;
+      background: #101c31;
+      color: #fff;
       border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 15px;
+      padding: 12px 12px;
       position: relative;
       overflow: hidden;
-      transition: transform 0.22s ease, background 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+      transition: transform 0.24s ease, background 0.24s ease, border-color 0.24s ease, box-shadow 0.24s ease, opacity 0.24s ease;
+      min-height: 62px;
     }
 
     .team-card:hover {
-      transform: translateY(-1px) scale(1.01);
-      border-color: rgba(59,130,246,0.45);
+      transform: scale(1.03);
+      border-color: rgba(59, 130, 246, 0.48);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
     }
 
-    .team-card.selected {
-      background: linear-gradient(135deg, rgba(34,197,94,0.22), rgba(37,99,235,0.18));
-      border-color: rgba(34,197,94,0.55);
-      box-shadow: 0 0 0 1px rgba(34,197,94,0.15) inset;
+    .team-card.selected-top {
+      background: linear-gradient(135deg, rgba(34, 197, 94, 0.24), rgba(37, 99, 235, 0.15));
+      border-color: rgba(34, 197, 94, 0.65);
+      box-shadow: 0 0 18px rgba(34, 197, 94, 0.22);
     }
 
-    .team-card.locked {
-      opacity: 0.52;
-      cursor: not-allowed;
+    .team-card.selected-third {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.24), rgba(217, 119, 6, 0.12));
+      border-color: rgba(245, 158, 11, 0.55);
+      box-shadow: 0 0 18px rgba(245, 158, 11, 0.18);
+    }
+
+    .team-card.selected-best-third {
+      background: linear-gradient(135deg, rgba(168, 85, 247, 0.24), rgba(59, 130, 246, 0.14));
+      border-color: rgba(168, 85, 247, 0.55);
+      box-shadow: 0 0 18px rgba(168, 85, 247, 0.18);
     }
 
     .team-card.winner {
-      background: linear-gradient(135deg, rgba(250,204,21,0.22), rgba(245,158,11,0.14));
-      border-color: rgba(250,204,21,0.55);
+      background: linear-gradient(135deg, rgba(250, 204, 21, 0.25), rgba(245, 158, 11, 0.14));
+      border-color: rgba(250, 204, 21, 0.62);
+      box-shadow: 0 0 22px rgba(250, 204, 21, 0.16);
+      color: #fff;
+    }
+
+    .team-card.locked {
+      opacity: 0.45;
+      cursor: not-allowed;
+      transform: none !important;
     }
 
     .flag {
-      width: 38px;
-      height: 26px;
+      width: 40px;
+      height: 28px;
       object-fit: cover;
-      border-radius: 5px;
-      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 6px;
+      border: 1px solid rgba(255,255,255,0.18);
       flex-shrink: 0;
-      background: #0e1627;
+      background: #0a1322;
     }
 
     .team-name {
-      font-size: 15px;
-      font-weight: 600;
       flex: 1;
+      font-size: 15px;
+      font-weight: 700;
+      line-height: 1.3;
     }
 
-    .pick-badge {
+    .badge {
       font-size: 12px;
+      color: var(--muted);
       padding: 6px 9px;
       border-radius: 999px;
-      background: rgba(255,255,255,0.06);
       border: 1px solid var(--border);
-      color: var(--muted);
+      background: rgba(255,255,255,0.04);
+      white-space: nowrap;
     }
 
-    .selected .pick-badge,
-    .winner .pick-badge {
+    .team-card.selected-top .badge,
+    .team-card.selected-third .badge,
+    .team-card.selected-best-third .badge,
+    .team-card.winner .badge {
       color: white;
-      background: rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.1);
     }
 
-    .action-row {
+    .actions {
       display: flex;
       gap: 12px;
       flex-wrap: wrap;
-      margin-top: 20px;
-    }
-
-    .center {
-      display: flex;
       justify-content: center;
+      margin-top: 22px;
     }
 
     .round-grid {
@@ -345,78 +395,131 @@
     }
 
     .match-box {
-      border: 1px solid var(--border);
       border-radius: 18px;
-      padding: 14px;
+      border: 1px solid var(--border);
       background: rgba(255,255,255,0.03);
+      padding: 16px;
       animation: fadeUp 0.35s ease;
     }
 
     .match-title {
       margin: 0 0 12px;
-      font-size: 15px;
       color: var(--muted);
+      font-size: 15px;
+      font-weight: 600;
     }
 
-    .match-teams {
+    .match-list {
       display: grid;
       gap: 10px;
+    }
+
+    .winner-line {
+      margin-top: 6px;
+      color: var(--green);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .mini-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .mini-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+    }
+
+    .mini-item img {
+      width: 34px;
+      height: 24px;
+      border-radius: 5px;
+      object-fit: cover;
+      border: 1px solid rgba(255,255,255,0.18);
     }
 
     .champion-box {
       text-align: center;
       padding: 28px 16px;
-      border: 1px solid rgba(250,204,21,0.35);
       border-radius: 22px;
-      background: linear-gradient(180deg, rgba(250,204,21,0.12), rgba(255,255,255,0.03));
-      animation: popIn 0.35s ease;
+      border: 1px solid rgba(250, 204, 21, 0.4);
+      background: linear-gradient(180deg, rgba(250, 204, 21, 0.12), rgba(255,255,255,0.03));
+      animation: popIn 0.32s ease;
     }
 
     .champion-box img {
-      width: 88px;
-      height: 60px;
+      width: 90px;
+      height: 62px;
       object-fit: cover;
       border-radius: 10px;
-      border: 2px solid rgba(255,255,255,0.24);
+      border: 2px solid rgba(255,255,255,0.22);
       margin-bottom: 14px;
     }
 
     .champion-box h3 {
       margin: 0 0 8px;
-      font-size: 30px;
       color: var(--gold);
+      font-size: 32px;
     }
 
     .champion-box p {
       margin: 0;
       color: var(--muted);
+      line-height: 1.6;
     }
 
-    .info-note {
+    .note {
+      margin-top: 16px;
       color: var(--muted);
       font-size: 14px;
       line-height: 1.6;
-      background: rgba(255,255,255,0.03);
       border: 1px solid var(--border);
-      border-radius: 16px;
       padding: 14px;
-      margin-top: 16px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.03);
     }
 
-    .small {
-      font-size: 13px;
+    .status-bar {
+      margin-top: 12px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.03);
       color: var(--muted);
+      font-size: 14px;
     }
 
-    .winner-line {
-      color: var(--accent-2);
-      font-weight: 600;
+    .success-text {
+      color: var(--green);
+      font-weight: 700;
+    }
+
+    .warning-text {
+      color: var(--orange);
+      font-weight: 700;
+    }
+
+    .danger-text {
+      color: #f87171;
+      font-weight: 700;
     }
 
     @keyframes fadeUp {
       from {
         opacity: 0;
-        transform: translateY(14px);
+        transform: translateY(12px);
       }
       to {
         opacity: 1;
@@ -435,26 +538,38 @@
       }
     }
 
-    @media (max-width: 1100px) {
+    @media (max-width: 1200px) {
       .groups-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
-
-      .progress-steps {
-        grid-template-columns: repeat(4, 1fr);
+      .progress {
+        grid-template-columns: repeat(3, 1fr);
       }
     }
 
-    @media (max-width: 760px) {
+    @media (max-width: 820px) {
       .login-grid,
       .round-grid,
+      .summary-grid,
       .groups-grid,
-      .progress-steps {
+      .progress {
         grid-template-columns: 1fr;
       }
 
       .hero h1 {
         font-size: 30px;
+      }
+
+      .toolbar {
+        align-items: stretch;
+      }
+
+      .toolbar-actions {
+        width: 100%;
+      }
+
+      .toolbar-actions button {
+        flex: 1;
       }
     }
   </style>
@@ -463,406 +578,338 @@
   <div class="container">
     <div class="hero">
       <h1>FIFA World Cup 2026 Predictor</h1>
-      <p>Group Stage থেকে Final পর্যন্ত নিজের prediction বানাও</p>
+      <p>Predict the tournament from the group stage to the final in one smooth interactive page.</p>
     </div>
 
     <div class="card login-card" id="loginCard">
-      <div class="section">
-        <h2>Enter Your Name and Gmail</h2>
-        <p>নাম আর Gmail দিয়ে ঢুকো, তারপর prediction শুরু করো।</p>
-      </div>
+      <h2 class="section-title">Enter your details</h2>
+      <p class="section-desc">
+        Enter your name and Gmail address to start. After finishing your prediction, you can save it and send the full result by email.
+      </p>
 
       <div class="login-grid">
         <div class="field">
           <label for="nameInput">Your Name</label>
-          <input type="text" id="nameInput" placeholder="Enter your name" />
+          <input id="nameInput" type="text" placeholder="Enter your full name" />
         </div>
 
         <div class="field">
-          <label for="emailInput">Gmail Address</label>
-          <input type="email" id="emailInput" placeholder="example@gmail.com" />
+          <label for="emailInput">Your Gmail Address</label>
+          <input id="emailInput" type="email" placeholder="example@gmail.com" />
         </div>
 
-        <button class="primary-btn" id="startBtn">Enter</button>
+        <button class="btn-primary" id="startBtn">Start Prediction</button>
       </div>
 
-      <div class="info-note">
-        এই version এ real Google Sign In নেই। এখানে নাম আর Gmail validation আছে। চাইলে পরে Firebase দিয়ে real Gmail login বসানো যাবে।
+      <div class="note">
+        To send predictions to <strong>jh81499@gmail.com</strong>, you need to connect EmailJS and replace the placeholder keys inside the code.
       </div>
     </div>
 
     <div id="app" class="hidden">
-      <div class="topbar">
+      <div class="toolbar">
         <div class="user-box">
-          <div class="user-avatar" id="userAvatar">U</div>
+          <div class="avatar" id="avatarBox">U</div>
           <div>
             <div id="userNameText">User</div>
-            <div class="small" id="userEmailText">user@gmail.com</div>
+            <div id="userEmailText" style="color: var(--muted); font-size: 13px;">user@gmail.com</div>
           </div>
         </div>
 
-        <div class="action-row">
-          <button class="secondary-btn" id="saveBtn">Save Prediction</button>
-          <button class="danger-btn" id="resetBtn">Reset All</button>
+        <div class="toolbar-actions">
+          <button class="btn-secondary" id="saveBtn">Save Locally</button>
+          <button class="btn-success" id="sendBtn">Send Prediction by Email</button>
+          <button class="btn-danger" id="resetBtn">Reset All</button>
         </div>
       </div>
 
-      <div class="progress-wrap">
-        <div class="progress-steps" id="progressSteps"></div>
-      </div>
+      <div class="progress" id="progressBar"></div>
 
-      <section class="section card" id="groupSection">
-        <h2>Group Stage</h2>
-        <p>প্রতি গ্রুপ থেকে ২টা দল সিলেক্ট করো। তারপর Best 8 Third-Place Teams নির্বাচন করা যাবে।</p>
+      <section class="card" id="groupSection">
+        <h2 class="section-title">Group Stage</h2>
+        <p class="section-desc">
+          In each group, select the top 2 teams. Then select the 3rd place team from the remaining 2 teams. This page uses your updated groups.
+        </p>
         <div class="groups-grid" id="groupsGrid"></div>
-        <div class="action-row center">
-          <button class="primary-btn" id="toThirdPlaceBtn">Continue to Best Third-Place Teams</button>
+        <div class="actions">
+          <button class="btn-primary" id="goToBestThirdBtn">Continue to Best Third-Place Teams</button>
         </div>
       </section>
 
-      <section class="section card hidden" id="thirdPlaceSection">
-        <h2>Best 8 Third-Place Teams</h2>
-        <p>৪৮ দলের format এ ১২ গ্রুপ থেকে ২৪ দল আসে, তাই Round of 32 করার জন্য ৮টা third-place team নিতে হবে। নিচে remaining দলগুলো থেকে ৮টা বেছে নাও।</p>
-        <div class="groups-grid" id="thirdPlaceGrid"></div>
-        <div class="action-row center">
-          <button class="secondary-btn" id="backToGroupsBtn">Back to Groups</button>
-          <button class="primary-btn" id="toRound32Btn">Generate Round of 32</button>
+      <section class="card hidden" id="bestThirdSection">
+        <h2 class="section-title">Best Third-Place Teams</h2>
+        <p class="section-desc">
+          You will have 12 third-place teams, one from each group. Select the best 8 to qualify for the Round of 32.
+        </p>
+        <div class="groups-grid" id="bestThirdGrid"></div>
+        <div class="actions">
+          <button class="btn-secondary" id="backToGroupsBtn">Back to Groups</button>
+          <button class="btn-primary" id="generateRound32Btn">Generate Round of 32</button>
         </div>
       </section>
 
-      <section class="section card hidden" id="round32Section">
-        <h2>Round of 32</h2>
-        <p>প্রতি ম্যাচে winning team এ click করো।</p>
-        <div class="round-grid" id="round32Matches"></div>
-        <div class="action-row center">
-          <button class="primary-btn" id="toRound16Btn">Continue to Round of 16</button>
+      <section class="card hidden" id="round32Section">
+        <h2 class="section-title">Round of 32</h2>
+        <p class="section-desc">
+          Click the winning team in every match. The selected team will move forward.
+        </p>
+        <div class="round-grid" id="round32Grid"></div>
+        <div class="actions">
+          <button class="btn-primary" id="generateRound16Btn">Continue to Round of 16</button>
         </div>
       </section>
 
-      <section class="section card hidden" id="round16Section">
-        <h2>Round of 16</h2>
-        <p>আবার winning team select করো।</p>
-        <div class="round-grid" id="round16Matches"></div>
-        <div class="action-row center">
-          <button class="primary-btn" id="toQuarterBtn">Continue to Quarter Final</button>
+      <section class="card hidden" id="round16Section">
+        <h2 class="section-title">Round of 16</h2>
+        <p class="section-desc">
+          Select the winner from every match.
+        </p>
+        <div class="round-grid" id="round16Grid"></div>
+        <div class="actions">
+          <button class="btn-primary" id="generateQuarterBtn">Continue to Quarter-final</button>
         </div>
       </section>
 
-      <section class="section card hidden" id="quarterSection">
-        <h2>Quarter Final</h2>
-        <p>৪টা quarter-final match থেকে winners বেছে নাও।</p>
-        <div class="round-grid" id="quarterMatches"></div>
-        <div class="action-row center">
-          <button class="primary-btn" id="toSemiBtn">Continue to Semi Final</button>
+      <section class="card hidden" id="quarterSection">
+        <h2 class="section-title">Quarter-final</h2>
+        <p class="section-desc">
+          Select the winner from the 4 quarter-final matches.
+        </p>
+        <div class="round-grid" id="quarterGrid"></div>
+        <div class="actions">
+          <button class="btn-primary" id="generateSemiBtn">Continue to Semi-final</button>
         </div>
       </section>
 
-      <section class="section card hidden" id="semiSection">
-        <h2>Semi Final</h2>
-        <p>২টা semi-final match এর winner select করো।</p>
-        <div class="round-grid" id="semiMatches"></div>
-        <div class="action-row center">
-          <button class="primary-btn" id="toFinalBtn">Continue to Final</button>
+      <section class="card hidden" id="semiSection">
+        <h2 class="section-title">Semi-final</h2>
+        <p class="section-desc">
+          Select the winners. The losing teams will automatically go to the third-place playoff.
+        </p>
+        <div class="round-grid" id="semiGrid"></div>
+        <div class="actions">
+          <button class="btn-primary" id="generateFinalBtn">Continue to Final and Third-place Match</button>
         </div>
       </section>
 
-      <section class="section card hidden" id="finalSection">
-        <h2>Final</h2>
-        <p>চ্যাম্পিয়ন select করো।</p>
-        <div class="round-grid" id="finalMatch"></div>
-        <div class="action-row center">
-          <button class="primary-btn" id="showChampionBtn">Show Champion</button>
+      <section class="card hidden" id="finalThirdSection">
+        <h2 class="section-title">Final and Third-place Playoff</h2>
+        <p class="section-desc">
+          Choose the champion and also select the winner of the third-place playoff.
+        </p>
+
+        <div class="summary-grid">
+          <div>
+            <h3 style="margin-top:0;">Final</h3>
+            <div class="round-grid" style="grid-template-columns: 1fr;" id="finalGrid"></div>
+          </div>
+
+          <div>
+            <h3 style="margin-top:0;">Third-place Match</h3>
+            <div class="round-grid" style="grid-template-columns: 1fr;" id="thirdPlaceGrid"></div>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button class="btn-primary" id="showSummaryBtn">Show Final Prediction Summary</button>
         </div>
       </section>
 
-      <section class="section card hidden" id="championSection">
-        <h2>Your Champion</h2>
-        <div id="championResult"></div>
+      <section class="card hidden" id="summarySection">
+        <h2 class="section-title">Prediction Summary</h2>
+        <p class="section-desc">
+          Review the final prediction, then save it or send it by email.
+        </p>
+
+        <div class="summary-grid">
+          <div>
+            <h3>Champion</h3>
+            <div id="championBox"></div>
+          </div>
+
+          <div>
+            <h3>Third Place</h3>
+            <div id="thirdPlaceWinnerBox"></div>
+          </div>
+        </div>
+
+        <div style="margin-top:20px;">
+          <h3>Qualified Teams from Groups</h3>
+          <div class="mini-list" id="qualifiedTeamsList"></div>
+        </div>
+
+        <div style="margin-top:20px;">
+          <h3>Selected Best Third-Place Teams</h3>
+          <div class="mini-list" id="bestThirdList"></div>
+        </div>
+
+        <div style="margin-top:20px;">
+          <h3>Knockout Winners by Round</h3>
+          <div class="mini-list" id="knockoutSummaryList"></div>
+        </div>
+
+        <div class="status-bar" id="statusBar">
+          Ready.
+        </div>
       </section>
     </div>
   </div>
 
   <script>
-    const groups = {
+    const PROGRESS_STEPS = [
+      "Login",
+      "Group Stage",
+      "Best Third",
+      "Round of 32",
+      "Round of 16",
+      "Quarter-final",
+      "Semi-final",
+      "Final",
+      "Summary"
+    ];
+
+    const GROUPS = {
       A: [
-        { name: "USA", code: "us" },
-        { name: "Ghana", code: "gh" },
-        { name: "Poland", code: "pl" },
-        { name: "Qatar", code: "qa" }
+        { name: "Mexico", code: "mx" },
+        { name: "South Africa", code: "za" },
+        { name: "South Korea", code: "kr" },
+        { name: "Czech Republic", code: "cz" }
       ],
       B: [
-        { name: "Argentina", code: "ar" },
-        { name: "Japan", code: "jp" },
-        { name: "Denmark", code: "dk" },
-        { name: "Iran", code: "ir" }
+        { name: "Canada", code: "ca" },
+        { name: "Bosnia and Herzegovina", code: "ba" },
+        { name: "Qatar", code: "qa" },
+        { name: "Switzerland", code: "ch" }
       ],
       C: [
-        { name: "France", code: "fr" },
-        { name: "Mexico", code: "mx" },
-        { name: "Switzerland", code: "ch" },
-        { name: "Saudi Arabia", code: "sa" }
+        { name: "Brazil", code: "br" },
+        { name: "Morocco", code: "ma" },
+        { name: "Haiti", code: "ht" },
+        { name: "Scotland", code: "gb-sct" }
       ],
       D: [
-        { name: "Brazil", code: "br" },
-        { name: "South Korea", code: "kr" },
-        { name: "Serbia", code: "rs" },
-        { name: "Morocco", code: "ma" }
+        { name: "United States", code: "us" },
+        { name: "Paraguay", code: "py" },
+        { name: "Australia", code: "au" },
+        { name: "Turkey", code: "tr" }
       ],
       E: [
-        { name: "England", code: "gb-eng" },
-        { name: "Sweden", code: "se" },
-        { name: "Tunisia", code: "tn" },
-        { name: "Costa Rica", code: "cr" }
+        { name: "Germany", code: "de" },
+        { name: "Curaçao", code: "cw" },
+        { name: "Ivory Coast", code: "ci" },
+        { name: "Ecuador", code: "ec" }
       ],
       F: [
-        { name: "Spain", code: "es" },
-        { name: "Canada", code: "ca" },
-        { name: "Croatia", code: "hr" },
-        { name: "Egypt", code: "eg" }
+        { name: "Netherlands", code: "nl" },
+        { name: "Japan", code: "jp" },
+        { name: "Sweden", code: "se" },
+        { name: "Tunisia", code: "tn" }
       ],
       G: [
-        { name: "Portugal", code: "pt" },
-        { name: "Colombia", code: "co" },
-        { name: "Austria", code: "at" },
-        { name: "Nigeria", code: "ng" }
+        { name: "Belgium", code: "be" },
+        { name: "Egypt", code: "eg" },
+        { name: "Iran", code: "ir" },
+        { name: "New Zealand", code: "nz" }
       ],
       H: [
-        { name: "Netherlands", code: "nl" },
-        { name: "Uruguay", code: "uy" },
-        { name: "Turkey", code: "tr" },
-        { name: "Algeria", code: "dz" }
+        { name: "Spain", code: "es" },
+        { name: "Cape Verde", code: "cv" },
+        { name: "Saudi Arabia", code: "sa" },
+        { name: "Uruguay", code: "uy" }
       ],
       I: [
-        { name: "Germany", code: "de" },
-        { name: "Ecuador", code: "ec" },
-        { name: "Ukraine", code: "ua" },
-        { name: "Cameroon", code: "cm" }
+        { name: "France", code: "fr" },
+        { name: "Senegal", code: "sn" },
+        { name: "Iraq", code: "iq" },
+        { name: "Norway", code: "no" }
       ],
       J: [
-        { name: "Belgium", code: "be" },
-        { name: "Chile", code: "cl" },
-        { name: "Czech Republic", code: "cz" },
-        { name: "Ivory Coast", code: "ci" }
+        { name: "Argentina", code: "ar" },
+        { name: "Algeria", code: "dz" },
+        { name: "Austria", code: "at" },
+        { name: "Jordan", code: "jo" }
       ],
       K: [
-        { name: "Italy", code: "it" },
-        { name: "Peru", code: "pe" },
-        { name: "Hungary", code: "hu" },
-        { name: "Senegal", code: "sn" }
+        { name: "Portugal", code: "pt" },
+        { name: "DR Congo", code: "cd" },
+        { name: "Uzbekistan", code: "uz" },
+        { name: "Colombia", code: "co" }
       ],
       L: [
-        { name: "Australia", code: "au" },
-        { name: "Paraguay", code: "py" },
-        { name: "Romania", code: "ro" },
-        { name: "New Zealand", code: "nz" }
+        { name: "England", code: "gb-eng" },
+        { name: "Croatia", code: "hr" },
+        { name: "Ghana", code: "gh" },
+        { name: "Panama", code: "pa" }
       ]
     };
 
     const state = {
       user: null,
-      groupSelections: {},
-      thirdPlaceSelections: [],
+      groups: {},
+      bestThirdQualified: [],
       round32Teams: [],
       round32Winners: [],
       round16Winners: [],
       quarterWinners: [],
       semiWinners: [],
-      finalWinner: null
+      semiLosers: [],
+      champion: null,
+      thirdPlaceWinner: null
     };
 
-    const stages = [
-      "Login",
-      "Group Stage",
-      "Third Place",
-      "Round of 32",
-      "Round of 16",
-      "Quarter Final",
-      "Semi / Final"
-    ];
-
-    function getFlagUrl(code) {
-      if (code === "gb-eng") {
-        return "https://flagcdn.com/w80/gb-eng.png";
-      }
-      return `https://flagcdn.com/w80/${code}.png`;
+    function initDefaultState() {
+      Object.keys(GROUPS).forEach(groupKey => {
+        if (!state.groups[groupKey]) {
+          state.groups[groupKey] = {
+            top2: [],
+            third: null
+          };
+        }
+      });
     }
 
     function cloneTeam(team) {
-      return { ...team };
-    }
-
-    function showMessage(text) {
-      alert(text);
+      return JSON.parse(JSON.stringify(team));
     }
 
     function isValidGmail(email) {
       return /^[a-zA-Z0-9._%+-]+@gmail\.com$/.test(email.trim());
     }
 
-    function saveToLocal() {
-      const payload = JSON.stringify(state);
-      localStorage.setItem("fifaPredictor2026", payload);
-      showMessage("Prediction saved.");
+    function getFlagUrl(code) {
+      if (code === "gb-eng") return "https://flagcdn.com/w80/gb-eng.png";
+      if (code === "gb-sct") return "https://flagcdn.com/w80/gb-sct.png";
+      return `https://flagcdn.com/w80/${code}.png`;
     }
 
-    function loadFromLocal() {
-      const saved = localStorage.getItem("fifaPredictor2026");
-      if (!saved) return false;
-
-      try {
-        const parsed = JSON.parse(saved);
-        Object.assign(state, parsed);
-        return true;
-      } catch (error) {
-        return false;
+    function setStatus(text, type = "normal") {
+      const bar = document.getElementById("statusBar");
+      if (!bar) return;
+      if (type === "success") {
+        bar.innerHTML = `<span class="success-text">${text}</span>`;
+      } else if (type === "warning") {
+        bar.innerHTML = `<span class="warning-text">${text}</span>`;
+      } else if (type === "danger") {
+        bar.innerHTML = `<span class="danger-text">${text}</span>`;
+      } else {
+        bar.textContent = text;
       }
     }
 
-    function resetAll() {
-      localStorage.removeItem("fifaPredictor2026");
-      location.reload();
+    function alertMessage(message) {
+      alert(message);
     }
 
-    function updateProgress(activeIndex) {
-      const progressSteps = document.getElementById("progressSteps");
-      progressSteps.innerHTML = "";
-
-      stages.forEach((stage, index) => {
+    function buildProgress(activeIndex) {
+      const progress = document.getElementById("progressBar");
+      progress.innerHTML = "";
+      PROGRESS_STEPS.forEach((step, index) => {
         const div = document.createElement("div");
-        div.className = "step";
+        div.className = "progress-step";
         if (index < activeIndex) div.classList.add("done");
         if (index === activeIndex) div.classList.add("active");
-        div.textContent = stage;
-        progressSteps.appendChild(div);
-      });
-    }
-
-    function setUserUI() {
-      if (!state.user) return;
-      document.getElementById("userNameText").textContent = state.user.name;
-      document.getElementById("userEmailText").textContent = state.user.email;
-      document.getElementById("userAvatar").textContent = state.user.name.trim().charAt(0).toUpperCase();
-    }
-
-    function startApp() {
-      document.getElementById("loginCard").classList.add("hidden");
-      document.getElementById("app").classList.remove("hidden");
-      setUserUI();
-      updateProgress(1);
-      renderGroups();
-      restoreFlowFromState();
-    }
-
-    function restoreFlowFromState() {
-      const groupsDone = areAllGroupsCompleted();
-
-      if (groupsDone) {
-        document.getElementById("thirdPlaceSection").classList.remove("hidden");
-        renderThirdPlaceSelection();
-      }
-
-      if (state.round32Teams.length === 32) {
-        document.getElementById("round32Section").classList.remove("hidden");
-        renderKnockoutRound("round32Matches", state.round32Teams, state.round32Winners, "r32");
-      }
-
-      if (state.round32Winners.length === 16) {
-        document.getElementById("round16Section").classList.remove("hidden");
-        renderKnockoutRound("round16Matches", state.round32Winners, state.round16Winners, "r16");
-      }
-
-      if (state.round16Winners.length === 8) {
-        document.getElementById("quarterSection").classList.remove("hidden");
-        renderKnockoutRound("quarterMatches", state.round16Winners, state.quarterWinners, "qf");
-      }
-
-      if (state.quarterWinners.length === 4) {
-        document.getElementById("semiSection").classList.remove("hidden");
-        renderKnockoutRound("semiMatches", state.quarterWinners, state.semiWinners, "sf");
-      }
-
-      if (state.semiWinners.length === 2) {
-        document.getElementById("finalSection").classList.remove("hidden");
-        renderFinal();
-      }
-
-      if (state.finalWinner) {
-        document.getElementById("championSection").classList.remove("hidden");
-        renderChampion();
-      }
-    }
-
-    function renderGroups() {
-      const groupsGrid = document.getElementById("groupsGrid");
-      groupsGrid.innerHTML = "";
-
-      Object.entries(groups).forEach(([groupKey, teams]) => {
-        if (!state.groupSelections[groupKey]) {
-          state.groupSelections[groupKey] = [];
-        }
-
-        const selectedNames = state.groupSelections[groupKey];
-        const box = document.createElement("div");
-        box.className = "group-box";
-        if (selectedNames.length === 2) box.classList.add("complete");
-
-        const head = document.createElement("div");
-        head.className = "group-head";
-
-        const h3 = document.createElement("h3");
-        h3.textContent = `Group ${groupKey}`;
-
-        const status = document.createElement("div");
-        status.className = "group-status";
-        status.textContent = `${selectedNames.length}/2 selected`;
-
-        head.appendChild(h3);
-        head.appendChild(status);
-
-        const teamList = document.createElement("div");
-        teamList.className = "teams-list";
-
-        teams.forEach(team => {
-          const isSelected = selectedNames.includes(team.name);
-          const locked = selectedNames.length >= 2 && !isSelected;
-
-          const btn = createTeamCard(team, isSelected ? "Selected" : "Pick");
-          if (isSelected) btn.classList.add("selected");
-          if (locked) btn.classList.add("locked");
-
-          btn.onclick = () => {
-            const current = state.groupSelections[groupKey];
-
-            if (current.includes(team.name)) {
-              state.groupSelections[groupKey] = current.filter(name => name !== team.name);
-            } else {
-              if (current.length >= 2) {
-                showMessage(`Group ${groupKey} থেকে শুধু 2টা দল select করা যাবে।`);
-                return;
-              }
-              state.groupSelections[groupKey].push(team.name);
-            }
-
-            if (!areAllGroupsCompleted()) {
-              state.thirdPlaceSelections = [];
-              state.round32Teams = [];
-              state.round32Winners = [];
-              state.round16Winners = [];
-              state.quarterWinners = [];
-              state.semiWinners = [];
-              state.finalWinner = null;
-              hideAfter("thirdPlaceSection");
-            }
-
-            renderGroups();
-          };
-
-          teamList.appendChild(btn);
-        });
-
-        box.appendChild(head);
-        box.appendChild(teamList);
-        groupsGrid.appendChild(box);
+        div.textContent = step;
+        progress.appendChild(div);
       });
     }
 
@@ -880,182 +927,340 @@
       name.textContent = team.name;
 
       const badge = document.createElement("div");
-      badge.className = "pick-badge";
+      badge.className = "badge";
       badge.textContent = badgeText;
 
       btn.appendChild(img);
       btn.appendChild(name);
       btn.appendChild(badge);
+
       return btn;
     }
 
-    function areAllGroupsCompleted() {
-      return Object.keys(groups).every(key => (state.groupSelections[key] || []).length === 2);
+    function updateUserBox() {
+      document.getElementById("userNameText").textContent = state.user.name;
+      document.getElementById("userEmailText").textContent = state.user.email;
+      document.getElementById("avatarBox").textContent = state.user.name.trim().charAt(0).toUpperCase();
     }
 
-    function getThirdPlaceCandidates() {
-      const candidates = [];
-      Object.entries(groups).forEach(([groupKey, teams]) => {
-        const selected = state.groupSelections[groupKey] || [];
-        const remaining = teams.filter(team => !selected.includes(team.name));
-        if (remaining.length > 0) {
-          candidates.push({
-            group: groupKey,
-            team: cloneTeam(remaining[0]),
-            positionLabel: "Third Place Candidate"
-          });
-        }
+    function openApp() {
+      document.getElementById("loginCard").classList.add("hidden");
+      document.getElementById("app").classList.remove("hidden");
+      updateUserBox();
+      buildProgress(1);
+      renderGroups();
+      restoreSectionsFromState();
+    }
+
+    function saveLocal() {
+      localStorage.setItem("wc2026_predictor_full", JSON.stringify(state));
+      setStatus("Prediction saved locally.", "success");
+    }
+
+    function loadLocal() {
+      const raw = localStorage.getItem("wc2026_predictor_full");
+      if (!raw) return false;
+      try {
+        const parsed = JSON.parse(raw);
+        Object.assign(state, parsed);
+        initDefaultState();
+        return true;
+      } catch (e) {
+        return false;
+      }
+    }
+
+    function resetAll() {
+      localStorage.removeItem("wc2026_predictor_full");
+      location.reload();
+    }
+
+    function areGroupsComplete() {
+      return Object.keys(GROUPS).every(groupKey => {
+        const data = state.groups[groupKey];
+        return data.top2.length === 2 && !!data.third;
       });
-      return candidates;
     }
 
-    function renderThirdPlaceSelection() {
-      updateProgress(2);
-      const grid = document.getElementById("thirdPlaceGrid");
-      grid.innerHTML = "";
+    function getRemainingTeamsForGroup(groupKey) {
+      const teams = GROUPS[groupKey];
+      const selectedTop2 = state.groups[groupKey].top2;
+      return teams.filter(team => !selectedTop2.includes(team.name));
+    }
 
-      const candidates = getThirdPlaceCandidates();
+    function renderGroups() {
+      const container = document.getElementById("groupsGrid");
+      container.innerHTML = "";
 
-      candidates.forEach(item => {
-        const wrap = document.createElement("div");
-        wrap.className = "group-box";
-        if (state.thirdPlaceSelections.includes(item.team.name)) {
-          wrap.classList.add("complete");
-        }
+      Object.entries(GROUPS).forEach(([groupKey, teams]) => {
+        const groupState = state.groups[groupKey];
+        const top2Count = groupState.top2.length;
+        const thirdSelected = groupState.third;
+
+        const box = document.createElement("div");
+        box.className = "group-box";
+        if (top2Count === 2 && thirdSelected) box.classList.add("complete");
 
         const head = document.createElement("div");
         head.className = "group-head";
 
-        const h3 = document.createElement("h3");
-        h3.textContent = `Group ${item.group}`;
+        const title = document.createElement("h3");
+        title.textContent = `Group ${groupKey}`;
 
-        const status = document.createElement("div");
-        status.className = "group-status";
-        status.textContent = item.positionLabel;
+        const pill = document.createElement("div");
+        pill.className = "pill";
+        pill.textContent = `${top2Count}/2 top teams | 3rd: ${thirdSelected ? "Selected" : "Pending"}`;
 
-        head.appendChild(h3);
-        head.appendChild(status);
+        head.appendChild(title);
+        head.appendChild(pill);
+
+        const info = document.createElement("div");
+        info.className = "group-info-line";
+        info.innerHTML = `
+          <strong>Step 1:</strong> Select the top 2 teams.<br>
+          <strong>Step 2:</strong> From the remaining 2 teams, select the 3rd place team.
+        `;
+
+        const teamList = document.createElement("div");
+        teamList.className = "team-list";
+
+        teams.forEach(team => {
+          const isTopSelected = groupState.top2.includes(team.name);
+          const topLocked = groupState.top2.length >= 2 && !isTopSelected;
+          const remainingTeams = getRemainingTeamsForGroup(groupKey);
+          const isThirdCandidate = remainingTeams.some(t => t.name === team.name);
+          const isThirdSelected = groupState.third === team.name;
+
+          let badgeText = "Select";
+          if (isTopSelected) badgeText = "Top 2";
+          else if (isThirdSelected) badgeText = "3rd Place";
+          else if (groupState.top2.length === 2 && isThirdCandidate) badgeText = "3rd Place Candidate";
+          else if (topLocked) badgeText = "Locked";
+
+          const btn = createTeamCard(team, badgeText);
+
+          if (isTopSelected) btn.classList.add("selected-top");
+          if (isThirdSelected) btn.classList.add("selected-third");
+          if (topLocked && !isThirdCandidate) btn.classList.add("locked");
+
+          btn.onclick = () => {
+            handleGroupTeamClick(groupKey, team.name);
+          };
+
+          teamList.appendChild(btn);
+        });
+
+        box.appendChild(head);
+        box.appendChild(info);
+        box.appendChild(teamList);
+        container.appendChild(box);
+      });
+    }
+
+    function handleGroupTeamClick(groupKey, teamName) {
+      const groupState = state.groups[groupKey];
+      const isTopSelected = groupState.top2.includes(teamName);
+      const remainingTeams = getRemainingTeamsForGroup(groupKey);
+      const isThirdCandidate = remainingTeams.some(t => t.name === teamName);
+
+      if (isTopSelected) {
+        groupState.top2 = groupState.top2.filter(name => name !== teamName);
+        if (groupState.third === teamName) groupState.third = null;
+        clearFromBestThirdAndKnockout();
+        renderGroups();
+        return;
+      }
+
+      if (groupState.top2.length < 2) {
+        groupState.top2.push(teamName);
+        if (groupState.third && groupState.top2.includes(groupState.third)) {
+          groupState.third = null;
+        }
+        clearFromBestThirdAndKnockout();
+        renderGroups();
+        return;
+      }
+
+      if (groupState.top2.length === 2 && isThirdCandidate) {
+        if (groupState.third === teamName) {
+          groupState.third = null;
+        } else {
+          groupState.third = teamName;
+        }
+        clearFromBestThirdAndKnockout();
+        renderGroups();
+        return;
+      }
+
+      alertMessage("You can only select 2 top teams first. Then choose 1 team for 3rd place from the remaining 2 teams.");
+    }
+
+    function clearFromBestThirdAndKnockout() {
+      state.bestThirdQualified = [];
+      state.round32Teams = [];
+      state.round32Winners = [];
+      state.round16Winners = [];
+      state.quarterWinners = [];
+      state.semiWinners = [];
+      state.semiLosers = [];
+      state.champion = null;
+      state.thirdPlaceWinner = null;
+
+      hideSectionsAfter("bestThirdSection");
+    }
+
+    function getAllThirdPlaceTeams() {
+      const result = [];
+      Object.keys(GROUPS).forEach(groupKey => {
+        const thirdName = state.groups[groupKey].third;
+        if (thirdName) {
+          const team = GROUPS[groupKey].find(t => t.name === thirdName);
+          if (team) result.push(cloneTeam(team));
+        }
+      });
+      return result;
+    }
+
+    function renderBestThirdSection() {
+      buildProgress(2);
+      const container = document.getElementById("bestThirdGrid");
+      container.innerHTML = "";
+
+      getAllThirdPlaceTeams().forEach(team => {
+        const box = document.createElement("div");
+        box.className = "group-box";
+        if (state.bestThirdQualified.includes(team.name)) box.classList.add("complete");
+
+        const head = document.createElement("div");
+        head.className = "group-head";
+
+        const title = document.createElement("h3");
+        title.textContent = team.name;
+
+        const pill = document.createElement("div");
+        pill.className = "pill";
+        pill.textContent = state.bestThirdQualified.includes(team.name) ? "Qualified" : "Available";
+
+        head.appendChild(title);
+        head.appendChild(pill);
 
         const list = document.createElement("div");
-        list.className = "teams-list";
+        list.className = "team-list";
 
-        const selected = state.thirdPlaceSelections.includes(item.team.name);
-        const locked = state.thirdPlaceSelections.length >= 8 && !selected;
+        const btn = createTeamCard(team, state.bestThirdQualified.includes(team.name) ? "Selected" : "Select");
+        if (state.bestThirdQualified.includes(team.name)) btn.classList.add("selected-best-third");
+        if (state.bestThirdQualified.length >= 8 && !state.bestThirdQualified.includes(team.name)) btn.classList.add("locked");
 
-        const btn = createTeamCard(item.team, selected ? "Selected" : "Pick");
-        if (selected) btn.classList.add("selected");
-        if (locked) btn.classList.add("locked");
-
-        btn.onclick = () => {
-          const arr = state.thirdPlaceSelections;
-          if (arr.includes(item.team.name)) {
-            state.thirdPlaceSelections = arr.filter(name => name !== item.team.name);
-          } else {
-            if (arr.length >= 8) {
-              showMessage("শুধু 8টা third-place team select করা যাবে।");
-              return;
-            }
-            state.thirdPlaceSelections.push(item.team.name);
-          }
-
-          state.round32Teams = [];
-          state.round32Winners = [];
-          state.round16Winners = [];
-          state.quarterWinners = [];
-          state.semiWinners = [];
-          state.finalWinner = null;
-          hideAfter("round32Section");
-
-          renderThirdPlaceSelection();
-        };
+        btn.onclick = () => toggleBestThird(team.name);
 
         list.appendChild(btn);
-        wrap.appendChild(head);
-        wrap.appendChild(list);
-        grid.appendChild(wrap);
+        box.appendChild(head);
+        box.appendChild(list);
+
+        container.appendChild(box);
       });
     }
 
-    function buildRound32Teams() {
+    function toggleBestThird(teamName) {
+      if (state.bestThirdQualified.includes(teamName)) {
+        state.bestThirdQualified = state.bestThirdQualified.filter(name => name !== teamName);
+      } else {
+        if (state.bestThirdQualified.length >= 8) {
+          alertMessage("You can only select 8 best third-place teams.");
+          return;
+        }
+        state.bestThirdQualified.push(teamName);
+      }
+
+      state.round32Teams = [];
+      state.round32Winners = [];
+      state.round16Winners = [];
+      state.quarterWinners = [];
+      state.semiWinners = [];
+      state.semiLosers = [];
+      state.champion = null;
+      state.thirdPlaceWinner = null;
+      hideSectionsAfter("round32Section");
+      renderBestThirdSection();
+    }
+
+    function generateRound32Teams() {
       const qualified = [];
 
-      Object.entries(groups).forEach(([groupKey, teams]) => {
-        const selected = state.groupSelections[groupKey];
-        const groupQualified = selected.map(name => teams.find(team => team.name === name)).filter(Boolean);
-        qualified.push(...groupQualified.map(team => cloneTeam(team)));
+      Object.keys(GROUPS).forEach(groupKey => {
+        const top2Names = state.groups[groupKey].top2;
+        top2Names.forEach(name => {
+          const team = GROUPS[groupKey].find(t => t.name === name);
+          if (team) qualified.push(cloneTeam(team));
+        });
       });
 
-      const thirdCandidates = getThirdPlaceCandidates()
-        .filter(item => state.thirdPlaceSelections.includes(item.team.name))
-        .map(item => cloneTeam(item.team));
-
-      state.round32Teams = [...qualified, ...thirdCandidates];
+      const bestThirdTeams = getAllThirdPlaceTeams().filter(team => state.bestThirdQualified.includes(team.name));
+      state.round32Teams = [...qualified, ...bestThirdTeams];
     }
 
-    function hideAfter(sectionId) {
-      const order = [
-        "thirdPlaceSection",
+    function hideSectionsAfter(sectionId) {
+      const sectionOrder = [
+        "bestThirdSection",
         "round32Section",
         "round16Section",
         "quarterSection",
         "semiSection",
-        "finalSection",
-        "championSection"
+        "finalThirdSection",
+        "summarySection"
       ];
-
-      const startIndex = order.indexOf(sectionId);
-      if (startIndex === -1) return;
-
-      for (let i = startIndex; i < order.length; i++) {
-        document.getElementById(order[i]).classList.add("hidden");
+      const index = sectionOrder.indexOf(sectionId);
+      if (index === -1) return;
+      for (let i = index; i < sectionOrder.length; i++) {
+        document.getElementById(sectionOrder[i]).classList.add("hidden");
       }
     }
 
-    function renderKnockoutRound(containerId, teams, selectedWinners, stageCode) {
+    function renderKnockoutRound(containerId, teams, selectedWinners, roundCode) {
       const container = document.getElementById(containerId);
       container.innerHTML = "";
 
       for (let i = 0; i < teams.length; i += 2) {
         const team1 = teams[i];
         const team2 = teams[i + 1];
-        const winnerName = selectedWinners[Math.floor(i / 2)]?.name || null;
+        const selected = selectedWinners[Math.floor(i / 2)] || null;
 
-        const matchBox = document.createElement("div");
-        matchBox.className = "match-box";
+        const box = document.createElement("div");
+        box.className = "match-box";
 
         const title = document.createElement("h3");
         title.className = "match-title";
         title.textContent = `Match ${Math.floor(i / 2) + 1}`;
 
-        const matchTeams = document.createElement("div");
-        matchTeams.className = "match-teams";
+        const list = document.createElement("div");
+        list.className = "match-list";
 
-        const btn1 = createTeamCard(team1, winnerName === team1.name ? "Winner" : "Pick Winner");
-        const btn2 = createTeamCard(team2, winnerName === team2.name ? "Winner" : "Pick Winner");
+        const btn1 = createTeamCard(team1, selected?.name === team1.name ? "Winner" : "Pick winner");
+        const btn2 = createTeamCard(team2, selected?.name === team2.name ? "Winner" : "Pick winner");
 
-        if (winnerName === team1.name) btn1.classList.add("winner");
-        if (winnerName === team2.name) btn2.classList.add("winner");
+        if (selected?.name === team1.name) btn1.classList.add("winner");
+        if (selected?.name === team2.name) btn2.classList.add("winner");
 
-        btn1.onclick = () => pickWinner(stageCode, Math.floor(i / 2), team1);
-        btn2.onclick = () => pickWinner(stageCode, Math.floor(i / 2), team2);
+        btn1.onclick = () => selectKnockoutWinner(roundCode, Math.floor(i / 2), team1);
+        btn2.onclick = () => selectKnockoutWinner(roundCode, Math.floor(i / 2), team2);
 
-        matchTeams.appendChild(btn1);
-        matchTeams.appendChild(btn2);
+        list.appendChild(btn1);
+        list.appendChild(btn2);
 
-        if (winnerName) {
+        if (selected) {
           const line = document.createElement("div");
-          line.className = "winner-line small";
-          line.textContent = `${winnerName} selected for next round`;
-          matchTeams.appendChild(line);
+          line.className = "winner-line";
+          line.textContent = `${selected.name} moves to the next round`;
+          list.appendChild(line);
         }
 
-        matchBox.appendChild(title);
-        matchBox.appendChild(matchTeams);
-        container.appendChild(matchBox);
+        box.appendChild(title);
+        box.appendChild(list);
+        container.appendChild(box);
       }
     }
 
-    function pickWinner(stageCode, matchIndex, team) {
+    function selectKnockoutWinner(roundCode, matchIndex, team) {
       const map = {
         r32: "round32Winners",
         r16: "round16Winners",
@@ -1063,96 +1268,328 @@
         sf: "semiWinners"
       };
 
-      const key = map[stageCode];
-      if (!key) return;
+      state[map[roundCode]][matchIndex] = cloneTeam(team);
 
-      state[key][matchIndex] = cloneTeam(team);
-
-      if (stageCode === "r32") {
-        renderKnockoutRound("round32Matches", state.round32Teams, state.round32Winners, "r32");
-      } else if (stageCode === "r16") {
-        renderKnockoutRound("round16Matches", state.round32Winners, state.round16Winners, "r16");
-      } else if (stageCode === "qf") {
-        renderKnockoutRound("quarterMatches", state.round16Winners, state.quarterWinners, "qf");
-      } else if (stageCode === "sf") {
-        renderKnockoutRound("semiMatches", state.quarterWinners, state.semiWinners, "sf");
+      if (roundCode === "r32") {
+        renderKnockoutRound("round32Grid", state.round32Teams, state.round32Winners, "r32");
+      } else if (roundCode === "r16") {
+        renderKnockoutRound("round16Grid", state.round32Winners, state.round16Winners, "r16");
+      } else if (roundCode === "qf") {
+        renderKnockoutRound("quarterGrid", state.round16Winners, state.quarterWinners, "qf");
+      } else if (roundCode === "sf") {
+        renderKnockoutRound("semiGrid", state.quarterWinners, state.semiWinners, "sf");
       }
     }
 
-    function renderFinal() {
-      updateProgress(6);
-      const container = document.getElementById("finalMatch");
-      container.innerHTML = "";
-
-      const [team1, team2] = state.semiWinners;
-      if (!team1 || !team2) return;
-
-      const matchBox = document.createElement("div");
-      matchBox.className = "match-box";
-
-      const title = document.createElement("h3");
-      title.className = "match-title";
-      title.textContent = "Final Match";
-
-      const matchTeams = document.createElement("div");
-      matchTeams.className = "match-teams";
-
-      const btn1 = createTeamCard(team1, state.finalWinner?.name === team1.name ? "Champion" : "Pick Champion");
-      const btn2 = createTeamCard(team2, state.finalWinner?.name === team2.name ? "Champion" : "Pick Champion");
-
-      if (state.finalWinner?.name === team1.name) btn1.classList.add("winner");
-      if (state.finalWinner?.name === team2.name) btn2.classList.add("winner");
-
-      btn1.onclick = () => {
-        state.finalWinner = cloneTeam(team1);
-        renderFinal();
-      };
-
-      btn2.onclick = () => {
-        state.finalWinner = cloneTeam(team2);
-        renderFinal();
-      };
-
-      matchTeams.appendChild(btn1);
-      matchTeams.appendChild(btn2);
-
-      if (state.finalWinner) {
-        const line = document.createElement("div");
-        line.className = "winner-line small";
-        line.textContent = `${state.finalWinner.name} selected as champion`;
-        matchTeams.appendChild(line);
-      }
-
-      matchBox.appendChild(title);
-      matchBox.appendChild(matchTeams);
-      container.appendChild(matchBox);
+    function roundComplete(winners, expectedCount) {
+      return winners.length === expectedCount && winners.every(Boolean);
     }
 
-    function renderChampion() {
-      const championResult = document.getElementById("championResult");
-      championResult.innerHTML = "";
-
-      const winner = state.finalWinner;
-      if (!winner) return;
-
-      const box = document.createElement("div");
-      box.className = "champion-box";
-
-      box.innerHTML = `
-        <img src="${getFlagUrl(winner.code)}" alt="${winner.name} flag">
-        <h3>${winner.name}</h3>
-        <p>${state.user.name}, তোমার prediction অনুযায়ী এটাই World Cup champion.</p>
-      `;
-
-      championResult.appendChild(box);
+    function computeSemiLosers() {
+      const losers = [];
+      for (let i = 0; i < state.quarterWinners.length; i += 2) {
+        const semiTeam1 = state.quarterWinners[i];
+        const semiTeam2 = state.quarterWinners[i + 1];
+        const winner = state.semiWinners[Math.floor(i / 2)];
+        if (!semiTeam1 || !semiTeam2 || !winner) continue;
+        if (winner.name === semiTeam1.name) losers.push(cloneTeam(semiTeam2));
+        else losers.push(cloneTeam(semiTeam1));
+      }
+      state.semiLosers = losers;
     }
 
-    function validateRoundWinners(winnerList, neededCount, roundName) {
-      if (winnerList.length !== neededCount || winnerList.some(item => !item)) {
-        showMessage(`${roundName} এর সব ম্যাচের winner select করো।`);
-        return false;
+    function renderFinalAndThirdPlace() {
+      buildProgress(7);
+
+      const finalContainer = document.getElementById("finalGrid");
+      const thirdContainer = document.getElementById("thirdPlaceGrid");
+
+      finalContainer.innerHTML = "";
+      thirdContainer.innerHTML = "";
+
+      const finalTeams = state.semiWinners;
+      const thirdTeams = state.semiLosers;
+
+      if (finalTeams.length === 2) {
+        const box = document.createElement("div");
+        box.className = "match-box";
+
+        const title = document.createElement("h3");
+        title.className = "match-title";
+        title.textContent = "Final";
+
+        const list = document.createElement("div");
+        list.className = "match-list";
+
+        finalTeams.forEach(team => {
+          const btn = createTeamCard(team, state.champion?.name === team.name ? "Champion" : "Pick champion");
+          if (state.champion?.name === team.name) btn.classList.add("winner");
+          btn.onclick = () => {
+            state.champion = cloneTeam(team);
+            renderFinalAndThirdPlace();
+          };
+          list.appendChild(btn);
+        });
+
+        if (state.champion) {
+          const line = document.createElement("div");
+          line.className = "winner-line";
+          line.textContent = `${state.champion.name} is your selected champion`;
+          list.appendChild(line);
+        }
+
+        box.appendChild(title);
+        box.appendChild(list);
+        finalContainer.appendChild(box);
       }
-      return true;
+
+      if (thirdTeams.length === 2) {
+        const box = document.createElement("div");
+        box.className = "match-box";
+
+        const title = document.createElement("h3");
+        title.className = "match-title";
+        title.textContent = "Third-place Playoff";
+
+        const list = document.createElement("div");
+        list.className = "match-list";
+
+        thirdTeams.forEach(team => {
+          const btn = createTeamCard(team, state.thirdPlaceWinner?.name === team.name ? "Third Place" : "Pick winner");
+          if (state.thirdPlaceWinner?.name === team.name) btn.classList.add("winner");
+          btn.onclick = () => {
+            state.thirdPlaceWinner = cloneTeam(team);
+            renderFinalAndThirdPlace();
+          };
+          list.appendChild(btn);
+        });
+
+        if (state.thirdPlaceWinner) {
+          const line = document.createElement("div");
+          line.className = "winner-line";
+          line.textContent = `${state.thirdPlaceWinner.name} wins the third-place playoff`;
+          list.appendChild(line);
+        }
+
+        box.appendChild(title);
+        box.appendChild(list);
+        thirdContainer.appendChild(box);
+      }
+    }
+
+    function renderSummary() {
+      buildProgress(8);
+
+      const championBox = document.getElementById("championBox");
+      const thirdBox = document.getElementById("thirdPlaceWinnerBox");
+      const qualifiedList = document.getElementById("qualifiedTeamsList");
+      const bestThirdList = document.getElementById("bestThirdList");
+      const knockoutSummaryList = document.getElementById("knockoutSummaryList");
+
+      championBox.innerHTML = "";
+      thirdBox.innerHTML = "";
+      qualifiedList.innerHTML = "";
+      bestThirdList.innerHTML = "";
+      knockoutSummaryList.innerHTML = "";
+
+      if (state.champion) {
+        championBox.innerHTML = `
+          <div class="champion-box">
+            <img src="${getFlagUrl(state.champion.code)}" alt="${state.champion.name} flag">
+            <h3>${state.champion.name}</h3>
+            <p>${state.user.name}, this is your predicted FIFA World Cup 2026 champion.</p>
+          </div>
+        `;
+      }
+
+      if (state.thirdPlaceWinner) {
+        thirdBox.innerHTML = `
+          <div class="champion-box">
+            <img src="${getFlagUrl(state.thirdPlaceWinner.code)}" alt="${state.thirdPlaceWinner.name} flag">
+            <h3>${state.thirdPlaceWinner.name}</h3>
+            <p>This team wins your third-place playoff.</p>
+          </div>
+        `;
+      }
+
+      Object.keys(GROUPS).forEach(groupKey => {
+        const groupState = state.groups[groupKey];
+        const teams = [
+          ...groupState.top2,
+          groupState.third ? `${groupState.third} (3rd)` : null
+        ].filter(Boolean);
+
+        teams.forEach(name => {
+          const team = GROUPS[groupKey].find(t => t.name === name.replace(" (3rd)", ""));
+          if (!team) return;
+          const div = document.createElement("div");
+          div.className = "mini-item";
+          div.innerHTML = `
+            <img src="${getFlagUrl(team.code)}" alt="${team.name} flag">
+            <div><strong>Group ${groupKey}</strong>: ${name}</div>
+          `;
+          qualifiedList.appendChild(div);
+        });
+      });
+
+      getAllThirdPlaceTeams()
+        .filter(team => state.bestThirdQualified.includes(team.name))
+        .forEach(team => {
+          const div = document.createElement("div");
+          div.className = "mini-item";
+          div.innerHTML = `
+            <img src="${getFlagUrl(team.code)}" alt="${team.name} flag">
+            <div>${team.name}</div>
+          `;
+          bestThirdList.appendChild(div);
+        });
+
+      const summaryRounds = [
+        { title: "Round of 32 Winners", teams: state.round32Winners },
+        { title: "Round of 16 Winners", teams: state.round16Winners },
+        { title: "Quarter-final Winners", teams: state.quarterWinners },
+        { title: "Semi-final Winners", teams: state.semiWinners }
+      ];
+
+      summaryRounds.forEach(group => {
+        const wrapper = document.createElement("div");
+        wrapper.className = "mini-item";
+        wrapper.style.display = "block";
+
+        const title = document.createElement("div");
+        title.style.marginBottom = "10px";
+        title.innerHTML = `<strong>${group.title}</strong>`;
+
+        const inner = document.createElement("div");
+        inner.className = "mini-list";
+
+        group.teams.forEach(team => {
+          const item = document.createElement("div");
+          item.className = "mini-item";
+          item.innerHTML = `
+            <img src="${getFlagUrl(team.code)}" alt="${team.name} flag">
+            <div>${team.name}</div>
+          `;
+          inner.appendChild(item);
+        });
+
+        wrapper.appendChild(title);
+        wrapper.appendChild(inner);
+        knockoutSummaryList.appendChild(wrapper);
+      });
+
+      setStatus("Prediction summary is ready.", "success");
+    }
+
+    function collectPredictionText() {
+      let text = "";
+      text += `User Name: ${state.user.name}\n`;
+      text += `User Email: ${state.user.email}\n\n`;
+
+      text += `GROUP STAGE\n`;
+      Object.keys(GROUPS).forEach(groupKey => {
+        const gs = state.groups[groupKey];
+        text += `Group ${groupKey} Top 2: ${gs.top2.join(", ")}\n`;
+        text += `Group ${groupKey} Third Place: ${gs.third}\n`;
+      });
+
+      text += `\nBEST THIRD-PLACE TEAMS\n`;
+      text += `${state.bestThirdQualified.join(", ")}\n\n`;
+
+      text += `ROUND OF 32 WINNERS\n`;
+      text += `${state.round32Winners.map(t => t.name).join(", ")}\n\n`;
+
+      text += `ROUND OF 16 WINNERS\n`;
+      text += `${state.round16Winners.map(t => t.name).join(", ")}\n\n`;
+
+      text += `QUARTER-FINAL WINNERS\n`;
+      text += `${state.quarterWinners.map(t => t.name).join(", ")}\n\n`;
+
+      text += `SEMI-FINAL WINNERS\n`;
+      text += `${state.semiWinners.map(t => t.name).join(", ")}\n\n`;
+
+      text += `SEMI-FINAL LOSERS FOR THIRD-PLACE MATCH\n`;
+      text += `${state.semiLosers.map(t => t.name).join(", ")}\n\n`;
+
+      text += `THIRD-PLACE WINNER\n`;
+      text += `${state.thirdPlaceWinner ? state.thirdPlaceWinner.name : "Not selected"}\n\n`;
+
+      text += `CHAMPION\n`;
+      text += `${state.champion ? state.champion.name : "Not selected"}\n`;
+
+      return text;
+    }
+
+    async function sendPredictionEmail() {
+      if (!state.champion || !state.thirdPlaceWinner) {
+        setStatus("Please complete the final and the third-place playoff before sending the email.", "warning");
+        alertMessage("Please complete the final and the third-place playoff first.");
+        return;
+      }
+
+      try {
+        emailjs.init({
+          publicKey: "YOUR_PUBLIC_KEY"
+        });
+
+        const predictionText = collectPredictionText();
+
+        await emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", {
+          to_email: "jh81499@gmail.com",
+          from_name: state.user.name,
+          from_email: state.user.email,
+          user_name: state.user.name,
+          user_email: state.user.email,
+          champion: state.champion.name,
+          third_place_winner: state.thirdPlaceWinner.name,
+          prediction_text: predictionText
+        });
+
+        setStatus("Prediction email sent successfully.", "success");
+        alertMessage("Prediction email sent successfully.");
+      } catch (error) {
+        console.error(error);
+        setStatus("Email could not be sent. Replace the EmailJS keys with your own values.", "danger");
+        alertMessage("Email could not be sent. Replace the EmailJS keys with your own values.");
+      }
+    }
+
+    function restoreSectionsFromState() {
+      if (areGroupsComplete()) {
+        document.getElementById("bestThirdSection").classList.remove("hidden");
+        renderBestThirdSection();
+      }
+
+      if (state.round32Teams.length === 32) {
+        document.getElementById("round32Section").classList.remove("hidden");
+        renderKnockoutRound("round32Grid", state.round32Teams, state.round32Winners, "r32");
+      }
+
+      if (roundComplete(state.round32Winners, 16)) {
+        document.getElementById("round16Section").classList.remove("hidden");
+        renderKnockoutRound("round16Grid", state.round32Winners, state.round16Winners, "r16");
+      }
+
+      if (roundComplete(state.round16Winners, 8)) {
+        document.getElementById("quarterSection").classList.remove("hidden");
+        renderKnockoutRound("quarterGrid", state.round16Winners, state.quarterWinners, "qf");
+      }
+
+      if (roundComplete(state.quarterWinners, 4)) {
+        document.getElementById("semiSection").classList.remove("hidden");
+        renderKnockoutRound("semiGrid", state.quarterWinners, state.semiWinners, "sf");
+      }
+
+      if (roundComplete(state.semiWinners, 2)) {
+        if (!state.semiLosers.length) computeSemiLosers();
+        document.getElementById("finalThirdSection").classList.remove("hidden");
+        renderFinalAndThirdPlace();
+      }
+
+      if (state.champion && state.thirdPlaceWinner) {
+        document.getElementById("summarySection").classList.remove("hidden");
+        renderSummary();
+      }
     }
 
     document.getElementById("startBtn").addEventListener("click", () => {
@@ -1160,108 +1597,122 @@
       const email = document.getElementById("emailInput").value.trim();
 
       if (!name) {
-        showMessage("নাম দাও।");
+        alertMessage("Please enter your name.");
         return;
       }
 
       if (!isValidGmail(email)) {
-        showMessage("একটা valid Gmail address দাও।");
+        alertMessage("Please enter a valid Gmail address.");
         return;
       }
 
       state.user = { name, email };
-      startApp();
+      openApp();
     });
 
-    document.getElementById("saveBtn").addEventListener("click", saveToLocal);
+    document.getElementById("saveBtn").addEventListener("click", saveLocal);
+    document.getElementById("sendBtn").addEventListener("click", sendPredictionEmail);
     document.getElementById("resetBtn").addEventListener("click", resetAll);
 
-    document.getElementById("toThirdPlaceBtn").addEventListener("click", () => {
-      if (!areAllGroupsCompleted()) {
-        showMessage("আগে সব group থেকে 2টা করে দল select করো।");
+    document.getElementById("goToBestThirdBtn").addEventListener("click", () => {
+      if (!areGroupsComplete()) {
+        alertMessage("Please complete all groups first. You must select Top 2 and the 3rd place team in every group.");
         return;
       }
-      document.getElementById("thirdPlaceSection").classList.remove("hidden");
-      renderThirdPlaceSelection();
-      updateProgress(2);
-      document.getElementById("thirdPlaceSection").scrollIntoView({ behavior: "smooth" });
+      document.getElementById("bestThirdSection").classList.remove("hidden");
+      renderBestThirdSection();
+      buildProgress(2);
+      document.getElementById("bestThirdSection").scrollIntoView({ behavior: "smooth" });
     });
 
     document.getElementById("backToGroupsBtn").addEventListener("click", () => {
+      buildProgress(1);
       document.getElementById("groupSection").scrollIntoView({ behavior: "smooth" });
-      updateProgress(1);
     });
 
-    document.getElementById("toRound32Btn").addEventListener("click", () => {
-      if (state.thirdPlaceSelections.length !== 8) {
-        showMessage("8টা best third-place team select করো।");
+    document.getElementById("generateRound32Btn").addEventListener("click", () => {
+      if (state.bestThirdQualified.length !== 8) {
+        alertMessage("Please select exactly 8 best third-place teams.");
         return;
       }
 
-      buildRound32Teams();
+      generateRound32Teams();
 
       if (state.round32Teams.length !== 32) {
-        showMessage("Round of 32 তৈরি হয়নি। আবার check করো।");
+        alertMessage("Round of 32 could not be created. Please check your selections.");
         return;
       }
 
       document.getElementById("round32Section").classList.remove("hidden");
-      renderKnockoutRound("round32Matches", state.round32Teams, state.round32Winners, "r32");
-      updateProgress(3);
+      renderKnockoutRound("round32Grid", state.round32Teams, state.round32Winners, "r32");
+      buildProgress(3);
       document.getElementById("round32Section").scrollIntoView({ behavior: "smooth" });
     });
 
-    document.getElementById("toRound16Btn").addEventListener("click", () => {
-      if (!validateRoundWinners(state.round32Winners, 16, "Round of 32")) return;
-
+    document.getElementById("generateRound16Btn").addEventListener("click", () => {
+      if (!roundComplete(state.round32Winners, 16)) {
+        alertMessage("Please select all 16 winners in the Round of 32.");
+        return;
+      }
       document.getElementById("round16Section").classList.remove("hidden");
-      renderKnockoutRound("round16Matches", state.round32Winners, state.round16Winners, "r16");
-      updateProgress(4);
+      renderKnockoutRound("round16Grid", state.round32Winners, state.round16Winners, "r16");
+      buildProgress(4);
       document.getElementById("round16Section").scrollIntoView({ behavior: "smooth" });
     });
 
-    document.getElementById("toQuarterBtn").addEventListener("click", () => {
-      if (!validateRoundWinners(state.round16Winners, 8, "Round of 16")) return;
-
+    document.getElementById("generateQuarterBtn").addEventListener("click", () => {
+      if (!roundComplete(state.round16Winners, 8)) {
+        alertMessage("Please select all 8 winners in the Round of 16.");
+        return;
+      }
       document.getElementById("quarterSection").classList.remove("hidden");
-      renderKnockoutRound("quarterMatches", state.round16Winners, state.quarterWinners, "qf");
-      updateProgress(5);
+      renderKnockoutRound("quarterGrid", state.round16Winners, state.quarterWinners, "qf");
+      buildProgress(5);
       document.getElementById("quarterSection").scrollIntoView({ behavior: "smooth" });
     });
 
-    document.getElementById("toSemiBtn").addEventListener("click", () => {
-      if (!validateRoundWinners(state.quarterWinners, 4, "Quarter Final")) return;
-
+    document.getElementById("generateSemiBtn").addEventListener("click", () => {
+      if (!roundComplete(state.quarterWinners, 4)) {
+        alertMessage("Please select all 4 winners in the Quarter-final.");
+        return;
+      }
       document.getElementById("semiSection").classList.remove("hidden");
-      renderKnockoutRound("semiMatches", state.quarterWinners, state.semiWinners, "sf");
-      updateProgress(6);
+      renderKnockoutRound("semiGrid", state.quarterWinners, state.semiWinners, "sf");
+      buildProgress(6);
       document.getElementById("semiSection").scrollIntoView({ behavior: "smooth" });
     });
 
-    document.getElementById("toFinalBtn").addEventListener("click", () => {
-      if (!validateRoundWinners(state.semiWinners, 2, "Semi Final")) return;
-
-      document.getElementById("finalSection").classList.remove("hidden");
-      renderFinal();
-      updateProgress(6);
-      document.getElementById("finalSection").scrollIntoView({ behavior: "smooth" });
-    });
-
-    document.getElementById("showChampionBtn").addEventListener("click", () => {
-      if (!state.finalWinner) {
-        showMessage("Final এর champion select করো।");
+    document.getElementById("generateFinalBtn").addEventListener("click", () => {
+      if (!roundComplete(state.semiWinners, 2)) {
+        alertMessage("Please select both semi-final winners.");
         return;
       }
+      computeSemiLosers();
+      document.getElementById("finalThirdSection").classList.remove("hidden");
+      renderFinalAndThirdPlace();
+      buildProgress(7);
+      document.getElementById("finalThirdSection").scrollIntoView({ behavior: "smooth" });
+    });
 
-      document.getElementById("championSection").classList.remove("hidden");
-      renderChampion();
-      document.getElementById("championSection").scrollIntoView({ behavior: "smooth" });
+    document.getElementById("showSummaryBtn").addEventListener("click", () => {
+      if (!state.champion) {
+        alertMessage("Please select the champion in the final.");
+        return;
+      }
+      if (!state.thirdPlaceWinner) {
+        alertMessage("Please select the winner of the third-place playoff.");
+        return;
+      }
+      document.getElementById("summarySection").classList.remove("hidden");
+      renderSummary();
+      document.getElementById("summarySection").scrollIntoView({ behavior: "smooth" });
     });
 
     window.addEventListener("load", () => {
-      const loaded = loadFromLocal();
+      initDefaultState();
+      const loaded = loadLocal();
       if (loaded && state.user) {
-        startApp();
+        openApp();
       }
     });
   </script>
