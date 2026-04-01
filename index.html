@@ -11,23 +11,30 @@
     }
 
     :root {
-      --bg-1: #07111f;
-      --bg-2: #0d1b33;
-      --card: rgba(14, 24, 42, 0.88);
-      --card-2: rgba(17, 29, 50, 0.95);
-      --border: rgba(255, 255, 255, 0.08);
-      --text: #eef4ff;
-      --muted: #a8b8da;
+      --bg-1: #06101d;
+      --bg-2: #0c1830;
+      --bg-3: #102247;
+      --card: rgba(13, 22, 39, 0.92);
+      --card-2: rgba(20, 34, 61, 0.95);
+      --text: #eef3ff;
+      --muted: #aab9da;
+      --line: rgba(255,255,255,0.08);
       --blue: #3b82f6;
       --blue-2: #2563eb;
       --green: #22c55e;
       --green-2: #16a34a;
-      --gold: #facc15;
       --orange: #f59e0b;
+      --gold: #facc15;
       --red: #ef4444;
-      --shadow: 0 14px 40px rgba(0, 0, 0, 0.35);
-      --radius: 20px;
-      --radius-sm: 14px;
+      --purple: #8b5cf6;
+      --shadow: 0 18px 40px rgba(0,0,0,0.35);
+      --radius: 22px;
+      --radius-sm: 16px;
+      --radius-xs: 12px;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
@@ -35,28 +42,27 @@
       font-family: Arial, sans-serif;
       color: var(--text);
       background:
-        radial-gradient(circle at top left, rgba(37, 99, 235, 0.18), transparent 22%),
-        radial-gradient(circle at top right, rgba(34, 197, 94, 0.12), transparent 24%),
-        linear-gradient(180deg, var(--bg-1), var(--bg-2));
+        radial-gradient(circle at top left, rgba(59,130,246,0.18), transparent 24%),
+        radial-gradient(circle at top right, rgba(34,197,94,0.10), transparent 22%),
+        linear-gradient(180deg, var(--bg-1), var(--bg-2) 40%, var(--bg-3));
       min-height: 100vh;
-      scroll-behavior: smooth;
     }
 
     .container {
-      width: min(1460px, 94%);
+      width: min(1500px, 94%);
       margin: 0 auto;
-      padding: 26px 0 80px;
+      padding: 24px 0 80px;
     }
 
     .hero {
       text-align: center;
-      margin-bottom: 26px;
+      margin-bottom: 22px;
     }
 
     .hero h1 {
       margin: 0 0 10px;
-      font-size: 40px;
-      line-height: 1.1;
+      font-size: 42px;
+      line-height: 1.08;
       letter-spacing: 0.2px;
     }
 
@@ -64,11 +70,12 @@
       margin: 0;
       color: var(--muted);
       font-size: 16px;
+      line-height: 1.6;
     }
 
     .card {
       background: var(--card);
-      border: 1px solid var(--border);
+      border: 1px solid var(--line);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       backdrop-filter: blur(10px);
@@ -81,20 +88,20 @@
     }
 
     .login-card {
-      width: min(860px, 100%);
+      width: min(950px, 100%);
       margin: 0 auto 24px;
     }
 
-    .section-title {
+    .title {
       margin: 0 0 8px;
-      font-size: 28px;
+      font-size: 30px;
     }
 
-    .section-desc {
+    .desc {
       margin: 0 0 18px;
       color: var(--muted);
-      line-height: 1.6;
       font-size: 15px;
+      line-height: 1.7;
     }
 
     .login-grid {
@@ -107,35 +114,36 @@
     .field label {
       display: block;
       margin-bottom: 8px;
-      font-size: 14px;
       color: var(--muted);
+      font-size: 14px;
     }
 
     .field input {
       width: 100%;
       padding: 14px 14px;
       border-radius: 14px;
-      border: 1px solid var(--border);
-      background: #0b162a;
+      border: 1px solid var(--line);
+      background: #0a1427;
       color: var(--text);
       outline: none;
       font-size: 15px;
-      transition: border-color 0.2s ease, transform 0.2s ease;
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
     }
 
     .field input:focus {
-      border-color: rgba(59, 130, 246, 0.7);
+      border-color: rgba(59,130,246,0.6);
+      box-shadow: 0 0 0 4px rgba(59,130,246,0.10);
       transform: translateY(-1px);
     }
 
     button {
-      cursor: pointer;
       border: none;
       outline: none;
+      cursor: pointer;
       font-weight: 700;
       border-radius: 14px;
       padding: 14px 18px;
-      transition: transform 0.22s ease, box-shadow 0.22s ease, opacity 0.22s ease, background 0.22s ease;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease, background 0.2s ease;
     }
 
     button:hover {
@@ -143,61 +151,61 @@
     }
 
     button:active {
-      transform: scale(0.97);
+      transform: scale(0.98);
     }
 
     .btn-primary {
+      color: white;
       background: linear-gradient(135deg, var(--blue), var(--blue-2));
-      color: #fff;
-      box-shadow: 0 8px 24px rgba(37, 99, 235, 0.28);
-    }
-
-    .btn-secondary {
-      background: #192746;
-      color: #fff;
-      border: 1px solid var(--border);
+      box-shadow: 0 12px 24px rgba(37,99,235,0.24);
     }
 
     .btn-success {
+      color: white;
       background: linear-gradient(135deg, var(--green), var(--green-2));
-      color: #fff;
-      box-shadow: 0 8px 24px rgba(22, 163, 74, 0.24);
+      box-shadow: 0 12px 24px rgba(22,163,74,0.22);
+    }
+
+    .btn-secondary {
+      color: white;
+      background: #1a2a4b;
+      border: 1px solid var(--line);
     }
 
     .btn-danger {
+      color: white;
       background: linear-gradient(135deg, #dc2626, #991b1b);
-      color: #fff;
-      box-shadow: 0 8px 24px rgba(220, 38, 38, 0.24);
+      box-shadow: 0 12px 24px rgba(220,38,38,0.22);
     }
 
     .toolbar {
       display: flex;
       justify-content: space-between;
-      gap: 14px;
       align-items: center;
+      gap: 14px;
       flex-wrap: wrap;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
     }
 
     .user-box {
       display: flex;
       align-items: center;
       gap: 12px;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--line);
       padding: 10px 12px;
       border-radius: 16px;
     }
 
     .avatar {
-      width: 42px;
-      height: 42px;
+      width: 44px;
+      height: 44px;
       border-radius: 50%;
       display: grid;
       place-items: center;
-      font-weight: bold;
       background: linear-gradient(135deg, var(--blue), var(--green));
       color: white;
+      font-weight: 800;
       flex-shrink: 0;
     }
 
@@ -215,26 +223,26 @@
     }
 
     .progress-step {
-      padding: 12px 8px;
+      border: 1px solid var(--line);
       border-radius: 14px;
-      border: 1px solid var(--border);
-      background: #0c172b;
-      text-align: center;
+      background: #0b1528;
       color: var(--muted);
+      text-align: center;
+      padding: 12px 8px;
       font-size: 13px;
-      transition: 0.25s ease;
+      transition: 0.22s ease;
     }
 
     .progress-step.active {
-      color: #fff;
-      border-color: rgba(59, 130, 246, 0.55);
-      background: linear-gradient(180deg, rgba(37, 99, 235, 0.22), rgba(12, 23, 43, 0.98));
+      color: white;
+      border-color: rgba(59,130,246,0.5);
+      background: linear-gradient(180deg, rgba(37,99,235,0.20), rgba(11,21,40,0.98));
     }
 
     .progress-step.done {
-      color: #fff;
-      border-color: rgba(34, 197, 94, 0.45);
-      background: linear-gradient(180deg, rgba(34, 197, 94, 0.18), rgba(12, 23, 43, 0.98));
+      color: white;
+      border-color: rgba(34,197,94,0.42);
+      background: linear-gradient(180deg, rgba(34,197,94,0.16), rgba(11,21,40,0.98));
     }
 
     .groups-grid {
@@ -244,24 +252,23 @@
     }
 
     .group-box {
-      border: 1px solid var(--border);
+      border: 1px solid var(--line);
       border-radius: 18px;
-      background: rgba(255, 255, 255, 0.03);
+      background: rgba(255,255,255,0.03);
       padding: 16px;
-      transition: 0.25s ease;
       animation: fadeUp 0.3s ease;
     }
 
     .group-box.complete {
-      border-color: rgba(34, 197, 94, 0.45);
-      box-shadow: 0 0 0 1px rgba(34, 197, 94, 0.12) inset;
+      border-color: rgba(34,197,94,0.46);
+      box-shadow: 0 0 0 1px rgba(34,197,94,0.14) inset;
     }
 
     .group-head {
       display: flex;
       justify-content: space-between;
-      gap: 10px;
       align-items: center;
+      gap: 10px;
       margin-bottom: 12px;
     }
 
@@ -273,17 +280,18 @@
     .pill {
       font-size: 12px;
       color: var(--muted);
-      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--line);
       padding: 6px 10px;
       border-radius: 999px;
-      background: rgba(255, 255, 255, 0.04);
+      white-space: nowrap;
     }
 
-    .group-info-line {
+    .group-note {
       color: var(--muted);
       font-size: 13px;
+      line-height: 1.6;
       margin-bottom: 10px;
-      line-height: 1.5;
     }
 
     .team-list {
@@ -297,52 +305,50 @@
       align-items: center;
       gap: 12px;
       text-align: left;
-      background: #101c31;
-      color: #fff;
+      background: #101a2f;
+      color: white;
       border: 1px solid rgba(255,255,255,0.06);
       border-radius: 15px;
       padding: 12px 12px;
-      position: relative;
-      overflow: hidden;
-      transition: transform 0.24s ease, background 0.24s ease, border-color 0.24s ease, box-shadow 0.24s ease, opacity 0.24s ease;
       min-height: 62px;
+      transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease, background 0.22s ease, opacity 0.22s ease;
     }
 
     .team-card:hover {
-      transform: scale(1.03);
-      border-color: rgba(59, 130, 246, 0.48);
-      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
-    }
-
-    .team-card.selected-top {
-      background: linear-gradient(135deg, rgba(34, 197, 94, 0.24), rgba(37, 99, 235, 0.15));
-      border-color: rgba(34, 197, 94, 0.65);
-      box-shadow: 0 0 18px rgba(34, 197, 94, 0.22);
-    }
-
-    .team-card.selected-third {
-      background: linear-gradient(135deg, rgba(245, 158, 11, 0.24), rgba(217, 119, 6, 0.12));
-      border-color: rgba(245, 158, 11, 0.55);
-      box-shadow: 0 0 18px rgba(245, 158, 11, 0.18);
-    }
-
-    .team-card.selected-best-third {
-      background: linear-gradient(135deg, rgba(168, 85, 247, 0.24), rgba(59, 130, 246, 0.14));
-      border-color: rgba(168, 85, 247, 0.55);
-      box-shadow: 0 0 18px rgba(168, 85, 247, 0.18);
-    }
-
-    .team-card.winner {
-      background: linear-gradient(135deg, rgba(250, 204, 21, 0.25), rgba(245, 158, 11, 0.14));
-      border-color: rgba(250, 204, 21, 0.62);
-      box-shadow: 0 0 22px rgba(250, 204, 21, 0.16);
-      color: #fff;
+      transform: scale(1.025);
+      border-color: rgba(59,130,246,0.45);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.16);
     }
 
     .team-card.locked {
-      opacity: 0.45;
+      opacity: 0.46;
       cursor: not-allowed;
       transform: none !important;
+    }
+
+    .team-card.selected-top {
+      background: linear-gradient(135deg, rgba(34,197,94,0.22), rgba(59,130,246,0.12));
+      border-color: rgba(34,197,94,0.65);
+      box-shadow: 0 0 18px rgba(34,197,94,0.18);
+    }
+
+    .team-card.selected-third {
+      background: linear-gradient(135deg, rgba(245,158,11,0.20), rgba(217,119,6,0.10));
+      border-color: rgba(245,158,11,0.60);
+      box-shadow: 0 0 18px rgba(245,158,11,0.16);
+    }
+
+    .team-card.selected-best-third {
+      background: linear-gradient(135deg, rgba(139,92,246,0.22), rgba(59,130,246,0.12));
+      border-color: rgba(139,92,246,0.58);
+      box-shadow: 0 0 18px rgba(139,92,246,0.18);
+    }
+
+    .team-card.winner {
+      background: linear-gradient(135deg, rgba(250,204,21,0.25), rgba(245,158,11,0.12));
+      border-color: rgba(250,204,21,0.60);
+      box-shadow: 0 0 18px rgba(250,204,21,0.18);
+      color: white;
     }
 
     .flag {
@@ -350,25 +356,25 @@
       height: 28px;
       object-fit: cover;
       border-radius: 6px;
-      border: 1px solid rgba(255,255,255,0.18);
+      border: 1px solid rgba(255,255,255,0.16);
+      background: #091220;
       flex-shrink: 0;
-      background: #0a1322;
     }
 
     .team-name {
       flex: 1;
-      font-size: 15px;
       font-weight: 700;
-      line-height: 1.3;
+      line-height: 1.35;
+      font-size: 15px;
     }
 
     .badge {
-      font-size: 12px;
       color: var(--muted);
+      font-size: 12px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--line);
       padding: 6px 9px;
       border-radius: 999px;
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,0.04);
       white-space: nowrap;
     }
 
@@ -377,36 +383,51 @@
     .team-card.selected-best-third .badge,
     .team-card.winner .badge {
       color: white;
-      background: rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.10);
     }
 
     .actions {
       display: flex;
+      justify-content: center;
       gap: 12px;
       flex-wrap: wrap;
-      justify-content: center;
       margin-top: 22px;
     }
 
-    .round-grid {
+    .r32-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 16px;
     }
 
     .match-box {
+      border: 1px solid var(--line);
       border-radius: 18px;
-      border: 1px solid var(--border);
       background: rgba(255,255,255,0.03);
       padding: 16px;
       animation: fadeUp 0.35s ease;
     }
 
+    .match-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
     .match-title {
-      margin: 0 0 12px;
-      color: var(--muted);
+      margin: 0;
       font-size: 15px;
-      font-weight: 600;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .match-meta {
+      text-align: right;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
     }
 
     .match-list {
@@ -421,13 +442,25 @@
       font-weight: 700;
     }
 
-    .summary-grid {
+    .bracket-columns {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 18px;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 16px;
     }
 
-    .mini-list {
+    .bracket-col {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(255,255,255,0.03);
+      padding: 14px;
+    }
+
+    .bracket-col h3 {
+      margin: 0 0 12px;
+      font-size: 18px;
+    }
+
+    .bracket-mini-list {
       display: grid;
       gap: 10px;
     }
@@ -436,10 +469,12 @@
       display: flex;
       align-items: center;
       gap: 10px;
-      padding: 10px 12px;
+      border: 1px solid var(--line);
       border-radius: 14px;
       background: rgba(255,255,255,0.03);
-      border: 1px solid var(--border);
+      padding: 10px 12px;
+      font-size: 14px;
+      line-height: 1.5;
     }
 
     .mini-item img {
@@ -447,21 +482,28 @@
       height: 24px;
       border-radius: 5px;
       object-fit: cover;
-      border: 1px solid rgba(255,255,255,0.18);
+      border: 1px solid rgba(255,255,255,0.16);
+      background: #091220;
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
     }
 
     .champion-box {
       text-align: center;
-      padding: 28px 16px;
+      padding: 28px 18px;
       border-radius: 22px;
-      border: 1px solid rgba(250, 204, 21, 0.4);
-      background: linear-gradient(180deg, rgba(250, 204, 21, 0.12), rgba(255,255,255,0.03));
+      border: 1px solid rgba(250,204,21,0.36);
+      background: linear-gradient(180deg, rgba(250,204,21,0.12), rgba(255,255,255,0.03));
       animation: popIn 0.32s ease;
     }
 
     .champion-box img {
-      width: 90px;
-      height: 62px;
+      width: 92px;
+      height: 64px;
       object-fit: cover;
       border-radius: 10px;
       border: 2px solid rgba(255,255,255,0.22);
@@ -480,40 +522,38 @@
       line-height: 1.6;
     }
 
-    .note {
+    .status {
       margin-top: 16px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: rgba(255,255,255,0.03);
+      padding: 14px 16px;
       color: var(--muted);
       font-size: 14px;
       line-height: 1.6;
-      border: 1px solid var(--border);
-      padding: 14px;
-      border-radius: 16px;
-      background: rgba(255,255,255,0.03);
     }
 
-    .status-bar {
-      margin-top: 12px;
-      padding: 12px 14px;
-      border-radius: 14px;
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,0.03);
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .success-text {
+    .ok {
       color: var(--green);
       font-weight: 700;
     }
 
-    .warning-text {
+    .warn {
       color: var(--orange);
       font-weight: 700;
     }
 
-    .danger-text {
+    .bad {
       color: #f87171;
       font-weight: 700;
+    }
+
+    .thin {
+      font-weight: normal;
+    }
+
+    .footer-space {
+      height: 20px;
     }
 
     @keyframes fadeUp {
@@ -538,26 +578,30 @@
       }
     }
 
-    @media (max-width: 1200px) {
-      .groups-grid {
+    @media (max-width: 1250px) {
+      .groups-grid,
+      .r32-grid,
+      .bracket-columns {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
+
       .progress {
         grid-template-columns: repeat(3, 1fr);
       }
     }
 
-    @media (max-width: 820px) {
+    @media (max-width: 850px) {
       .login-grid,
-      .round-grid,
-      .summary-grid,
       .groups-grid,
-      .progress {
+      .r32-grid,
+      .summary-grid,
+      .progress,
+      .bracket-columns {
         grid-template-columns: 1fr;
       }
 
       .hero h1 {
-        font-size: 30px;
+        font-size: 31px;
       }
 
       .toolbar {
@@ -578,31 +622,32 @@
   <div class="container">
     <div class="hero">
       <h1>FIFA World Cup 2026 Predictor</h1>
-      <p>Predict the tournament from the group stage to the final in one smooth interactive page.</p>
+      <p>Build your full tournament prediction from the group stage to the final with a smoother bracket and a full summary.</p>
     </div>
 
     <div class="card login-card" id="loginCard">
-      <h2 class="section-title">Enter your details</h2>
-      <p class="section-desc">
-        Enter your name and Gmail address to start. After finishing your prediction, you can save it and send the full result by email.
+      <h2 class="title">Start Your Prediction</h2>
+      <p class="desc">
+        Enter your name and Gmail address. Then complete the groups, choose the best 8 third-place teams, and continue through the full knockout bracket.
       </p>
 
       <div class="login-grid">
         <div class="field">
           <label for="nameInput">Your Name</label>
-          <input id="nameInput" type="text" placeholder="Enter your full name" />
+          <input id="nameInput" type="text" placeholder="Enter your full name">
         </div>
-
         <div class="field">
           <label for="emailInput">Your Gmail Address</label>
-          <input id="emailInput" type="email" placeholder="example@gmail.com" />
+          <input id="emailInput" type="email" placeholder="example@gmail.com">
         </div>
-
-        <button class="btn-primary" id="startBtn">Start Prediction</button>
+        <button class="btn-primary" id="startBtn">Start</button>
       </div>
 
-      <div class="note">
-        To send predictions to <strong>jh81499@gmail.com</strong>, you need to connect EmailJS and replace the placeholder keys inside the code.
+      <div class="status">
+        To send the prediction by email, replace the EmailJS placeholders inside the code:
+        <strong>YOUR_PUBLIC_KEY</strong>,
+        <strong>YOUR_SERVICE_ID</strong>,
+        <strong>YOUR_TEMPLATE_ID</strong>.
       </div>
     </div>
 
@@ -618,242 +663,292 @@
 
         <div class="toolbar-actions">
           <button class="btn-secondary" id="saveBtn">Save Locally</button>
-          <button class="btn-success" id="sendBtn">Send Prediction by Email</button>
-          <button class="btn-danger" id="resetBtn">Reset All</button>
+          <button class="btn-success" id="sendBtn">Send by Email</button>
+          <button class="btn-danger" id="resetBtn">Reset</button>
         </div>
       </div>
 
       <div class="progress" id="progressBar"></div>
 
       <section class="card" id="groupSection">
-        <h2 class="section-title">Group Stage</h2>
-        <p class="section-desc">
-          In each group, select the top 2 teams. Then select the 3rd place team from the remaining 2 teams. This page uses your updated groups.
+        <h2 class="title">Group Stage</h2>
+        <p class="desc">
+          In each group, first select the top 2 teams. Then choose the 3rd-place team from the remaining 2 teams.
         </p>
         <div class="groups-grid" id="groupsGrid"></div>
         <div class="actions">
-          <button class="btn-primary" id="goToBestThirdBtn">Continue to Best Third-Place Teams</button>
+          <button class="btn-primary" id="toBestThirdBtn">Continue to Best Third-Place Teams</button>
         </div>
       </section>
 
       <section class="card hidden" id="bestThirdSection">
-        <h2 class="section-title">Best Third-Place Teams</h2>
-        <p class="section-desc">
-          You will have 12 third-place teams, one from each group. Select the best 8 to qualify for the Round of 32.
+        <h2 class="title">Best Third-Place Teams</h2>
+        <p class="desc">
+          You will have 12 third-place teams, one from each group. Select exactly 8 teams to qualify for the Round of 32.
         </p>
         <div class="groups-grid" id="bestThirdGrid"></div>
         <div class="actions">
           <button class="btn-secondary" id="backToGroupsBtn">Back to Groups</button>
-          <button class="btn-primary" id="generateRound32Btn">Generate Round of 32</button>
+          <button class="btn-primary" id="buildRound32Btn">Build Round of 32</button>
         </div>
       </section>
 
       <section class="card hidden" id="round32Section">
-        <h2 class="section-title">Round of 32</h2>
-        <p class="section-desc">
-          Click the winning team in every match. The selected team will move forward.
+        <h2 class="title">Round of 32</h2>
+        <p class="desc">
+          This round follows your roadmap-style bracket slots. Click the winner in every match.
         </p>
-        <div class="round-grid" id="round32Grid"></div>
+        <div class="r32-grid" id="round32Grid"></div>
         <div class="actions">
-          <button class="btn-primary" id="generateRound16Btn">Continue to Round of 16</button>
+          <button class="btn-primary" id="toRound16Btn">Continue to Round of 16</button>
         </div>
       </section>
 
       <section class="card hidden" id="round16Section">
-        <h2 class="section-title">Round of 16</h2>
-        <p class="section-desc">
-          Select the winner from every match.
+        <h2 class="title">Round of 16</h2>
+        <p class="desc">
+          Select the winner of every Round of 16 match.
         </p>
-        <div class="round-grid" id="round16Grid"></div>
+        <div class="r32-grid" id="round16Grid"></div>
         <div class="actions">
-          <button class="btn-primary" id="generateQuarterBtn">Continue to Quarter-final</button>
+          <button class="btn-primary" id="toQuarterBtn">Continue to Quarter-finals</button>
         </div>
       </section>
 
       <section class="card hidden" id="quarterSection">
-        <h2 class="section-title">Quarter-final</h2>
-        <p class="section-desc">
-          Select the winner from the 4 quarter-final matches.
+        <h2 class="title">Quarter-finals</h2>
+        <p class="desc">
+          Select the winner of every quarter-final match.
         </p>
-        <div class="round-grid" id="quarterGrid"></div>
+        <div class="r32-grid" id="quarterGrid"></div>
         <div class="actions">
-          <button class="btn-primary" id="generateSemiBtn">Continue to Semi-final</button>
+          <button class="btn-primary" id="toSemiBtn">Continue to Semi-finals</button>
         </div>
       </section>
 
       <section class="card hidden" id="semiSection">
-        <h2 class="section-title">Semi-final</h2>
-        <p class="section-desc">
-          Select the winners. The losing teams will automatically go to the third-place playoff.
+        <h2 class="title">Semi-finals</h2>
+        <p class="desc">
+          Select the winners. The losing teams will go to the third-place playoff automatically.
         </p>
-        <div class="round-grid" id="semiGrid"></div>
+        <div class="r32-grid" id="semiGrid"></div>
         <div class="actions">
-          <button class="btn-primary" id="generateFinalBtn">Continue to Final and Third-place Match</button>
+          <button class="btn-primary" id="toFinalBtn">Continue to Final and Third-Place Match</button>
         </div>
       </section>
 
-      <section class="card hidden" id="finalThirdSection">
-        <h2 class="section-title">Final and Third-place Playoff</h2>
-        <p class="section-desc">
-          Choose the champion and also select the winner of the third-place playoff.
+      <section class="card hidden" id="finalSection">
+        <h2 class="title">Final and Third-Place Match</h2>
+        <p class="desc">
+          Choose your champion and also the winner of the third-place playoff.
         </p>
-
         <div class="summary-grid">
           <div>
             <h3 style="margin-top:0;">Final</h3>
-            <div class="round-grid" style="grid-template-columns: 1fr;" id="finalGrid"></div>
+            <div class="r32-grid" style="grid-template-columns: 1fr;" id="finalGrid"></div>
           </div>
-
           <div>
-            <h3 style="margin-top:0;">Third-place Match</h3>
-            <div class="round-grid" style="grid-template-columns: 1fr;" id="thirdPlaceGrid"></div>
+            <h3 style="margin-top:0;">Third-Place Match</h3>
+            <div class="r32-grid" style="grid-template-columns: 1fr;" id="thirdPlaceMatchGrid"></div>
           </div>
         </div>
-
         <div class="actions">
-          <button class="btn-primary" id="showSummaryBtn">Show Final Prediction Summary</button>
+          <button class="btn-primary" id="toSummaryBtn">Show Full Summary</button>
         </div>
       </section>
 
       <section class="card hidden" id="summarySection">
-        <h2 class="section-title">Prediction Summary</h2>
-        <p class="section-desc">
-          Review the final prediction, then save it or send it by email.
+        <h2 class="title">Prediction Summary</h2>
+        <p class="desc">
+          Review your champion, third-place winner, and the full knockout path.
         </p>
 
         <div class="summary-grid">
-          <div>
-            <h3>Champion</h3>
-            <div id="championBox"></div>
+          <div id="championBox"></div>
+          <div id="thirdPlaceBox"></div>
+        </div>
+
+        <div class="card" style="margin-top: 18px; background: rgba(255,255,255,0.02);">
+          <h3 style="margin-top:0;">Bracket Overview</h3>
+          <div class="bracket-columns">
+            <div class="bracket-col">
+              <h3>Round of 32</h3>
+              <div class="bracket-mini-list" id="summaryR32"></div>
+            </div>
+            <div class="bracket-col">
+              <h3>Round of 16</h3>
+              <div class="bracket-mini-list" id="summaryR16"></div>
+            </div>
+            <div class="bracket-col">
+              <h3>Quarter-finals</h3>
+              <div class="bracket-mini-list" id="summaryQF"></div>
+            </div>
+            <div class="bracket-col">
+              <h3>Semi-finals</h3>
+              <div class="bracket-mini-list" id="summarySF"></div>
+            </div>
+            <div class="bracket-col">
+              <h3>Final Path</h3>
+              <div class="bracket-mini-list" id="summaryFinalPath"></div>
+            </div>
           </div>
-
-          <div>
-            <h3>Third Place</h3>
-            <div id="thirdPlaceWinnerBox"></div>
-          </div>
         </div>
 
-        <div style="margin-top:20px;">
-          <h3>Qualified Teams from Groups</h3>
-          <div class="mini-list" id="qualifiedTeamsList"></div>
+        <div class="card" style="margin-top: 18px; background: rgba(255,255,255,0.02);">
+          <h3 style="margin-top:0;">Qualified Teams from Groups</h3>
+          <div class="bracket-mini-list" id="qualifiedTeamsList"></div>
         </div>
 
-        <div style="margin-top:20px;">
-          <h3>Selected Best Third-Place Teams</h3>
-          <div class="mini-list" id="bestThirdList"></div>
+        <div class="card" style="margin-top: 18px; background: rgba(255,255,255,0.02);">
+          <h3 style="margin-top:0;">Selected Best Third-Place Teams</h3>
+          <div class="bracket-mini-list" id="qualifiedThirdList"></div>
         </div>
 
-        <div style="margin-top:20px;">
-          <h3>Knockout Winners by Round</h3>
-          <div class="mini-list" id="knockoutSummaryList"></div>
-        </div>
-
-        <div class="status-bar" id="statusBar">
-          Ready.
-        </div>
+        <div class="status" id="statusBox">Ready.</div>
       </section>
+
+      <div class="footer-space"></div>
     </div>
   </div>
 
   <script>
     const PROGRESS_STEPS = [
       "Login",
-      "Group Stage",
+      "Groups",
       "Best Third",
       "Round of 32",
       "Round of 16",
-      "Quarter-final",
-      "Semi-final",
+      "Quarter-finals",
+      "Semi-finals",
       "Final",
       "Summary"
     ];
 
     const GROUPS = {
       A: [
-        { name: "Mexico", code: "mx" },
-        { name: "South Africa", code: "za" },
-        { name: "South Korea", code: "kr" },
-        { name: "Czech Republic", code: "cz" }
+        { name: "Mexico", code: "mx", group: "A" },
+        { name: "South Africa", code: "za", group: "A" },
+        { name: "South Korea", code: "kr", group: "A" },
+        { name: "Czech Republic", code: "cz", group: "A" }
       ],
       B: [
-        { name: "Canada", code: "ca" },
-        { name: "Bosnia and Herzegovina", code: "ba" },
-        { name: "Qatar", code: "qa" },
-        { name: "Switzerland", code: "ch" }
+        { name: "Canada", code: "ca", group: "B" },
+        { name: "Bosnia and Herzegovina", code: "ba", group: "B" },
+        { name: "Qatar", code: "qa", group: "B" },
+        { name: "Switzerland", code: "ch", group: "B" }
       ],
       C: [
-        { name: "Brazil", code: "br" },
-        { name: "Morocco", code: "ma" },
-        { name: "Haiti", code: "ht" },
-        { name: "Scotland", code: "gb-sct" }
+        { name: "Brazil", code: "br", group: "C" },
+        { name: "Morocco", code: "ma", group: "C" },
+        { name: "Haiti", code: "ht", group: "C" },
+        { name: "Scotland", code: "gb-sct", group: "C" }
       ],
       D: [
-        { name: "United States", code: "us" },
-        { name: "Paraguay", code: "py" },
-        { name: "Australia", code: "au" },
-        { name: "Turkey", code: "tr" }
+        { name: "United States", code: "us", group: "D" },
+        { name: "Paraguay", code: "py", group: "D" },
+        { name: "Australia", code: "au", group: "D" },
+        { name: "Turkey", code: "tr", group: "D" }
       ],
       E: [
-        { name: "Germany", code: "de" },
-        { name: "Curaçao", code: "cw" },
-        { name: "Ivory Coast", code: "ci" },
-        { name: "Ecuador", code: "ec" }
+        { name: "Germany", code: "de", group: "E" },
+        { name: "Curaçao", code: "cw", group: "E" },
+        { name: "Ivory Coast", code: "ci", group: "E" },
+        { name: "Ecuador", code: "ec", group: "E" }
       ],
       F: [
-        { name: "Netherlands", code: "nl" },
-        { name: "Japan", code: "jp" },
-        { name: "Sweden", code: "se" },
-        { name: "Tunisia", code: "tn" }
+        { name: "Netherlands", code: "nl", group: "F" },
+        { name: "Japan", code: "jp", group: "F" },
+        { name: "Sweden", code: "se", group: "F" },
+        { name: "Tunisia", code: "tn", group: "F" }
       ],
       G: [
-        { name: "Belgium", code: "be" },
-        { name: "Egypt", code: "eg" },
-        { name: "Iran", code: "ir" },
-        { name: "New Zealand", code: "nz" }
+        { name: "Belgium", code: "be", group: "G" },
+        { name: "Egypt", code: "eg", group: "G" },
+        { name: "Iran", code: "ir", group: "G" },
+        { name: "New Zealand", code: "nz", group: "G" }
       ],
       H: [
-        { name: "Spain", code: "es" },
-        { name: "Cape Verde", code: "cv" },
-        { name: "Saudi Arabia", code: "sa" },
-        { name: "Uruguay", code: "uy" }
+        { name: "Spain", code: "es", group: "H" },
+        { name: "Cape Verde", code: "cv", group: "H" },
+        { name: "Saudi Arabia", code: "sa", group: "H" },
+        { name: "Uruguay", code: "uy", group: "H" }
       ],
       I: [
-        { name: "France", code: "fr" },
-        { name: "Senegal", code: "sn" },
-        { name: "Iraq", code: "iq" },
-        { name: "Norway", code: "no" }
+        { name: "France", code: "fr", group: "I" },
+        { name: "Senegal", code: "sn", group: "I" },
+        { name: "Iraq", code: "iq", group: "I" },
+        { name: "Norway", code: "no", group: "I" }
       ],
       J: [
-        { name: "Argentina", code: "ar" },
-        { name: "Algeria", code: "dz" },
-        { name: "Austria", code: "at" },
-        { name: "Jordan", code: "jo" }
+        { name: "Argentina", code: "ar", group: "J" },
+        { name: "Algeria", code: "dz", group: "J" },
+        { name: "Austria", code: "at", group: "J" },
+        { name: "Jordan", code: "jo", group: "J" }
       ],
       K: [
-        { name: "Portugal", code: "pt" },
-        { name: "DR Congo", code: "cd" },
-        { name: "Uzbekistan", code: "uz" },
-        { name: "Colombia", code: "co" }
+        { name: "Portugal", code: "pt", group: "K" },
+        { name: "DR Congo", code: "cd", group: "K" },
+        { name: "Uzbekistan", code: "uz", group: "K" },
+        { name: "Colombia", code: "co", group: "K" }
       ],
       L: [
-        { name: "England", code: "gb-eng" },
-        { name: "Croatia", code: "hr" },
-        { name: "Ghana", code: "gh" },
-        { name: "Panama", code: "pa" }
+        { name: "England", code: "gb-eng", group: "L" },
+        { name: "Croatia", code: "hr", group: "L" },
+        { name: "Ghana", code: "gh", group: "L" },
+        { name: "Panama", code: "pa", group: "L" }
       ]
     };
+
+    const THIRD_SLOT_DEFS = [
+      { id: "T1", label: "3rd Group A/B/C/D/F", allowed: ["A", "B", "C", "D", "F"] },
+      { id: "T2", label: "3rd Group C/D/F/G/H", allowed: ["C", "D", "F", "G", "H"] },
+      { id: "T3", label: "3rd Group B/E/F/I/J", allowed: ["B", "E", "F", "I", "J"] },
+      { id: "T4", label: "3rd Group A/E/H/I/J", allowed: ["A", "E", "H", "I", "J"] },
+      { id: "T5", label: "3rd Group C/E/F/H/I", allowed: ["C", "E", "F", "H", "I"] },
+      { id: "T6", label: "3rd Group E/H/I/J/K", allowed: ["E", "H", "I", "J", "K"] },
+      { id: "T7", label: "3rd Group E/F/G/I/J", allowed: ["E", "F", "G", "I", "J"] },
+      { id: "T8", label: "3rd Group D/E/I/J/L", allowed: ["D", "E", "I", "J", "L"] }
+    ];
+
+    const R32_MATCHES = [
+      { num: 73, date: "June 29", venue: "Foxborough", title: "Winner Group E vs 3rd Group A/B/C/D/F", a: { type: "group", group: "E", pos: 1 }, b: { type: "thirdSlot", slot: "T1" } },
+      { num: 74, date: "June 30", venue: "East Rutherford", title: "Winner Group I vs 3rd Group C/D/F/G/H", a: { type: "group", group: "I", pos: 1 }, b: { type: "thirdSlot", slot: "T2" } },
+      { num: 75, date: "June 28", venue: "Inglewood", title: "Runner-up Group A vs Runner-up Group B", a: { type: "group", group: "A", pos: 2 }, b: { type: "group", group: "B", pos: 2 } },
+      { num: 76, date: "June 29", venue: "Guadalupe", title: "Winner Group F vs Runner-up Group C", a: { type: "group", group: "F", pos: 1 }, b: { type: "group", group: "C", pos: 2 } },
+
+      { num: 77, date: "July 2", venue: "Toronto", title: "Runner-up Group K vs Runner-up Group L", a: { type: "group", group: "K", pos: 2 }, b: { type: "group", group: "L", pos: 2 } },
+      { num: 78, date: "July 2", venue: "Inglewood", title: "Winner Group H vs Runner-up Group J", a: { type: "group", group: "H", pos: 1 }, b: { type: "group", group: "J", pos: 2 } },
+      { num: 79, date: "July 1", venue: "Santa Clara", title: "Winner Group D vs 3rd Group B/E/F/I/J", a: { type: "group", group: "D", pos: 1 }, b: { type: "thirdSlot", slot: "T3" } },
+      { num: 80, date: "July 1", venue: "Seattle", title: "Winner Group G vs 3rd Group A/E/H/I/J", a: { type: "group", group: "G", pos: 1 }, b: { type: "thirdSlot", slot: "T4" } },
+
+      { num: 81, date: "June 29", venue: "Houston", title: "Winner Group C vs Runner-up Group F", a: { type: "group", group: "C", pos: 1 }, b: { type: "group", group: "F", pos: 2 } },
+      { num: 82, date: "June 30", venue: "Arlington", title: "Runner-up Group E vs Runner-up Group I", a: { type: "group", group: "E", pos: 2 }, b: { type: "group", group: "I", pos: 2 } },
+      { num: 83, date: "June 30", venue: "Mexico City", title: "Winner Group A vs 3rd Group C/E/F/H/I", a: { type: "group", group: "A", pos: 1 }, b: { type: "thirdSlot", slot: "T5" } },
+      { num: 84, date: "July 1", venue: "Atlanta", title: "Winner Group L vs 3rd Group E/H/I/J/K", a: { type: "group", group: "L", pos: 1 }, b: { type: "thirdSlot", slot: "T6" } },
+
+      { num: 85, date: "July 3", venue: "Miami Gardens", title: "Winner Group J vs Runner-up Group H", a: { type: "group", group: "J", pos: 1 }, b: { type: "group", group: "H", pos: 2 } },
+      { num: 86, date: "July 3", venue: "Arlington", title: "Runner-up Group D vs Runner-up Group G", a: { type: "group", group: "D", pos: 2 }, b: { type: "group", group: "G", pos: 2 } },
+      { num: 87, date: "July 2", venue: "Vancouver", title: "Winner Group B vs 3rd Group E/F/G/I/J", a: { type: "group", group: "B", pos: 1 }, b: { type: "thirdSlot", slot: "T7" } },
+      { num: 88, date: "July 3", venue: "Kansas City", title: "Winner Group K vs 3rd Group D/E/I/J/L", a: { type: "group", group: "K", pos: 1 }, b: { type: "thirdSlot", slot: "T8" } }
+    ];
 
     const state = {
       user: null,
       groups: {},
-      bestThirdQualified: [],
-      round32Teams: [],
+      selectedBestThird: [],
+      thirdSlotAssignments: {},
+      round32Pairs: [],
       round32Winners: [],
+      round16Pairs: [],
       round16Winners: [],
+      quarterPairs: [],
       quarterWinners: [],
+      semiPairs: [],
       semiWinners: [],
       semiLosers: [],
+      finalPair: [],
       champion: null,
+      thirdPlacePair: [],
       thirdPlaceWinner: null
     };
 
@@ -868,48 +963,48 @@
       });
     }
 
-    function cloneTeam(team) {
-      return JSON.parse(JSON.stringify(team));
-    }
-
-    function isValidGmail(email) {
-      return /^[a-zA-Z0-9._%+-]+@gmail\.com$/.test(email.trim());
-    }
-
     function getFlagUrl(code) {
       if (code === "gb-eng") return "https://flagcdn.com/w80/gb-eng.png";
       if (code === "gb-sct") return "https://flagcdn.com/w80/gb-sct.png";
       return `https://flagcdn.com/w80/${code}.png`;
     }
 
-    function setStatus(text, type = "normal") {
-      const bar = document.getElementById("statusBar");
-      if (!bar) return;
+    function clone(value) {
+      return JSON.parse(JSON.stringify(value));
+    }
+
+    function isValidGmail(email) {
+      return /^[a-zA-Z0-9._%+-]+@gmail\.com$/.test(email.trim());
+    }
+
+    function setStatus(message, type = "normal") {
+      const statusBox = document.getElementById("statusBox");
+      if (!statusBox) return;
       if (type === "success") {
-        bar.innerHTML = `<span class="success-text">${text}</span>`;
+        statusBox.innerHTML = `<span class="ok">${message}</span>`;
       } else if (type === "warning") {
-        bar.innerHTML = `<span class="warning-text">${text}</span>`;
+        statusBox.innerHTML = `<span class="warn">${message}</span>`;
       } else if (type === "danger") {
-        bar.innerHTML = `<span class="danger-text">${text}</span>`;
+        statusBox.innerHTML = `<span class="bad">${message}</span>`;
       } else {
-        bar.textContent = text;
+        statusBox.innerHTML = message;
       }
     }
 
-    function alertMessage(message) {
-      alert(message);
+    function showAlert(text) {
+      alert(text);
     }
 
-    function buildProgress(activeIndex) {
-      const progress = document.getElementById("progressBar");
-      progress.innerHTML = "";
+    function renderProgress(activeIndex) {
+      const progressBar = document.getElementById("progressBar");
+      progressBar.innerHTML = "";
       PROGRESS_STEPS.forEach((step, index) => {
         const div = document.createElement("div");
         div.className = "progress-step";
         if (index < activeIndex) div.classList.add("done");
         if (index === activeIndex) div.classList.add("active");
         div.textContent = step;
-        progress.appendChild(div);
+        progressBar.appendChild(div);
       });
     }
 
@@ -933,32 +1028,22 @@
       btn.appendChild(img);
       btn.appendChild(name);
       btn.appendChild(badge);
-
       return btn;
     }
 
-    function updateUserBox() {
+    function updateUserUI() {
       document.getElementById("userNameText").textContent = state.user.name;
       document.getElementById("userEmailText").textContent = state.user.email;
       document.getElementById("avatarBox").textContent = state.user.name.trim().charAt(0).toUpperCase();
     }
 
-    function openApp() {
-      document.getElementById("loginCard").classList.add("hidden");
-      document.getElementById("app").classList.remove("hidden");
-      updateUserBox();
-      buildProgress(1);
-      renderGroups();
-      restoreSectionsFromState();
-    }
-
     function saveLocal() {
-      localStorage.setItem("wc2026_predictor_full", JSON.stringify(state));
+      localStorage.setItem("wc2026_predictor_next_level", JSON.stringify(state));
       setStatus("Prediction saved locally.", "success");
     }
 
     function loadLocal() {
-      const raw = localStorage.getItem("wc2026_predictor_full");
+      const raw = localStorage.getItem("wc2026_predictor_next_level");
       if (!raw) return false;
       try {
         const parsed = JSON.parse(raw);
@@ -971,362 +1056,464 @@
     }
 
     function resetAll() {
-      localStorage.removeItem("wc2026_predictor_full");
+      localStorage.removeItem("wc2026_predictor_next_level");
       location.reload();
+    }
+
+    function openApp() {
+      document.getElementById("loginCard").classList.add("hidden");
+      document.getElementById("app").classList.remove("hidden");
+      updateUserUI();
+      renderProgress(1);
+      renderGroups();
+      restoreFromState();
     }
 
     function areGroupsComplete() {
       return Object.keys(GROUPS).every(groupKey => {
-        const data = state.groups[groupKey];
-        return data.top2.length === 2 && !!data.third;
+        const g = state.groups[groupKey];
+        return g.top2.length === 2 && !!g.third;
       });
     }
 
-    function getRemainingTeamsForGroup(groupKey) {
-      const teams = GROUPS[groupKey];
-      const selectedTop2 = state.groups[groupKey].top2;
-      return teams.filter(team => !selectedTop2.includes(team.name));
+    function getRemainingTeams(groupKey) {
+      const top2 = state.groups[groupKey].top2;
+      return GROUPS[groupKey].filter(team => !top2.includes(team.name));
+    }
+
+    function clearAfterBestThird() {
+      state.selectedBestThird = [];
+      state.thirdSlotAssignments = {};
+      state.round32Pairs = [];
+      state.round32Winners = [];
+      state.round16Pairs = [];
+      state.round16Winners = [];
+      state.quarterPairs = [];
+      state.quarterWinners = [];
+      state.semiPairs = [];
+      state.semiWinners = [];
+      state.semiLosers = [];
+      state.finalPair = [];
+      state.champion = null;
+      state.thirdPlacePair = [];
+      state.thirdPlaceWinner = null;
+      hideSectionsAfter("bestThirdSection");
+    }
+
+    function clearAfterRound32() {
+      state.thirdSlotAssignments = {};
+      state.round32Pairs = [];
+      state.round32Winners = [];
+      state.round16Pairs = [];
+      state.round16Winners = [];
+      state.quarterPairs = [];
+      state.quarterWinners = [];
+      state.semiPairs = [];
+      state.semiWinners = [];
+      state.semiLosers = [];
+      state.finalPair = [];
+      state.champion = null;
+      state.thirdPlacePair = [];
+      state.thirdPlaceWinner = null;
+      hideSectionsAfter("round32Section");
+    }
+
+    function hideSectionsAfter(sectionId) {
+      const order = [
+        "bestThirdSection",
+        "round32Section",
+        "round16Section",
+        "quarterSection",
+        "semiSection",
+        "finalSection",
+        "summarySection"
+      ];
+      const start = order.indexOf(sectionId);
+      if (start === -1) return;
+      for (let i = start; i < order.length; i++) {
+        document.getElementById(order[i]).classList.add("hidden");
+      }
     }
 
     function renderGroups() {
-      const container = document.getElementById("groupsGrid");
-      container.innerHTML = "";
+      const groupsGrid = document.getElementById("groupsGrid");
+      groupsGrid.innerHTML = "";
 
       Object.entries(GROUPS).forEach(([groupKey, teams]) => {
         const groupState = state.groups[groupKey];
-        const top2Count = groupState.top2.length;
-        const thirdSelected = groupState.third;
+        const complete = groupState.top2.length === 2 && !!groupState.third;
 
         const box = document.createElement("div");
         box.className = "group-box";
-        if (top2Count === 2 && thirdSelected) box.classList.add("complete");
+        if (complete) box.classList.add("complete");
 
         const head = document.createElement("div");
         head.className = "group-head";
 
-        const title = document.createElement("h3");
-        title.textContent = `Group ${groupKey}`;
+        const h3 = document.createElement("h3");
+        h3.textContent = `Group ${groupKey}`;
 
         const pill = document.createElement("div");
         pill.className = "pill";
-        pill.textContent = `${top2Count}/2 top teams | 3rd: ${thirdSelected ? "Selected" : "Pending"}`;
+        pill.textContent = `${groupState.top2.length}/2 Top Teams | 3rd: ${groupState.third ? "Selected" : "Pending"}`;
 
-        head.appendChild(title);
+        head.appendChild(h3);
         head.appendChild(pill);
 
-        const info = document.createElement("div");
-        info.className = "group-info-line";
-        info.innerHTML = `
-          <strong>Step 1:</strong> Select the top 2 teams.<br>
-          <strong>Step 2:</strong> From the remaining 2 teams, select the 3rd place team.
-        `;
+        const note = document.createElement("div");
+        note.className = "group-note";
+        note.innerHTML = `<strong>Step 1:</strong> select the top 2 teams. <br><strong>Step 2:</strong> choose the 3rd-place team from the remaining 2 teams.`;
 
-        const teamList = document.createElement("div");
-        teamList.className = "team-list";
+        const list = document.createElement("div");
+        list.className = "team-list";
 
         teams.forEach(team => {
           const isTopSelected = groupState.top2.includes(team.name);
-          const topLocked = groupState.top2.length >= 2 && !isTopSelected;
-          const remainingTeams = getRemainingTeamsForGroup(groupKey);
-          const isThirdCandidate = remainingTeams.some(t => t.name === team.name);
+          const remaining = getRemainingTeams(groupKey);
+          const isThirdCandidate = groupState.top2.length === 2 && remaining.some(t => t.name === team.name);
           const isThirdSelected = groupState.third === team.name;
 
-          let badgeText = "Select";
-          if (isTopSelected) badgeText = "Top 2";
-          else if (isThirdSelected) badgeText = "3rd Place";
-          else if (groupState.top2.length === 2 && isThirdCandidate) badgeText = "3rd Place Candidate";
-          else if (topLocked) badgeText = "Locked";
+          let badge = "Select";
+          if (isTopSelected) badge = "Top 2";
+          else if (isThirdSelected) badge = "3rd Place";
+          else if (isThirdCandidate) badge = "3rd Candidate";
+          else if (groupState.top2.length >= 2) badge = "Locked";
 
-          const btn = createTeamCard(team, badgeText);
+          const btn = createTeamCard(team, badge);
 
           if (isTopSelected) btn.classList.add("selected-top");
           if (isThirdSelected) btn.classList.add("selected-third");
-          if (topLocked && !isThirdCandidate) btn.classList.add("locked");
+          if (groupState.top2.length >= 2 && !isTopSelected && !isThirdCandidate) btn.classList.add("locked");
 
-          btn.onclick = () => {
-            handleGroupTeamClick(groupKey, team.name);
-          };
-
-          teamList.appendChild(btn);
+          btn.onclick = () => handleGroupClick(groupKey, team.name);
+          list.appendChild(btn);
         });
 
         box.appendChild(head);
-        box.appendChild(info);
-        box.appendChild(teamList);
-        container.appendChild(box);
+        box.appendChild(note);
+        box.appendChild(list);
+        groupsGrid.appendChild(box);
       });
     }
 
-    function handleGroupTeamClick(groupKey, teamName) {
-      const groupState = state.groups[groupKey];
-      const isTopSelected = groupState.top2.includes(teamName);
-      const remainingTeams = getRemainingTeamsForGroup(groupKey);
-      const isThirdCandidate = remainingTeams.some(t => t.name === teamName);
+    function handleGroupClick(groupKey, teamName) {
+      const g = state.groups[groupKey];
+      const isTop = g.top2.includes(teamName);
 
-      if (isTopSelected) {
-        groupState.top2 = groupState.top2.filter(name => name !== teamName);
-        if (groupState.third === teamName) groupState.third = null;
-        clearFromBestThirdAndKnockout();
+      if (isTop) {
+        g.top2 = g.top2.filter(name => name !== teamName);
+        if (g.third === teamName) g.third = null;
+        clearAfterBestThird();
         renderGroups();
         return;
       }
 
-      if (groupState.top2.length < 2) {
-        groupState.top2.push(teamName);
-        if (groupState.third && groupState.top2.includes(groupState.third)) {
-          groupState.third = null;
-        }
-        clearFromBestThirdAndKnockout();
+      if (g.top2.length < 2) {
+        g.top2.push(teamName);
+        if (g.third && g.top2.includes(g.third)) g.third = null;
+        clearAfterBestThird();
         renderGroups();
         return;
       }
 
-      if (groupState.top2.length === 2 && isThirdCandidate) {
-        if (groupState.third === teamName) {
-          groupState.third = null;
+      const remaining = getRemainingTeams(groupKey);
+      const isThirdCandidate = remaining.some(team => team.name === teamName);
+
+      if (g.top2.length === 2 && isThirdCandidate) {
+        if (g.third === teamName) {
+          g.third = null;
         } else {
-          groupState.third = teamName;
+          g.third = teamName;
         }
-        clearFromBestThirdAndKnockout();
+        clearAfterBestThird();
         renderGroups();
         return;
       }
 
-      alertMessage("You can only select 2 top teams first. Then choose 1 team for 3rd place from the remaining 2 teams.");
-    }
-
-    function clearFromBestThirdAndKnockout() {
-      state.bestThirdQualified = [];
-      state.round32Teams = [];
-      state.round32Winners = [];
-      state.round16Winners = [];
-      state.quarterWinners = [];
-      state.semiWinners = [];
-      state.semiLosers = [];
-      state.champion = null;
-      state.thirdPlaceWinner = null;
-
-      hideSectionsAfter("bestThirdSection");
+      showAlert("Please select only the top 2 first. Then choose the 3rd-place team from the remaining 2 teams.");
     }
 
     function getAllThirdPlaceTeams() {
-      const result = [];
+      const thirdTeams = [];
       Object.keys(GROUPS).forEach(groupKey => {
         const thirdName = state.groups[groupKey].third;
         if (thirdName) {
           const team = GROUPS[groupKey].find(t => t.name === thirdName);
-          if (team) result.push(cloneTeam(team));
+          if (team) thirdTeams.push(clone(team));
         }
       });
-      return result;
+      return thirdTeams;
     }
 
-    function renderBestThirdSection() {
-      buildProgress(2);
-      const container = document.getElementById("bestThirdGrid");
-      container.innerHTML = "";
+    function renderBestThird() {
+      renderProgress(2);
+      const bestThirdGrid = document.getElementById("bestThirdGrid");
+      bestThirdGrid.innerHTML = "";
 
       getAllThirdPlaceTeams().forEach(team => {
         const box = document.createElement("div");
         box.className = "group-box";
-        if (state.bestThirdQualified.includes(team.name)) box.classList.add("complete");
+        if (state.selectedBestThird.includes(team.name)) box.classList.add("complete");
 
         const head = document.createElement("div");
         head.className = "group-head";
 
-        const title = document.createElement("h3");
-        title.textContent = team.name;
+        const h3 = document.createElement("h3");
+        h3.textContent = `${team.name}`;
 
         const pill = document.createElement("div");
         pill.className = "pill";
-        pill.textContent = state.bestThirdQualified.includes(team.name) ? "Qualified" : "Available";
+        pill.textContent = state.selectedBestThird.includes(team.name) ? "Qualified" : `Group ${team.group}`;
 
-        head.appendChild(title);
+        head.appendChild(h3);
         head.appendChild(pill);
 
         const list = document.createElement("div");
         list.className = "team-list";
 
-        const btn = createTeamCard(team, state.bestThirdQualified.includes(team.name) ? "Selected" : "Select");
-        if (state.bestThirdQualified.includes(team.name)) btn.classList.add("selected-best-third");
-        if (state.bestThirdQualified.length >= 8 && !state.bestThirdQualified.includes(team.name)) btn.classList.add("locked");
+        const btn = createTeamCard(team, state.selectedBestThird.includes(team.name) ? "Selected" : "Select");
+        if (state.selectedBestThird.includes(team.name)) btn.classList.add("selected-best-third");
+        if (state.selectedBestThird.length >= 8 && !state.selectedBestThird.includes(team.name)) btn.classList.add("locked");
 
         btn.onclick = () => toggleBestThird(team.name);
 
         list.appendChild(btn);
         box.appendChild(head);
         box.appendChild(list);
-
-        container.appendChild(box);
+        bestThirdGrid.appendChild(box);
       });
     }
 
     function toggleBestThird(teamName) {
-      if (state.bestThirdQualified.includes(teamName)) {
-        state.bestThirdQualified = state.bestThirdQualified.filter(name => name !== teamName);
+      if (state.selectedBestThird.includes(teamName)) {
+        state.selectedBestThird = state.selectedBestThird.filter(name => name !== teamName);
       } else {
-        if (state.bestThirdQualified.length >= 8) {
-          alertMessage("You can only select 8 best third-place teams.");
+        if (state.selectedBestThird.length >= 8) {
+          showAlert("You can only select 8 best third-place teams.");
           return;
         }
-        state.bestThirdQualified.push(teamName);
+        state.selectedBestThird.push(teamName);
       }
 
-      state.round32Teams = [];
-      state.round32Winners = [];
-      state.round16Winners = [];
-      state.quarterWinners = [];
-      state.semiWinners = [];
-      state.semiLosers = [];
-      state.champion = null;
-      state.thirdPlaceWinner = null;
-      hideSectionsAfter("round32Section");
-      renderBestThirdSection();
+      clearAfterRound32();
+      renderBestThird();
     }
 
-    function generateRound32Teams() {
-      const qualified = [];
+    function getQualifiedThirdTeams() {
+      return getAllThirdPlaceTeams().filter(team => state.selectedBestThird.includes(team.name));
+    }
 
-      Object.keys(GROUPS).forEach(groupKey => {
-        const top2Names = state.groups[groupKey].top2;
-        top2Names.forEach(name => {
-          const team = GROUPS[groupKey].find(t => t.name === name);
-          if (team) qualified.push(cloneTeam(team));
+    function getGroupPosTeam(groupKey, pos) {
+      const g = state.groups[groupKey];
+      const teamName = pos === 1 ? g.top2[0] : g.top2[1];
+      return GROUPS[groupKey].find(t => t.name === teamName) || null;
+    }
+
+    function resolveBacktracking(slotDefs, teams, index, usedNames, currentMap) {
+      if (index === slotDefs.length) return currentMap;
+
+      const slot = slotDefs[index];
+      const options = teams.filter(team => slot.allowed.includes(team.group) && !usedNames.has(team.name));
+
+      for (const team of options) {
+        usedNames.add(team.name);
+        currentMap[slot.id] = clone(team);
+
+        const result = resolveBacktracking(slotDefs, teams, index + 1, usedNames, currentMap);
+        if (result) return result;
+
+        usedNames.delete(team.name);
+        delete currentMap[slot.id];
+      }
+
+      return null;
+    }
+
+    function assignThirdPlaceSlots() {
+      const qualifiedThirds = getQualifiedThirdTeams();
+      if (qualifiedThirds.length !== 8) {
+        return null;
+      }
+
+      return resolveBacktracking(THIRD_SLOT_DEFS, qualifiedThirds, 0, new Set(), {});
+    }
+
+    function resolveR32Ref(ref, slotAssignments) {
+      if (ref.type === "group") {
+        return clone(getGroupPosTeam(ref.group, ref.pos));
+      }
+      if (ref.type === "thirdSlot") {
+        return clone(slotAssignments[ref.slot]);
+      }
+      return null;
+    }
+
+    function buildRound32Pairs() {
+      const slotAssignments = assignThirdPlaceSlots();
+      if (!slotAssignments) {
+        return { ok: false, message: "These 8 third-place teams cannot fill the required Round of 32 third-place slots. Please choose a different combination." };
+      }
+
+      state.thirdSlotAssignments = slotAssignments;
+      state.round32Pairs = [];
+      state.round32Winners = [];
+      state.round16Pairs = [];
+      state.round16Winners = [];
+      state.quarterPairs = [];
+      state.quarterWinners = [];
+      state.semiPairs = [];
+      state.semiWinners = [];
+      state.semiLosers = [];
+      state.finalPair = [];
+      state.champion = null;
+      state.thirdPlacePair = [];
+      state.thirdPlaceWinner = null;
+
+      R32_MATCHES.forEach(match => {
+        const teamA = resolveR32Ref(match.a, slotAssignments);
+        const teamB = resolveR32Ref(match.b, slotAssignments);
+        state.round32Pairs.push({
+          num: match.num,
+          date: match.date,
+          venue: match.venue,
+          title: match.title,
+          teamA,
+          teamB
         });
       });
 
-      const bestThirdTeams = getAllThirdPlaceTeams().filter(team => state.bestThirdQualified.includes(team.name));
-      state.round32Teams = [...qualified, ...bestThirdTeams];
+      return { ok: true };
     }
 
-    function hideSectionsAfter(sectionId) {
-      const sectionOrder = [
-        "bestThirdSection",
-        "round32Section",
-        "round16Section",
-        "quarterSection",
-        "semiSection",
-        "finalThirdSection",
-        "summarySection"
-      ];
-      const index = sectionOrder.indexOf(sectionId);
-      if (index === -1) return;
-      for (let i = index; i < sectionOrder.length; i++) {
-        document.getElementById(sectionOrder[i]).classList.add("hidden");
-      }
-    }
-
-    function renderKnockoutRound(containerId, teams, selectedWinners, roundCode) {
+    function renderRoundPairs(containerId, pairs, winners, roundCode) {
       const container = document.getElementById(containerId);
       container.innerHTML = "";
 
-      for (let i = 0; i < teams.length; i += 2) {
-        const team1 = teams[i];
-        const team2 = teams[i + 1];
-        const selected = selectedWinners[Math.floor(i / 2)] || null;
-
+      pairs.forEach((pair, index) => {
         const box = document.createElement("div");
         box.className = "match-box";
 
+        const top = document.createElement("div");
+        top.className = "match-top";
+
         const title = document.createElement("h3");
         title.className = "match-title";
-        title.textContent = `Match ${Math.floor(i / 2) + 1}`;
+        title.innerHTML = `<strong>Match ${pair.num ?? (index + 1)}</strong><br><span class="thin">${pair.title || ""}</span>`;
+
+        const meta = document.createElement("div");
+        meta.className = "match-meta";
+        meta.innerHTML = `${pair.date || ""}<br>${pair.venue || ""}`;
+
+        top.appendChild(title);
+        top.appendChild(meta);
 
         const list = document.createElement("div");
         list.className = "match-list";
 
-        const btn1 = createTeamCard(team1, selected?.name === team1.name ? "Winner" : "Pick winner");
-        const btn2 = createTeamCard(team2, selected?.name === team2.name ? "Winner" : "Pick winner");
+        const currentWinner = winners[index] || null;
 
-        if (selected?.name === team1.name) btn1.classList.add("winner");
-        if (selected?.name === team2.name) btn2.classList.add("winner");
+        const btnA = createTeamCard(pair.teamA, currentWinner?.name === pair.teamA.name ? "Winner" : "Pick winner");
+        const btnB = createTeamCard(pair.teamB, currentWinner?.name === pair.teamB.name ? "Winner" : "Pick winner");
 
-        btn1.onclick = () => selectKnockoutWinner(roundCode, Math.floor(i / 2), team1);
-        btn2.onclick = () => selectKnockoutWinner(roundCode, Math.floor(i / 2), team2);
+        if (currentWinner?.name === pair.teamA.name) btnA.classList.add("winner");
+        if (currentWinner?.name === pair.teamB.name) btnB.classList.add("winner");
 
-        list.appendChild(btn1);
-        list.appendChild(btn2);
+        btnA.onclick = () => selectRoundWinner(roundCode, index, pair.teamA);
+        btnB.onclick = () => selectRoundWinner(roundCode, index, pair.teamB);
 
-        if (selected) {
+        list.appendChild(btnA);
+        list.appendChild(btnB);
+
+        if (currentWinner) {
           const line = document.createElement("div");
           line.className = "winner-line";
-          line.textContent = `${selected.name} moves to the next round`;
+          line.textContent = `${currentWinner.name} moves forward`;
           list.appendChild(line);
         }
 
-        box.appendChild(title);
+        box.appendChild(top);
         box.appendChild(list);
         container.appendChild(box);
-      }
+      });
     }
 
-    function selectKnockoutWinner(roundCode, matchIndex, team) {
+    function selectRoundWinner(roundCode, index, team) {
       const map = {
         r32: "round32Winners",
         r16: "round16Winners",
         qf: "quarterWinners",
         sf: "semiWinners"
       };
+      state[map[roundCode]][index] = clone(team);
 
-      state[map[roundCode]][matchIndex] = cloneTeam(team);
-
-      if (roundCode === "r32") {
-        renderKnockoutRound("round32Grid", state.round32Teams, state.round32Winners, "r32");
-      } else if (roundCode === "r16") {
-        renderKnockoutRound("round16Grid", state.round32Winners, state.round16Winners, "r16");
-      } else if (roundCode === "qf") {
-        renderKnockoutRound("quarterGrid", state.round16Winners, state.quarterWinners, "qf");
-      } else if (roundCode === "sf") {
-        renderKnockoutRound("semiGrid", state.quarterWinners, state.semiWinners, "sf");
-      }
+      if (roundCode === "r32") renderRoundPairs("round32Grid", state.round32Pairs, state.round32Winners, "r32");
+      if (roundCode === "r16") renderRoundPairs("round16Grid", state.round16Pairs, state.round16Winners, "r16");
+      if (roundCode === "qf") renderRoundPairs("quarterGrid", state.quarterPairs, state.quarterWinners, "qf");
+      if (roundCode === "sf") renderRoundPairs("semiGrid", state.semiPairs, state.semiWinners, "sf");
     }
 
-    function roundComplete(winners, expectedCount) {
-      return winners.length === expectedCount && winners.every(Boolean);
+    function winnersComplete(winners, expected) {
+      return winners.length === expected && winners.every(Boolean);
+    }
+
+    function buildNextPairsFromWinners(winners, prefix) {
+      const pairs = [];
+      for (let i = 0; i < winners.length; i += 2) {
+        pairs.push({
+          num: `${prefix}${Math.floor(i / 2) + 1}`,
+          date: "",
+          venue: "",
+          title: `${prefix} Match ${Math.floor(i / 2) + 1}`,
+          teamA: clone(winners[i]),
+          teamB: clone(winners[i + 1])
+        });
+      }
+      return pairs;
     }
 
     function computeSemiLosers() {
-      const losers = [];
-      for (let i = 0; i < state.quarterWinners.length; i += 2) {
-        const semiTeam1 = state.quarterWinners[i];
-        const semiTeam2 = state.quarterWinners[i + 1];
-        const winner = state.semiWinners[Math.floor(i / 2)];
-        if (!semiTeam1 || !semiTeam2 || !winner) continue;
-        if (winner.name === semiTeam1.name) losers.push(cloneTeam(semiTeam2));
-        else losers.push(cloneTeam(semiTeam1));
-      }
-      state.semiLosers = losers;
+      state.semiLosers = state.semiPairs.map((pair, i) => {
+        const winner = state.semiWinners[i];
+        if (!winner) return null;
+        return winner.name === pair.teamA.name ? clone(pair.teamB) : clone(pair.teamA);
+      }).filter(Boolean);
     }
 
-    function renderFinalAndThirdPlace() {
-      buildProgress(7);
+    function renderFinalSection() {
+      renderProgress(7);
 
-      const finalContainer = document.getElementById("finalGrid");
-      const thirdContainer = document.getElementById("thirdPlaceGrid");
+      const finalGrid = document.getElementById("finalGrid");
+      const thirdPlaceMatchGrid = document.getElementById("thirdPlaceMatchGrid");
+      finalGrid.innerHTML = "";
+      thirdPlaceMatchGrid.innerHTML = "";
 
-      finalContainer.innerHTML = "";
-      thirdContainer.innerHTML = "";
-
-      const finalTeams = state.semiWinners;
-      const thirdTeams = state.semiLosers;
-
-      if (finalTeams.length === 2) {
+      if (state.finalPair.length === 2) {
         const box = document.createElement("div");
         box.className = "match-box";
 
+        const top = document.createElement("div");
+        top.className = "match-top";
+
         const title = document.createElement("h3");
         title.className = "match-title";
-        title.textContent = "Final";
+        title.innerHTML = `<strong>Final</strong><br><span class="thin">Choose your champion</span>`;
+
+        const meta = document.createElement("div");
+        meta.className = "match-meta";
+        meta.textContent = "July 19 • East Rutherford";
+
+        top.appendChild(title);
+        top.appendChild(meta);
 
         const list = document.createElement("div");
         list.className = "match-list";
 
-        finalTeams.forEach(team => {
+        state.finalPair.forEach(team => {
           const btn = createTeamCard(team, state.champion?.name === team.name ? "Champion" : "Pick champion");
           if (state.champion?.name === team.name) btn.classList.add("winner");
           btn.onclick = () => {
-            state.champion = cloneTeam(team);
-            renderFinalAndThirdPlace();
+            state.champion = clone(team);
+            renderFinalSection();
           };
           list.appendChild(btn);
         });
@@ -1334,32 +1521,42 @@
         if (state.champion) {
           const line = document.createElement("div");
           line.className = "winner-line";
-          line.textContent = `${state.champion.name} is your selected champion`;
+          line.textContent = `${state.champion.name} is your predicted champion`;
           list.appendChild(line);
         }
 
-        box.appendChild(title);
+        box.appendChild(top);
         box.appendChild(list);
-        finalContainer.appendChild(box);
+        finalGrid.appendChild(box);
       }
 
-      if (thirdTeams.length === 2) {
+      if (state.thirdPlacePair.length === 2) {
         const box = document.createElement("div");
         box.className = "match-box";
 
+        const top = document.createElement("div");
+        top.className = "match-top";
+
         const title = document.createElement("h3");
         title.className = "match-title";
-        title.textContent = "Third-place Playoff";
+        title.innerHTML = `<strong>Third-Place Match</strong><br><span class="thin">Choose the winner</span>`;
+
+        const meta = document.createElement("div");
+        meta.className = "match-meta";
+        meta.textContent = "July 18 • Miami Gardens";
+
+        top.appendChild(title);
+        top.appendChild(meta);
 
         const list = document.createElement("div");
         list.className = "match-list";
 
-        thirdTeams.forEach(team => {
+        state.thirdPlacePair.forEach(team => {
           const btn = createTeamCard(team, state.thirdPlaceWinner?.name === team.name ? "Third Place" : "Pick winner");
           if (state.thirdPlaceWinner?.name === team.name) btn.classList.add("winner");
           btn.onclick = () => {
-            state.thirdPlaceWinner = cloneTeam(team);
-            renderFinalAndThirdPlace();
+            state.thirdPlaceWinner = clone(team);
+            renderFinalSection();
           };
           list.appendChild(btn);
         });
@@ -1371,114 +1568,155 @@
           list.appendChild(line);
         }
 
-        box.appendChild(title);
+        box.appendChild(top);
         box.appendChild(list);
-        thirdContainer.appendChild(box);
+        thirdPlaceMatchGrid.appendChild(box);
       }
     }
 
     function renderSummary() {
-      buildProgress(8);
+      renderProgress(8);
 
       const championBox = document.getElementById("championBox");
-      const thirdBox = document.getElementById("thirdPlaceWinnerBox");
-      const qualifiedList = document.getElementById("qualifiedTeamsList");
-      const bestThirdList = document.getElementById("bestThirdList");
-      const knockoutSummaryList = document.getElementById("knockoutSummaryList");
+      const thirdPlaceBox = document.getElementById("thirdPlaceBox");
+      const qualifiedTeamsList = document.getElementById("qualifiedTeamsList");
+      const qualifiedThirdList = document.getElementById("qualifiedThirdList");
+      const summaryR32 = document.getElementById("summaryR32");
+      const summaryR16 = document.getElementById("summaryR16");
+      const summaryQF = document.getElementById("summaryQF");
+      const summarySF = document.getElementById("summarySF");
+      const summaryFinalPath = document.getElementById("summaryFinalPath");
 
       championBox.innerHTML = "";
-      thirdBox.innerHTML = "";
-      qualifiedList.innerHTML = "";
-      bestThirdList.innerHTML = "";
-      knockoutSummaryList.innerHTML = "";
+      thirdPlaceBox.innerHTML = "";
+      qualifiedTeamsList.innerHTML = "";
+      qualifiedThirdList.innerHTML = "";
+      summaryR32.innerHTML = "";
+      summaryR16.innerHTML = "";
+      summaryQF.innerHTML = "";
+      summarySF.innerHTML = "";
+      summaryFinalPath.innerHTML = "";
 
-      if (state.champion) {
-        championBox.innerHTML = `
-          <div class="champion-box">
-            <img src="${getFlagUrl(state.champion.code)}" alt="${state.champion.name} flag">
-            <h3>${state.champion.name}</h3>
-            <p>${state.user.name}, this is your predicted FIFA World Cup 2026 champion.</p>
-          </div>
-        `;
-      }
+      championBox.innerHTML = `
+        <div class="champion-box">
+          <img src="${getFlagUrl(state.champion.code)}" alt="${state.champion.name} flag">
+          <h3>${state.champion.name}</h3>
+          <p>${state.user.name}, this is your predicted FIFA World Cup 2026 champion.</p>
+        </div>
+      `;
 
-      if (state.thirdPlaceWinner) {
-        thirdBox.innerHTML = `
-          <div class="champion-box">
-            <img src="${getFlagUrl(state.thirdPlaceWinner.code)}" alt="${state.thirdPlaceWinner.name} flag">
-            <h3>${state.thirdPlaceWinner.name}</h3>
-            <p>This team wins your third-place playoff.</p>
-          </div>
-        `;
-      }
+      thirdPlaceBox.innerHTML = `
+        <div class="champion-box">
+          <img src="${getFlagUrl(state.thirdPlaceWinner.code)}" alt="${state.thirdPlaceWinner.name} flag">
+          <h3>${state.thirdPlaceWinner.name}</h3>
+          <p>This team wins your third-place playoff.</p>
+        </div>
+      `;
 
       Object.keys(GROUPS).forEach(groupKey => {
-        const groupState = state.groups[groupKey];
-        const teams = [
-          ...groupState.top2,
-          groupState.third ? `${groupState.third} (3rd)` : null
-        ].filter(Boolean);
+        const g = state.groups[groupKey];
 
-        teams.forEach(name => {
-          const team = GROUPS[groupKey].find(t => t.name === name.replace(" (3rd)", ""));
-          if (!team) return;
-          const div = document.createElement("div");
-          div.className = "mini-item";
-          div.innerHTML = `
-            <img src="${getFlagUrl(team.code)}" alt="${team.name} flag">
-            <div><strong>Group ${groupKey}</strong>: ${name}</div>
-          `;
-          qualifiedList.appendChild(div);
-        });
-      });
-
-      getAllThirdPlaceTeams()
-        .filter(team => state.bestThirdQualified.includes(team.name))
-        .forEach(team => {
-          const div = document.createElement("div");
-          div.className = "mini-item";
-          div.innerHTML = `
-            <img src="${getFlagUrl(team.code)}" alt="${team.name} flag">
-            <div>${team.name}</div>
-          `;
-          bestThirdList.appendChild(div);
-        });
-
-      const summaryRounds = [
-        { title: "Round of 32 Winners", teams: state.round32Winners },
-        { title: "Round of 16 Winners", teams: state.round16Winners },
-        { title: "Quarter-final Winners", teams: state.quarterWinners },
-        { title: "Semi-final Winners", teams: state.semiWinners }
-      ];
-
-      summaryRounds.forEach(group => {
-        const wrapper = document.createElement("div");
-        wrapper.className = "mini-item";
-        wrapper.style.display = "block";
-
-        const title = document.createElement("div");
-        title.style.marginBottom = "10px";
-        title.innerHTML = `<strong>${group.title}</strong>`;
-
-        const inner = document.createElement("div");
-        inner.className = "mini-list";
-
-        group.teams.forEach(team => {
+        g.top2.forEach((name, index) => {
+          const team = GROUPS[groupKey].find(t => t.name === name);
           const item = document.createElement("div");
           item.className = "mini-item";
           item.innerHTML = `
             <img src="${getFlagUrl(team.code)}" alt="${team.name} flag">
-            <div>${team.name}</div>
+            <div><strong>Group ${groupKey}</strong> ${index === 0 ? "Winner" : "Runner-up"}: ${team.name}</div>
           `;
-          inner.appendChild(item);
+          qualifiedTeamsList.appendChild(item);
         });
 
-        wrapper.appendChild(title);
-        wrapper.appendChild(inner);
-        knockoutSummaryList.appendChild(wrapper);
+        const thirdTeam = GROUPS[groupKey].find(t => t.name === g.third);
+        const item = document.createElement("div");
+        item.className = "mini-item";
+        item.innerHTML = `
+          <img src="${getFlagUrl(thirdTeam.code)}" alt="${thirdTeam.name} flag">
+          <div><strong>Group ${groupKey}</strong> Third Place: ${thirdTeam.name}</div>
+        `;
+        qualifiedTeamsList.appendChild(item);
       });
 
-      setStatus("Prediction summary is ready.", "success");
+      getQualifiedThirdTeams().forEach(team => {
+        const item = document.createElement("div");
+        item.className = "mini-item";
+        item.innerHTML = `
+          <img src="${getFlagUrl(team.code)}" alt="${team.name} flag">
+          <div>${team.name} <span style="color: var(--muted);">(${team.group})</span></div>
+        `;
+        qualifiedThirdList.appendChild(item);
+      });
+
+      state.round32Pairs.forEach((pair, i) => {
+        const winner = state.round32Winners[i];
+        const item = document.createElement("div");
+        item.className = "mini-item";
+        item.innerHTML = `
+          <img src="${getFlagUrl(winner.code)}" alt="${winner.name} flag">
+          <div><strong>Match ${pair.num}</strong>: ${winner.name}</div>
+        `;
+        summaryR32.appendChild(item);
+      });
+
+      state.round16Pairs.forEach((pair, i) => {
+        const winner = state.round16Winners[i];
+        const item = document.createElement("div");
+        item.className = "mini-item";
+        item.innerHTML = `
+          <img src="${getFlagUrl(winner.code)}" alt="${winner.name} flag">
+          <div><strong>${pair.num}</strong>: ${winner.name}</div>
+        `;
+        summaryR16.appendChild(item);
+      });
+
+      state.quarterPairs.forEach((pair, i) => {
+        const winner = state.quarterWinners[i];
+        const item = document.createElement("div");
+        item.className = "mini-item";
+        item.innerHTML = `
+          <img src="${getFlagUrl(winner.code)}" alt="${winner.name} flag">
+          <div><strong>${pair.num}</strong>: ${winner.name}</div>
+        `;
+        summaryQF.appendChild(item);
+      });
+
+      state.semiPairs.forEach((pair, i) => {
+        const winner = state.semiWinners[i];
+        const item = document.createElement("div");
+        item.className = "mini-item";
+        item.innerHTML = `
+          <img src="${getFlagUrl(winner.code)}" alt="${winner.name} flag">
+          <div><strong>${pair.num}</strong>: ${winner.name}</div>
+        `;
+        summarySF.appendChild(item);
+      });
+
+      [
+        { label: "Finalist 1", team: state.finalPair[0] },
+        { label: "Finalist 2", team: state.finalPair[1] },
+        { label: "Champion", team: state.champion },
+        { label: "Third Place", team: state.thirdPlaceWinner }
+      ].forEach(entry => {
+        const item = document.createElement("div");
+        item.className = "mini-item";
+        item.innerHTML = `
+          <img src="${getFlagUrl(entry.team.code)}" alt="${entry.team.name} flag">
+          <div><strong>${entry.label}</strong>: ${entry.team.name}</div>
+        `;
+        summaryFinalPath.appendChild(item);
+      });
+
+      setStatus("Summary is ready.", "success");
+    }
+
+    function addMiniItem(container, team, text) {
+      const div = document.createElement("div");
+      div.className = "mini-item";
+      div.innerHTML = `
+        <img src="${getFlagUrl(team.code)}" alt="${team.name} flag">
+        <div>${text}</div>
+      `;
+      container.appendChild(div);
     }
 
     function collectPredictionText() {
@@ -1488,42 +1726,56 @@
 
       text += `GROUP STAGE\n`;
       Object.keys(GROUPS).forEach(groupKey => {
-        const gs = state.groups[groupKey];
-        text += `Group ${groupKey} Top 2: ${gs.top2.join(", ")}\n`;
-        text += `Group ${groupKey} Third Place: ${gs.third}\n`;
+        const g = state.groups[groupKey];
+        text += `Group ${groupKey} Winner: ${g.top2[0]}\n`;
+        text += `Group ${groupKey} Runner-up: ${g.top2[1]}\n`;
+        text += `Group ${groupKey} Third Place: ${g.third}\n`;
       });
 
       text += `\nBEST THIRD-PLACE TEAMS\n`;
-      text += `${state.bestThirdQualified.join(", ")}\n\n`;
+      text += `${state.selectedBestThird.join(", ")}\n\n`;
 
-      text += `ROUND OF 32 WINNERS\n`;
-      text += `${state.round32Winners.map(t => t.name).join(", ")}\n\n`;
+      text += `THIRD-PLACE SLOT ASSIGNMENTS\n`;
+      THIRD_SLOT_DEFS.forEach(slot => {
+        const team = state.thirdSlotAssignments[slot.id];
+        text += `${slot.label}: ${team ? team.name : "Not assigned"}\n`;
+      });
 
-      text += `ROUND OF 16 WINNERS\n`;
-      text += `${state.round16Winners.map(t => t.name).join(", ")}\n\n`;
+      text += `\nROUND OF 32 WINNERS\n`;
+      state.round32Pairs.forEach((pair, i) => {
+        text += `Match ${pair.num}: ${state.round32Winners[i].name}\n`;
+      });
 
-      text += `QUARTER-FINAL WINNERS\n`;
-      text += `${state.quarterWinners.map(t => t.name).join(", ")}\n\n`;
+      text += `\nROUND OF 16 WINNERS\n`;
+      state.round16Pairs.forEach((pair, i) => {
+        text += `${pair.num}: ${state.round16Winners[i].name}\n`;
+      });
 
-      text += `SEMI-FINAL WINNERS\n`;
-      text += `${state.semiWinners.map(t => t.name).join(", ")}\n\n`;
+      text += `\nQUARTER-FINAL WINNERS\n`;
+      state.quarterPairs.forEach((pair, i) => {
+        text += `${pair.num}: ${state.quarterWinners[i].name}\n`;
+      });
 
-      text += `SEMI-FINAL LOSERS FOR THIRD-PLACE MATCH\n`;
-      text += `${state.semiLosers.map(t => t.name).join(", ")}\n\n`;
+      text += `\nSEMI-FINAL WINNERS\n`;
+      state.semiPairs.forEach((pair, i) => {
+        text += `${pair.num}: ${state.semiWinners[i].name}\n`;
+      });
 
-      text += `THIRD-PLACE WINNER\n`;
-      text += `${state.thirdPlaceWinner ? state.thirdPlaceWinner.name : "Not selected"}\n\n`;
+      text += `\nTHIRD-PLACE MATCH\n`;
+      text += `${state.thirdPlacePair[0].name} vs ${state.thirdPlacePair[1].name}\n`;
+      text += `Winner: ${state.thirdPlaceWinner.name}\n\n`;
 
-      text += `CHAMPION\n`;
-      text += `${state.champion ? state.champion.name : "Not selected"}\n`;
+      text += `FINAL\n`;
+      text += `${state.finalPair[0].name} vs ${state.finalPair[1].name}\n`;
+      text += `Champion: ${state.champion.name}\n`;
 
       return text;
     }
 
     async function sendPredictionEmail() {
       if (!state.champion || !state.thirdPlaceWinner) {
-        setStatus("Please complete the final and the third-place playoff before sending the email.", "warning");
-        alertMessage("Please complete the final and the third-place playoff first.");
+        setStatus("Please finish the final and the third-place match before sending the email.", "warning");
+        showAlert("Please finish the final and the third-place match first.");
         return;
       }
 
@@ -1546,44 +1798,49 @@
         });
 
         setStatus("Prediction email sent successfully.", "success");
-        alertMessage("Prediction email sent successfully.");
+        showAlert("Prediction email sent successfully.");
       } catch (error) {
         console.error(error);
-        setStatus("Email could not be sent. Replace the EmailJS keys with your own values.", "danger");
-        alertMessage("Email could not be sent. Replace the EmailJS keys with your own values.");
+        setStatus("Email could not be sent. Replace the EmailJS placeholders with your own values.", "danger");
+        showAlert("Email could not be sent. Replace the EmailJS placeholders with your own values.");
       }
     }
 
-    function restoreSectionsFromState() {
+    function restoreFromState() {
       if (areGroupsComplete()) {
         document.getElementById("bestThirdSection").classList.remove("hidden");
-        renderBestThirdSection();
+        renderBestThird();
       }
 
-      if (state.round32Teams.length === 32) {
+      if (state.round32Pairs.length === 16) {
         document.getElementById("round32Section").classList.remove("hidden");
-        renderKnockoutRound("round32Grid", state.round32Teams, state.round32Winners, "r32");
+        renderRoundPairs("round32Grid", state.round32Pairs, state.round32Winners, "r32");
       }
 
-      if (roundComplete(state.round32Winners, 16)) {
+      if (winnersComplete(state.round32Winners, 16)) {
+        state.round16Pairs = buildNextPairsFromWinners(state.round32Winners, "R16");
         document.getElementById("round16Section").classList.remove("hidden");
-        renderKnockoutRound("round16Grid", state.round32Winners, state.round16Winners, "r16");
+        renderRoundPairs("round16Grid", state.round16Pairs, state.round16Winners, "r16");
       }
 
-      if (roundComplete(state.round16Winners, 8)) {
+      if (winnersComplete(state.round16Winners, 8)) {
+        state.quarterPairs = buildNextPairsFromWinners(state.round16Winners, "QF");
         document.getElementById("quarterSection").classList.remove("hidden");
-        renderKnockoutRound("quarterGrid", state.round16Winners, state.quarterWinners, "qf");
+        renderRoundPairs("quarterGrid", state.quarterPairs, state.quarterWinners, "qf");
       }
 
-      if (roundComplete(state.quarterWinners, 4)) {
+      if (winnersComplete(state.quarterWinners, 4)) {
+        state.semiPairs = buildNextPairsFromWinners(state.quarterWinners, "SF");
         document.getElementById("semiSection").classList.remove("hidden");
-        renderKnockoutRound("semiGrid", state.quarterWinners, state.semiWinners, "sf");
+        renderRoundPairs("semiGrid", state.semiPairs, state.semiWinners, "sf");
       }
 
-      if (roundComplete(state.semiWinners, 2)) {
+      if (winnersComplete(state.semiWinners, 2)) {
         if (!state.semiLosers.length) computeSemiLosers();
-        document.getElementById("finalThirdSection").classList.remove("hidden");
-        renderFinalAndThirdPlace();
+        if (!state.finalPair.length) state.finalPair = clone(state.semiWinners);
+        if (!state.thirdPlacePair.length) state.thirdPlacePair = clone(state.semiLosers);
+        document.getElementById("finalSection").classList.remove("hidden");
+        renderFinalSection();
       }
 
       if (state.champion && state.thirdPlaceWinner) {
@@ -1597,12 +1854,12 @@
       const email = document.getElementById("emailInput").value.trim();
 
       if (!name) {
-        alertMessage("Please enter your name.");
+        showAlert("Please enter your name.");
         return;
       }
 
       if (!isValidGmail(email)) {
-        alertMessage("Please enter a valid Gmail address.");
+        showAlert("Please enter a valid Gmail address.");
         return;
       }
 
@@ -1614,95 +1871,133 @@
     document.getElementById("sendBtn").addEventListener("click", sendPredictionEmail);
     document.getElementById("resetBtn").addEventListener("click", resetAll);
 
-    document.getElementById("goToBestThirdBtn").addEventListener("click", () => {
+    document.getElementById("toBestThirdBtn").addEventListener("click", () => {
       if (!areGroupsComplete()) {
-        alertMessage("Please complete all groups first. You must select Top 2 and the 3rd place team in every group.");
+        showAlert("Please complete all groups first. You must choose the top 2 and the 3rd-place team in every group.");
         return;
       }
       document.getElementById("bestThirdSection").classList.remove("hidden");
-      renderBestThirdSection();
-      buildProgress(2);
+      renderBestThird();
+      renderProgress(2);
       document.getElementById("bestThirdSection").scrollIntoView({ behavior: "smooth" });
     });
 
     document.getElementById("backToGroupsBtn").addEventListener("click", () => {
-      buildProgress(1);
+      renderProgress(1);
       document.getElementById("groupSection").scrollIntoView({ behavior: "smooth" });
     });
 
-    document.getElementById("generateRound32Btn").addEventListener("click", () => {
-      if (state.bestThirdQualified.length !== 8) {
-        alertMessage("Please select exactly 8 best third-place teams.");
+    document.getElementById("buildRound32Btn").addEventListener("click", () => {
+      if (state.selectedBestThird.length !== 8) {
+        showAlert("Please select exactly 8 best third-place teams.");
         return;
       }
 
-      generateRound32Teams();
-
-      if (state.round32Teams.length !== 32) {
-        alertMessage("Round of 32 could not be created. Please check your selections.");
+      const result = buildRound32Pairs();
+      if (!result.ok) {
+        setStatus(result.message, "warning");
+        showAlert(result.message);
         return;
       }
 
       document.getElementById("round32Section").classList.remove("hidden");
-      renderKnockoutRound("round32Grid", state.round32Teams, state.round32Winners, "r32");
-      buildProgress(3);
+      renderRoundPairs("round32Grid", state.round32Pairs, state.round32Winners, "r32");
+      renderProgress(3);
       document.getElementById("round32Section").scrollIntoView({ behavior: "smooth" });
     });
 
-    document.getElementById("generateRound16Btn").addEventListener("click", () => {
-      if (!roundComplete(state.round32Winners, 16)) {
-        alertMessage("Please select all 16 winners in the Round of 32.");
+    document.getElementById("toRound16Btn").addEventListener("click", () => {
+      if (!winnersComplete(state.round32Winners, 16)) {
+        showAlert("Please select all 16 winners in the Round of 32.");
         return;
       }
+
+      state.round16Pairs = buildNextPairsFromWinners(state.round32Winners, "R16");
+      state.round16Winners = [];
+      state.quarterPairs = [];
+      state.quarterWinners = [];
+      state.semiPairs = [];
+      state.semiWinners = [];
+      state.semiLosers = [];
+      state.finalPair = [];
+      state.champion = null;
+      state.thirdPlacePair = [];
+      state.thirdPlaceWinner = null;
+
       document.getElementById("round16Section").classList.remove("hidden");
-      renderKnockoutRound("round16Grid", state.round32Winners, state.round16Winners, "r16");
-      buildProgress(4);
+      renderRoundPairs("round16Grid", state.round16Pairs, state.round16Winners, "r16");
+      renderProgress(4);
       document.getElementById("round16Section").scrollIntoView({ behavior: "smooth" });
     });
 
-    document.getElementById("generateQuarterBtn").addEventListener("click", () => {
-      if (!roundComplete(state.round16Winners, 8)) {
-        alertMessage("Please select all 8 winners in the Round of 16.");
+    document.getElementById("toQuarterBtn").addEventListener("click", () => {
+      if (!winnersComplete(state.round16Winners, 8)) {
+        showAlert("Please select all 8 winners in the Round of 16.");
         return;
       }
+
+      state.quarterPairs = buildNextPairsFromWinners(state.round16Winners, "QF");
+      state.quarterWinners = [];
+      state.semiPairs = [];
+      state.semiWinners = [];
+      state.semiLosers = [];
+      state.finalPair = [];
+      state.champion = null;
+      state.thirdPlacePair = [];
+      state.thirdPlaceWinner = null;
+
       document.getElementById("quarterSection").classList.remove("hidden");
-      renderKnockoutRound("quarterGrid", state.round16Winners, state.quarterWinners, "qf");
-      buildProgress(5);
+      renderRoundPairs("quarterGrid", state.quarterPairs, state.quarterWinners, "qf");
+      renderProgress(5);
       document.getElementById("quarterSection").scrollIntoView({ behavior: "smooth" });
     });
 
-    document.getElementById("generateSemiBtn").addEventListener("click", () => {
-      if (!roundComplete(state.quarterWinners, 4)) {
-        alertMessage("Please select all 4 winners in the Quarter-final.");
+    document.getElementById("toSemiBtn").addEventListener("click", () => {
+      if (!winnersComplete(state.quarterWinners, 4)) {
+        showAlert("Please select all 4 quarter-final winners.");
         return;
       }
+
+      state.semiPairs = buildNextPairsFromWinners(state.quarterWinners, "SF");
+      state.semiWinners = [];
+      state.semiLosers = [];
+      state.finalPair = [];
+      state.champion = null;
+      state.thirdPlacePair = [];
+      state.thirdPlaceWinner = null;
+
       document.getElementById("semiSection").classList.remove("hidden");
-      renderKnockoutRound("semiGrid", state.quarterWinners, state.semiWinners, "sf");
-      buildProgress(6);
+      renderRoundPairs("semiGrid", state.semiPairs, state.semiWinners, "sf");
+      renderProgress(6);
       document.getElementById("semiSection").scrollIntoView({ behavior: "smooth" });
     });
 
-    document.getElementById("generateFinalBtn").addEventListener("click", () => {
-      if (!roundComplete(state.semiWinners, 2)) {
-        alertMessage("Please select both semi-final winners.");
+    document.getElementById("toFinalBtn").addEventListener("click", () => {
+      if (!winnersComplete(state.semiWinners, 2)) {
+        showAlert("Please select both semi-final winners.");
         return;
       }
+
       computeSemiLosers();
-      document.getElementById("finalThirdSection").classList.remove("hidden");
-      renderFinalAndThirdPlace();
-      buildProgress(7);
-      document.getElementById("finalThirdSection").scrollIntoView({ behavior: "smooth" });
+      state.finalPair = clone(state.semiWinners);
+      state.thirdPlacePair = clone(state.semiLosers);
+
+      document.getElementById("finalSection").classList.remove("hidden");
+      renderFinalSection();
+      renderProgress(7);
+      document.getElementById("finalSection").scrollIntoView({ behavior: "smooth" });
     });
 
-    document.getElementById("showSummaryBtn").addEventListener("click", () => {
+    document.getElementById("toSummaryBtn").addEventListener("click", () => {
       if (!state.champion) {
-        alertMessage("Please select the champion in the final.");
+        showAlert("Please select the champion in the final.");
         return;
       }
       if (!state.thirdPlaceWinner) {
-        alertMessage("Please select the winner of the third-place playoff.");
+        showAlert("Please select the winner of the third-place match.");
         return;
       }
+
       document.getElementById("summarySection").classList.remove("hidden");
       renderSummary();
       document.getElementById("summarySection").scrollIntoView({ behavior: "smooth" });
